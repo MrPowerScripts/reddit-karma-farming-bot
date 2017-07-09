@@ -1,5 +1,10 @@
 # Reddit talkbot
 
+[Video: Is reddit full of robots?](https://www.youtube.com/watch?v=8DrOERA5FGc)
+
+
+[Video: Reddit Chat Bot](https://www.youtube.com/watch?v=KgWsqKkDEtI)
+
 ## Create a python virtual environment
 > virtualenv venv
 
