@@ -5,7 +5,7 @@
 
 [Video: Reddit Chat Bot](https://www.youtube.com/watch?v=KgWsqKkDEtI)
 
-## Install OS dependencies (I'm was running Ubuntu 16)
+## Install OS dependencies (I'm running Ubuntu 16)
 > sudo apt-get install git python-pip python-dev build-essential 
 > sudo pip install virtualenv
 
