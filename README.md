@@ -7,10 +7,12 @@
 
 ## Install OS dependencies (I'm running Ubuntu 16)
 > sudo apt-get install git python-pip python-dev build-essential 
+
 > sudo pip install virtualenv
 
 ## Clone the repo, and open the directory
 > git clone https://github.com/MrPowerScripts/talkbot.git
+
 > cd talkbot
 
 ## Create a python virtual environment
