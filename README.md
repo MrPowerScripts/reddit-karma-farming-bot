@@ -6,6 +6,8 @@
 [Video: Reddit Chat Bot](https://www.youtube.com/watch?v=KgWsqKkDEtI)
 
 ## Install OS dependencies (I'm running Ubuntu 16)
+### Stuck on Windows? Video: [Create an Ubuntu Virtual Machine](https://www.youtube.com/watch?v=WfP1VeXYksM)
+
 > sudo apt-get install git python-pip python-dev build-essential 
 
 > sudo pip install virtualenv
