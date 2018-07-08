@@ -11,15 +11,6 @@ api = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
                      username=settings.REDDIT_USERNAME)
 
 
-def submission_timespan():
-    # Get the current epoch time, and then subtract one year
-    year_ago = int(time.time()) - 31622400
-    # Add a day to the time from a year ago
-    end_search = year_ago + 86400
-    # Return a tuple with the start/end times to search old submissions
-    return (year_ago, end_search)
-
-
 def random_submission():
     # Get a random submission from a random subreddit
     random_submission = api.subreddit('all').random()
