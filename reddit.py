@@ -21,34 +21,28 @@ def submission_timespan():
 
 
 def random_submission():
-    # Get submissions from a random subreddit one year ago
-    submissions = list(api.subreddit('random').submissions(
-        *submission_timespan()))
+    # Get a random submission from a random subreddit
+    random_submission = api.subreddit('all').random()
 
     # Check if there's any items in the submissions list. If not display error
-    if submissions:
-        # If we get more than one submission choose a random one from the list
-        if len(submissions) > 1:
-            chosen = random.choice(submissions)
-        else:
-            chosen = submissions[0]
+    if random_submission:
 
         try:
             # Check if the we're reposting a selfpost or a link post.
             # Set the required params accodingly, and reuse the content
             # from the old post
-            if chosen.is_self:
-                params = {"title":chosen.title, "selftext":chosen.selftext}
+            if random_submission.is_self:
+                params = {"title":random_submission.title, "selftext":random_submission.selftext}
             else:
-                params = {"title":chosen.title, "url":chosen.url}
+                params = {"title":random_submission.title, "url":random_submission.url}
 
             # Submit the same content to the same subreddit. Prepare your salt picks
-            api.subreddit(chosen.subreddit.display_name).submit(**params)
+            api.subreddit(random_submission.subreddit.display_name).submit(**params)
         except Exception as e:
             print e
 
     else:
-        print 'list empty - something broke'
+        print 'something broke'
 
 
 def random_reply():
