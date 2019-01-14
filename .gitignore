@@ -1,3 +1,7 @@
 *.pyc
 *.db*
+*.log
+*.info
 venv
+settings.py
+.DS_Store
