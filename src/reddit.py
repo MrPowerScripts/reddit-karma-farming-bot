@@ -4,7 +4,6 @@ import random
 import bot
 import os
 import glob
-import settings
 import nltk
 nltk.download('wordnet')
 nltk.download('punkt')
@@ -20,6 +19,7 @@ if os.environ.get('REDDIT_CLIENT_ID'):
                     user_agent=os.environ.get('REDDIT_USER_AGENT'),
                     username=os.environ.get('REDDIT_USERNAME'))
 else:
+  import settings
   api = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
                   client_secret=settings.REDDIT_SECRET,
                   password=settings.REDDIT_PASSWORD,
