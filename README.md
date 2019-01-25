@@ -9,9 +9,13 @@
 3. Paste the whole command below into your terminal
 
 ```bash
-docker build -t=com.mrpowerscripts/mrps/reddit-karma-bot . \
-&& mkdir -p ~/reddit-karma-bot/brain \
-&& docker run -it \
+git clone https://github.com/MrPowerScripts/reddit-karma-farming-bot.git &&\
+cd reddit-karma-farming-bot &&\
+git pull origin master &&\
+git reset --hard HEAD &&\
+docker build -t=com.mrpowerscripts/mrps/reddit-karma-bot . &&\
+mkdir -p ~/reddit-karma-bot/brain &&\
+docker run -it \
   -e REDDIT_CLIENT_ID="MyCoolAppClientID" \
   -e REDDIT_SECRET="MyCoolAppSecret" \
   -e REDDIT_USERNAME="MyCoolUserName" \
