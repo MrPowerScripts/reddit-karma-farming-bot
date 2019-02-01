@@ -2,9 +2,11 @@
 
 ## How to run the bot
 
-1. Install docker
+1. Install docker https://docs.docker.com/install/
 
 2. Update the environment variables below with your account info
+    - Follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
+
 
 3. Paste the whole command below into your terminal
 
