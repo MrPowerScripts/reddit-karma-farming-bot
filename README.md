@@ -1,5 +1,17 @@
 # Reddit-Karma-Bot
 
+# Shameless self promotion
+
+[Karma Farming Bot 2.0 Video](https://www.youtube.com/watch?v=CCMGHepPBso)  
+[Karma Farming on Reddit Video](https://www.youtube.com/watch?v=8DrOERA5FGc)  
+[Karma Farming Bot 1.0 Video](https://www.youtube.com/watch?v=KgWsqKkDEtI)  
+
+Subscribe: http://bit.ly/mrps-yt-sub  
+Website: https://bit.ly/mrps-site  
+Discord: https://bit.ly/mrps-discord  
+Patreon: https://bit.ly/mrps-patreon  
+Power Up!: https://bit.ly/mrps-powerup  
+
 ## How to run the bot
 
 1. Install docker https://docs.docker.com/install/
