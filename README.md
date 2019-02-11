@@ -1,6 +1,6 @@
 # Reddit-Karma-Bot
 
-# Shameless self promotion
+## Shameless self promotion
 
 [Karma Farming Bot 2.0 Video](https://www.youtube.com/watch?v=CCMGHepPBso)  
 [Karma Farming on Reddit Video](https://www.youtube.com/watch?v=8DrOERA5FGc)  
