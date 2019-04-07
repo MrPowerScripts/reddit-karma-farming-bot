@@ -15,6 +15,7 @@ Power Up!: https://bit.ly/mrps-powerup
 ## How to run the bot
 
 1. Install docker https://docs.docker.com/install/
+    - Make sure [you enable docker without sudo](https://docs.docker.com/install/linux/linux-postinstall/)
 
 2. Update the environment variables below with your account info
     - Follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
@@ -39,6 +40,10 @@ docker run -it \
   --mount src=~/reddit-karma-bot,target=/reddit-karma-bot,type=bind \
   com.mrpowerscripts/mrps/reddit-karma-bot
 ```
+
+### Windows
+
+The command above will not readily work on Docker for Windows. Try running each command individually (lines between the `&&`) and put each command on a single line (remove the `\` from each command). If you get a fully working oneliner on Windows do let me know!
 
 You can provide a proxy server for the docker container to connect through
 
