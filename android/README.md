@@ -5,7 +5,7 @@ Firstly Install termux from [This](https://play.google.com/store/apps/details?id
 
 Now open up termux and type in `pkg install git` 
 
-After done type in `git clone https://github.com/EliteDaMyth/reddit-karma-farming-bot.git rkfb`
+After done type in `git clone https://github.com/MrPowerScripts/reddit-karma-farming-bot.git rkfb`
 
 Now type in `cd rkfb` then `cd android`
 
