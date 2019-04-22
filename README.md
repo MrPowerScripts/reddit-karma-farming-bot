@@ -12,6 +12,8 @@ Discord: https://bit.ly/mrps-discord
 Patreon: https://bit.ly/mrps-patreon  
 Power Up!: https://bit.ly/mrps-powerup  
 
+## For Android running visit the android folder
+
 ## How to run the bot
 
 1. Install docker https://docs.docker.com/install/
