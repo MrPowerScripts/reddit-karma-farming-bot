@@ -5,13 +5,6 @@ from utils import bytesto, countdown, prob, MAIN_DB
 from learn import learn
 from logger import log
 from requests import get
-
-try:
-  ip = get('https://api.ipify.org').text
-  print 'My public IP address is:', ip
-except Exception as e:
-  print "counld not check external ip"
-
         
 limit = 52428800
 log.info('------------new bot run--------------')
