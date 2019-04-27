@@ -1,5 +1,4 @@
 import reddit
-import time
 import os
 from utils import bytesto, countdown, prob, MAIN_DB
 from learn import learn
@@ -52,7 +51,7 @@ if __name__ == '__main__':
           log.info('going to learn')
           learn()
         
-        if prob(0.10): # 25% chance we'll delete previous comments with negative upvote
+        if prob(0.05): # 5% chance we'll delete previous comments with negative upvote
           log.info('going to clean up "bad" comments')
           reddit.delete_comments()
         

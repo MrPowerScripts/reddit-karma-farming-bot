@@ -1,8 +1,7 @@
 from bot import base_brain, Brain
 import reddit
-import time
 from logger import log
-from utils import MAIN_DB, DB_DIR
+from utils import DB_DIR
 
 def learn(subreddit=None):
   log.info('trying to learn')
