@@ -1,4 +1,3 @@
-import sys
 import time
 import random
 import os
@@ -9,6 +8,8 @@ ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 HOME_DIR = expanduser("~")
 DB_DIR = "/reddit-karma-bot/brains"
 MAIN_DB = DB_DIR + "/brain.db"
+SCORE_THRESHOLD = -2
+
 
 def bytesto(bytes, to, bsize=1024):
   """convert bytes to megabytes, etc.
