@@ -10,9 +10,8 @@ nltk.download('punkt')
 from logger import log
 from learn import learn
 from nltk.corpus import wordnet as wn
-from utils import DB_DIR
+from utils import DB_DIR, SCORE_THRESHOLD
 
-SCORE_THRESHOLD = -2
 
 if os.environ.get('REDDIT_CLIENT_ID'):
   api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
@@ -46,9 +45,12 @@ def delete_comments():
                 score=comment.score,
                 sub=comment.subreddit_name_prefixed,
                 sub_id=comment.subreddit_id))
-            comment.delete()
+            try:
+                comment.delete()
+            except Exception as e:
+                log.info("unable to delete comment(id={id}), skip...\n{error}".format(id=comment.id, error=e.message))
             count += 1
-    log.info('deleted {number} comments with less than {threshold} vote'.format(number=score, threshold=SCORE_THRESHOLD))
+    log.info('deleted {number} comments with less than {threshold} vote'.format(number=count, threshold=SCORE_THRESHOLD))
 
 def random_submission():
   log.info('making random submission')
