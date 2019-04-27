@@ -10,7 +10,8 @@ nltk.download('punkt')
 from logger import log
 from learn import learn
 from nltk.corpus import wordnet as wn
-from utils import DB_DIR
+from utils import DB_DIR, SCORE_THRESHOLD
+
 
 if os.environ.get('REDDIT_CLIENT_ID'):
   api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
@@ -21,10 +22,10 @@ if os.environ.get('REDDIT_CLIENT_ID'):
 else:
   import settings
   api = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
-                  client_secret=settings.REDDIT_SECRET,
-                  password=settings.REDDIT_PASSWORD,
-                  user_agent=settings.REDDIT_USER_AGENT,
-                  username=settings.REDDIT_USERNAME)
+                    client_secret=settings.REDDIT_SECRET,
+                    password=settings.REDDIT_PASSWORD,
+                    user_agent=settings.REDDIT_USER_AGENT,
+                    username=settings.REDDIT_USERNAME)
 
 def submission_timespan():
   # Get the current epoch time, and then subtract one year
@@ -34,6 +35,22 @@ def submission_timespan():
   # Return a tuple with the start/end times to search old submissions
   return (year_ago, end_search)
 
+def delete_comments():
+    count = 0
+    for comment in api.redditor(api.user.me().name).new(limit=500):
+        if comment.score <= SCORE_THRESHOLD:
+            log.info('deleting comment(id={id}, body={body}, score={score}, subreddit={sub}|{sub_id})'.format(
+                id=comment.id,
+                body=comment.body,
+                score=comment.score,
+                sub=comment.subreddit_name_prefixed,
+                sub_id=comment.subreddit_id))
+            try:
+                comment.delete()
+            except Exception as e:
+                log.info("unable to delete comment(id={id}), skip...\n{error}".format(id=comment.id, error=e.message))
+            count += 1
+    log.info('deleted {number} comments with less than {threshold} vote'.format(number=count, threshold=SCORE_THRESHOLD))
 
 def random_submission():
   log.info('making random submission')
