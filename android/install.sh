@@ -1,6 +1,7 @@
 #!/bin/bash
 set -ex
-mkdir brains
+
+cp -a ../src .
 apt install nano
 apt install git
 apt install python2
