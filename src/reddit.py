@@ -4,12 +4,8 @@ import random
 import bot
 import os
 import glob
-import nltk
-nltk.download('wordnet')
-nltk.download('punkt')
 from logger import log
 from learn import learn
-from nltk.corpus import wordnet as wn
 from utils import DB_DIR, SCORE_THRESHOLD
 
 
@@ -70,31 +66,13 @@ def random_submission():
       # Check if the we're reposting a selfpost or a link post.
       # Set the required params accodingly, and reuse the content
       # from the old post
-      title = rand_sub.title
+      title = 
       log.info("submission title: " + rand_sub.title)
       log.info("tokenizing title")
-      for word in nltk.word_tokenize(rand_sub.title):
-        log.debug("word: " + word)
-        try:
-          ss = wn.synsets(word)[0]
-
-          # log.info(ss.pos())
-          # log.info(ss.lemma_names()[1])
-          if ss.pos() == "v" or ss.pos() == "n" and ss.lemma_names()[1]:
-              log.info('editing the title: ' + ss.lemma() + " to " + ss.lemma_names()[1])
-              new_title = str.replace(ss.lemma(), ss.lemma_names()[1])
-              log.info('{} {}'.format(ss.lemma(), ss.lemma_names()[1]))
-          else:
-            new_title = title
-        except:
-          log.debug('no synonym for' + word)
-          new_title = title
-        
-      log.info("new title: " + new_title)
       if rand_sub.is_self:
-          params = {"title": new_title, "selftext":rand_sub.selftext}
+          params = {"title": rand_sub.title, "selftext":rand_sub.selftext}
       else:
-          params = {"title": new_title, "url": rand_sub.url}
+          params = {"title": rand_sub.title, "url": rand_sub.url}
 
       # Submit the same content to the same subreddit. Prepare your salt picks
       api.subreddit(rand_sub.subreddit.display_name).submit(**params)
