@@ -93,20 +93,15 @@ def random_reply():
     learn(sub_name)
 
   reply_brain = bot.Brain(brain)
-  # Replace the "MoreReplies" with all of the submission replies
-  submission.comments.replace_more(limit=0)
-
-  # Choose a random top level comment
-  comment = random.choice(submission.comments.list())
 
   try:
     # Pass the users comment to chatbrain asking for a reply
-    response = reply_brain.reply(comment.body)
+    response = reply_brain.reply(submission.title)
   except Exception as e:
     log.error(e, exc_info=False)
 
   try:
     # Reply tp the same users comment with chatbrains reply
-    reply = comment.reply(response)
+    reply = submission.reply(response)
   except Exception as e:
     log.error(e, exc_info=False)
