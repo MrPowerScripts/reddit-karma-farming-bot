@@ -1,13 +1,16 @@
 import praw
+import requests
+from bs4 import BeautifulSoup
+
 import time
 import random
 import bot
 import os
 import glob
+from operator import attrgetter, itemgetter
 from logger import log
 from learn import learn
-from utils import DB_DIR, SCORE_THRESHOLD
-
+from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, subreddit
 
 if os.environ.get('REDDIT_CLIENT_ID'):
   api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
@@ -23,13 +26,103 @@ else:
                     user_agent=settings.REDDIT_USER_AGENT,
                     username=settings.REDDIT_USERNAME)
 
+
+def _pushshift_search(sub, start, end):
+    """Search sub-reddit for submissions withing a given time range.
+
+    :param sub: name of the sub-reddit (str)
+    :param start: epoch date of start (int)
+    :param end: epoch date of end (int)
+    :return: iterable of reddit submissions (List[dict])
+    """
+    url = SUBMISSION_SEARCH_TEMPLATE.format(
+        after=start, before=end, subreddit=sub
+    )
+    return requests.get(url).json().get("data", [])
+
+
+def get_submissions(start_date, end_date, sub, submissions=[]):
+    """'Paginate' function to retrieve all of the submissions
+    between a given interval.
+    By default pushshift.io only returns maximum of 500 items,
+    we need to paginate by using the last retrieved item's date
+    as the next start date.
+    This is a recursive function.
+
+    :param start_date: epoch of the start date (int)
+    :param end_date: epoch of the end date (int)
+    :param sub: subreddit to search (str)
+    :param submissions: collected submissions (List[dict])
+    :return: submissions, sorted by the created date in ascending order (List[dict])
+    """
+    # base case
+    if submissions and submissions[-1]["created_utc"] >= end_date:
+        return submissions
+
+    # get submissions
+    new_submissions = _pushshift_search(sub, start_date, end_date)
+    if not new_submissions:
+        return submissions
+    # 'paginate', use the last retrieved item's created date
+    # for the next request's start date
+    next_start = sorted(new_submissions, key=itemgetter("created_utc"))[-1][
+        "created_utc"
+    ]
+    submissions += new_submissions
+    # we got all in the interval
+    if next_start == start_date:
+        return submissions
+    time.sleep(0.25)  # limit the requests a bit, be nice with pushshift API
+    return get_submissions(next_start, end_date, sub, submissions)
+
+
+def get_top_subreddits(min_subscribers=500000):
+    """Scraper for redditlist.com.
+    Retrieves top subreddits with at least `min_subscribers`.
+
+    :param min_subscribers: filter for subreddits (int)
+    :return: list of subreddits with at least `min_subscribers` (List[Subreddit])
+    """
+    pagination_template = "/?page={}"
+    url = "http://www.redditlist.com{page}"
+    subs = []
+    page = 1
+    while True:
+        source_code = requests.get(url.format(page=pagination_template.format(page)))
+        plain_text = source_code.text
+        soup = BeautifulSoup(plain_text, "html.parser")
+        listings = soup.findAll(
+            "div", attrs={"class": "span4 listing"}
+        )  # subscriber list is the middle one
+        items = listings[1].findAll("div", {"class": "listing-item"})
+        for sub in items:
+            attrs = sub.attrs
+            num_subscribers = int(
+                sub.find("span", {"class": "listing-stat"}).get_text().replace(",", "")
+            )
+            if num_subscribers < min_subscribers:
+                return sorted(subs, key=attrgetter("rank"))
+            subs.append(
+                subreddit(
+                    name=attrs["data-target-subreddit"],
+                    rank=int(sub.find("span", {"class": "rank-value"}).get_text()),
+                    url=sub.find("span", {"class": "subreddit-url"})
+                    .find("a")
+                    .get("href"),
+                    subscribers=num_subscribers,
+                    type=attrs["data-target-filter"],
+                )
+            )
+        page += 1
+
+
 def submission_timespan():
   # Get the current epoch time, and then subtract one year
   year_ago = int(time.time()) - 31622400
   # Add a day to the time from a year ago
   end_search = year_ago + 86400
   # Return a tuple with the start/end times to search old submissions
-  return (year_ago, end_search)
+  return year_ago, end_search
 
 def delete_comments():
     count = 0
@@ -66,7 +159,6 @@ def random_submission():
       # Check if the we're reposting a selfpost or a link post.
       # Set the required params accodingly, and reuse the content
       # from the old post
-      title = 
       log.info("submission title: " + rand_sub.title)
       log.info("tokenizing title")
       if rand_sub.is_self:
