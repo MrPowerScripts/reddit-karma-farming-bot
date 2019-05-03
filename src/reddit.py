@@ -66,7 +66,6 @@ def random_submission():
       # Check if the we're reposting a selfpost or a link post.
       # Set the required params accodingly, and reuse the content
       # from the old post
-      title = 
       log.info("submission title: " + rand_sub.title)
       log.info("tokenizing title")
       if rand_sub.is_self:
