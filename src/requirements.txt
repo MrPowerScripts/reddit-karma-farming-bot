@@ -1,4 +1,5 @@
 backports.functools-lru-cache==1.4
+beautifulsoup4==4.7.1
 certifi==2017.4.17
 chardet==3.0.4
 cobe==2.1.2
