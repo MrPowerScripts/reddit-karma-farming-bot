@@ -40,18 +40,19 @@ if __name__ == '__main__':
       if size > limit: # once we learn enough start submissions and replies  
         log.info('database size is big enough')
 
-        if prob(0.11): # 2% chance we reply to someone
+        if prob(0.02): # 2% chance we reply to someone
+          log.info('making a random reply')
           reddit.random_reply()
 
-        if prob(0.00): # 1% chance we make a random submission
+        if prob(0.02): # 1% chance we make a random submission
           log.info('making a submission')
           reddit.random_submission()
 
-        if prob(0.10): #25% chance we'll learn more 
+        if prob(0.01): # chance we'll learn more 
           log.info('going to learn')
           learn()
         
-        if prob(0.05): # 5% chance we'll delete previous comments with negative upvote
+        if prob(0.02): # 5% chance we'll delete previous comments with negative upvote
           log.info('going to clean up "bad" comments')
           reddit.delete_comments()
         

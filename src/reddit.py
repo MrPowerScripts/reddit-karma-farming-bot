@@ -7,10 +7,11 @@ import random
 import bot
 import os
 import glob
+import datetime
 from operator import attrgetter, itemgetter
 from logger import log
 from learn import learn
-from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, subreddit
+from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, MIN_SCORE, subreddit
 
 if os.environ.get('REDDIT_CLIENT_ID'):
   api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
@@ -144,6 +145,32 @@ def delete_comments():
 def random_submission():
   log.info('making random submission')
   # Get a random submission from a random subreddit
+  END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=364)
+  ED = END_DATE_PY.strftime('%s')
+
+  START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
+  SD = START_DATE_PY.strftime('%s')
+
+  log.info(START_DATE_PY)
+  log.info(END_DATE_PY)
+  log.info(SD)
+  log.info(ED)
+  DATE_DIFF = ''
+  subreddits = get_top_subreddits()
+  for sub in subreddits[:5]:
+      print("\n{}".format("#" * 20))
+      print(sub)
+      tops = get_submissions(SD, ED, sub.name)
+      big_upvote_posts = list(filter(lambda item: item["score"] >= MIN_SCORE, tops))
+      print(
+          "found {} posts with score >= {} | time range {}".format(
+              len(big_upvote_posts), MIN_SCORE, DATE_DIFF
+          )
+      )
+
+  log.info(big_upvote_posts[0])
+
+  rand_sub = api.submission(id=big_upvote_posts[0])
 
   subok = False
   while subok == False:
