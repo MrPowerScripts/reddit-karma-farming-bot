@@ -10,6 +10,7 @@ HOME_DIR = expanduser("~")
 DB_DIR = "/reddit-karma-bot/brains"
 MAIN_DB = DB_DIR + "/brain.db"
 SCORE_THRESHOLD = -2
+MIN_SCORE = 30000 # for posts to repost
 SUBMISSION_SEARCH_TEMPLATE = \
     "https://api.pushshift.io/reddit/submission/search/" \
     "?after={after}&before={before}" \

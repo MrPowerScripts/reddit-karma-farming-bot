@@ -5,3 +5,4 @@
 venv
 settings.py
 .DS_Store
+macos.sh
