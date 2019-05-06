@@ -1,0 +1,17 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/python:2.7
+
+jobs:
+  build:
+    executor: default
+    steps:
+      - run: echo hello
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
