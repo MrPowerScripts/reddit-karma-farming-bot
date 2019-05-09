@@ -4,10 +4,22 @@
 from bot import base_brain, Brain
 import reddit
 from logger import log
-from utils import DB_DIR
+import os
+from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE
 
 def learn(subreddit=None):
   log.info('trying to learn')
+
+  if os.path.isfile(MAIN_DB):
+    size = os.path.getsize(MAIN_DB)
+    log.info('db size: ' + str(bytesto(size, 'm')))
+  else:
+    size = 0
+
+  if size > MAIN_DB_MAX_SIZE: # learn faster early on
+    log.info('DB size has reached limit: {}'.format(bytesto(MAIN_DB_MAX_SIZE, 'm')))
+    return
+
   try:
       if subreddit:
         log.info("learning from: " + subreddit)
