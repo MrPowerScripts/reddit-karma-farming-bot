@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import reddit
 import os
 from utils import bytesto, countdown, prob, MAIN_DB

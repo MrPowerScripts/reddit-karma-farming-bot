@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from cobe.brain import Brain
 from logger import log
 from utils import MAIN_DB

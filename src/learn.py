@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from bot import base_brain, Brain
 import reddit
 from logger import log
