@@ -18,7 +18,7 @@ import datetime
 from operator import attrgetter, itemgetter
 from logger import log
 from learn import learn
-from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, MIN_SCORE, subreddit
+from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, MIN_SCORE, subreddit, prob
 
 if os.environ.get('REDDIT_CLIENT_ID'):
   api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
@@ -212,6 +212,7 @@ def random_reply():
   log.info('making random reply')
   # Choose a random submission from /r/all that is currently hot
   submission = random.choice(list(api.subreddit('all').hot()))
+  submission.comments.replace_more(limit=0) # Replace the "MoreReplies" with all of the submission replies
 
   sub_name = submission.subreddit.display_name
   brain = "{}/{}.db".format(DB_DIR, sub_name)
@@ -221,13 +222,20 @@ def random_reply():
   reply_brain = bot.Brain(brain)
 
   try:
-    # Pass the users comment to chatbrain asking for a reply
-    response = reply_brain.reply(submission.title)
-  except Exception as e:
-    log.error(e, exc_info=False)
+    if prob(.35): #There's a larger chance that we'll reply to a comment.
+      log.info('replying to a comment')
+      comment = random.choice(submission.comments.list())
+      response = reply_brain.reply(comment.body)
+      reply = comment.reply(response)
+      log.info('Replied to comment: {}'.fomrat(comment))
+      log.info('Replied with: {}'.format(reply))
+    else:
+      log.info('replying to a submission')
+      # Pass the users comment to chatbrain asking for a reply
+      response = reply_brain.reply(submission.title)
+      submission.reply(response)
+      log.info('Replied to Title: {}'.format(submission.title))
+      log.info('Replied with: {}'.format(response))
 
-  try:
-    # Reply tp the same users comment with chatbrains reply
-    reply = submission.reply(response)
   except Exception as e:
     log.error(e, exc_info=False)
