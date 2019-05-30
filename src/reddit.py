@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
+
 reload(sys)
-sys.setdefaultencoding('utf8')
+sys.setdefaultencoding("utf8")
 
 import praw
 import requests
@@ -18,23 +19,39 @@ import datetime
 from operator import attrgetter, itemgetter
 from logger import log
 from learn import learn
-from utils import DB_DIR, SCORE_THRESHOLD, SUBMISSION_SEARCH_TEMPLATE, MIN_SCORE, subreddit, prob
+from utils import (
+    DB_DIR,
+    SCORE_THRESHOLD,
+    SUBMISSION_SEARCH_TEMPLATE,
+    MIN_SCORE,
+    subreddit,
+    prob,
+    lru_cache,
+    DAY,
+    TOP_SUBREDDIT_NUM,
+)
 
-if os.environ.get('REDDIT_CLIENT_ID'):
-  api = praw.Reddit(client_id=os.environ.get('REDDIT_CLIENT_ID'),
-                    client_secret=os.environ.get('REDDIT_SECRET'),
-                    password=os.environ.get('REDDIT_PASSWORD'),
-                    user_agent=os.environ.get('REDDIT_USER_AGENT'),
-                    username=os.environ.get('REDDIT_USERNAME'))
+if os.environ.get("REDDIT_CLIENT_ID"):
+    api = praw.Reddit(
+        client_id=os.environ.get("REDDIT_CLIENT_ID"),
+        client_secret=os.environ.get("REDDIT_SECRET"),
+        password=os.environ.get("REDDIT_PASSWORD"),
+        user_agent=os.environ.get("REDDIT_USER_AGENT"),
+        username=os.environ.get("REDDIT_USERNAME"),
+    )
 else:
-  import settings
-  api = praw.Reddit(client_id=settings.REDDIT_CLIENT_ID,
-                    client_secret=settings.REDDIT_SECRET,
-                    password=settings.REDDIT_PASSWORD,
-                    user_agent=settings.REDDIT_USER_AGENT,
-                    username=settings.REDDIT_USERNAME)
+    import settings
+
+    api = praw.Reddit(
+        client_id=settings.REDDIT_CLIENT_ID,
+        client_secret=settings.REDDIT_SECRET,
+        password=settings.REDDIT_PASSWORD,
+        user_agent=settings.REDDIT_USER_AGENT,
+        username=settings.REDDIT_USERNAME,
+    )
 
 
+@lru_cache(timeout=DAY)
 def _pushshift_search(sub, start, end):
     """Search sub-reddit for submissions withing a given time range.
 
@@ -43,12 +60,15 @@ def _pushshift_search(sub, start, end):
     :param end: epoch date of end (int)
     :return: iterable of reddit submissions (List[dict])
     """
-    url = SUBMISSION_SEARCH_TEMPLATE.format(
-        after=start, before=end, subreddit=sub
-    )
-    return requests.get(url).json().get("data", [])
+    url = SUBMISSION_SEARCH_TEMPLATE.format(after=start, before=end, subreddit=sub)
+    try:
+        return requests.get(url).json().get("data", [])
+    except Exception as e:
+        # unable to get data from pushshift
+        return None
 
 
+@lru_cache(timeout=DAY)
 def get_submissions(start_date, end_date, sub, submissions=[]):
     """'Paginate' function to retrieve all of the submissions
     between a given interval.
@@ -84,6 +104,7 @@ def get_submissions(start_date, end_date, sub, submissions=[]):
     return get_submissions(next_start, end_date, sub, submissions)
 
 
+@lru_cache(timeout=DAY)
 def get_top_subreddits(min_subscribers=500000):
     """Scraper for redditlist.com.
     Retrieves top subreddits with at least `min_subscribers`.
@@ -125,117 +146,136 @@ def get_top_subreddits(min_subscribers=500000):
 
 
 def submission_timespan():
-  # Get the current epoch time, and then subtract one year
-  year_ago = int(time.time()) - 31622400
-  # Add a day to the time from a year ago
-  end_search = year_ago + 86400
-  # Return a tuple with the start/end times to search old submissions
-  return year_ago, end_search
+    # Get the current epoch time, and then subtract one year
+    year_ago = int(time.time()) - 31622400
+    # Add a day to the time from a year ago
+    end_search = year_ago + 86400
+    # Return a tuple with the start/end times to search old submissions
+    return year_ago, end_search
+
 
 def delete_comments():
     count = 0
     for comment in api.redditor(api.user.me().name).new(limit=500):
         if comment.score <= SCORE_THRESHOLD:
-            log.info('deleting comment(id={id}, body={body}, score={score}, subreddit={sub}|{sub_id})'.format(
-                id=comment.id,
-                body=comment.body,
-                score=comment.score,
-                sub=comment.subreddit_name_prefixed,
-                sub_id=comment.subreddit_id))
+            log.info(
+                "deleting comment(id={id}, body={body}, score={score}, subreddit={sub}|{sub_id})".format(
+                    id=comment.id,
+                    body=comment.body,
+                    score=comment.score,
+                    sub=comment.subreddit_name_prefixed,
+                    sub_id=comment.subreddit_id,
+                )
+            )
             try:
                 comment.delete()
+            except praw.exceptions.APIException as e:
+                raise e
             except Exception as e:
-                log.info("unable to delete comment(id={id}), skip...\n{error}".format(id=comment.id, error=e.message))
+                log.info(
+                    "unable to delete comment(id={id}), skip...\n{error}".format(
+                        id=comment.id, error=e.message
+                    )
+                )
             count += 1
-    log.info('deleted {number} comments with less than {threshold} vote'.format(number=count, threshold=SCORE_THRESHOLD))
+    log.info(
+        "deleted {number} comments with less than {threshold} vote".format(
+            number=count, threshold=SCORE_THRESHOLD
+        )
+    )
+
 
 def random_submission():
-  log.info('making random submission')
-  # Get a random submission from a random subreddit
-  END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=364)
-  ED = END_DATE_PY.strftime('%s')
+    log.info("making random submission")
+    # Get a random submission from a random subreddit
+    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=364)
+    ED = END_DATE_PY.strftime("%s")
 
-  START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
-  SD = START_DATE_PY.strftime('%s')
+    START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
+    SD = START_DATE_PY.strftime("%s")
 
-  log.info(START_DATE_PY)
-  log.info(END_DATE_PY)
-  log.info(SD)
-  log.info(ED)
-  DATE_DIFF = ''
-  subreddits = get_top_subreddits()
-  for sub in subreddits[:5]:
-      print("\n{}".format("#" * 20))
-      print(sub)
-      tops = get_submissions(SD, ED, sub.name)
-      big_upvote_posts = list(filter(lambda item: item["score"] >= MIN_SCORE, tops))
-      print(
-          "found {} posts with score >= {} | time range {}".format(
-              len(big_upvote_posts), MIN_SCORE, DATE_DIFF
-          )
-      )
+    log.info(START_DATE_PY)
+    log.info(END_DATE_PY)
+    log.info(SD)
+    log.info(ED)
+    DATE_DIFF = ""
+    subreddits = get_top_subreddits()
+    for sub in subreddits[:TOP_SUBREDDIT_NUM]:
+        log.info("\n{}\n{}".format("#" * 20, sub))
+        tops = get_submissions(SD, ED, sub.name)
+        big_upvote_posts = list(filter(lambda item: item["score"] >= MIN_SCORE, tops))
+        log.info(
+            "found {} posts with score >= {}".format(len(big_upvote_posts), MIN_SCORE)
+        )
 
-  log.info(big_upvote_posts[0])
+    log.info(big_upvote_posts[0])
 
-  rand_sub = api.submission(id=big_upvote_posts[0])
+    rand_sub = api.submission(id=big_upvote_posts[0])
 
-  subok = False
-  while subok == False:
-    rand_sub = api.subreddit('all').random()
-    if rand_sub.subreddit.over18 == False: # we don't want nsfw sub
-      if rand_sub.subreddit.subscribers > 100000: # easier to get away with stuff on big subs
-        log.info("posting to: " + rand_sub.subreddit.display_name)
-        subok = True
+    subok = False
+    while subok == False:
+        rand_sub = api.subreddit("all").random()
+        if rand_sub.subreddit.over18 == False:  # we don't want nsfw sub
+            if (
+                rand_sub.subreddit.subscribers > 100000
+            ):  # easier to get away with stuff on big subs
+                log.info("posting to: " + rand_sub.subreddit.display_name)
+                subok = True
 
-  # Check if there's any items in the submissions list. If not display error
-  if rand_sub:
-    try:
-      # Check if the we're reposting a selfpost or a link post.
-      # Set the required params accodingly, and reuse the content
-      # from the old post
-      log.info("submission title: " + rand_sub.title)
-      log.info("tokenizing title")
-      if rand_sub.is_self:
-          params = {"title": rand_sub.title, "selftext":rand_sub.selftext}
-      else:
-          params = {"title": rand_sub.title, "url": rand_sub.url}
+    # Check if there's any items in the submissions list. If not display error
+    if rand_sub:
+        try:
+            # Check if the we're reposting a selfpost or a link post.
+            # Set the required params accodingly, and reuse the content
+            # from the old post
+            log.info("submission title: " + rand_sub.title)
+            log.info("tokenizing title")
+            if rand_sub.is_self:
+                params = {"title": rand_sub.title, "selftext": rand_sub.selftext}
+            else:
+                params = {"title": rand_sub.title, "url": rand_sub.url}
 
-      # Submit the same content to the same subreddit. Prepare your salt picks
-      api.subreddit(rand_sub.subreddit.display_name).submit(**params)
-    except Exception as e:
-      print e
+            # Submit the same content to the same subreddit. Prepare your salt picks
+            api.subreddit(rand_sub.subreddit.display_name).submit(**params)
+        except praw.exceptions.APIException as e:
+            raise e
+        except Exception as e:
+            log.info(e)
+    else:
+        log.error("something broke")
 
-  else:
-    print 'something broke'
 
 def random_reply():
-  log.info('making random reply')
-  # Choose a random submission from /r/all that is currently hot
-  submission = random.choice(list(api.subreddit('all').hot()))
-  submission.comments.replace_more(limit=0) # Replace the "MoreReplies" with all of the submission replies
+    log.info("making random reply")
+    # Choose a random submission from /r/all that is currently hot
+    submission = random.choice(list(api.subreddit("all").hot()))
+    submission.comments.replace_more(
+        limit=0
+    )  # Replace the "MoreReplies" with all of the submission replies
 
-  sub_name = submission.subreddit.display_name
-  brain = "{}/{}.db".format(DB_DIR, sub_name)
-  if not glob.glob(brain):
-    learn(sub_name)
+    sub_name = submission.subreddit.display_name
+    brain = "{}/{}.db".format(DB_DIR, sub_name)
+    if not glob.glob(brain):
+        learn(sub_name)
 
-  reply_brain = bot.Brain(brain)
+    reply_brain = bot.Brain(brain)
 
-  try:
-    if prob(.35): #There's a larger chance that we'll reply to a comment.
-      log.info('replying to a comment')
-      comment = random.choice(submission.comments.list())
-      response = reply_brain.reply(comment.body)
-      reply = comment.reply(response)
-      log.info('Replied to comment: {}'.fomrat(comment))
-      log.info('Replied with: {}'.format(reply))
-    else:
-      log.info('replying to a submission')
-      # Pass the users comment to chatbrain asking for a reply
-      response = reply_brain.reply(submission.title)
-      submission.reply(response)
-      log.info('Replied to Title: {}'.format(submission.title))
-      log.info('Replied with: {}'.format(response))
-
-  except Exception as e:
-    log.error(e, exc_info=False)
+    try:
+        if prob(.35):  # There's a larger chance that we'll reply to a comment.
+            log.info("replying to a comment")
+            comment = random.choice(submission.comments.list())
+            response = reply_brain.reply(comment.body)
+            reply = comment.reply(response)
+            log.info("Replied to comment: {}".format(comment))
+            log.info("Replied with: {}".format(reply))
+        else:
+            log.info("replying to a submission")
+            # Pass the users comment to chatbrain asking for a reply
+            response = reply_brain.reply(submission.title)
+            submission.reply(response)
+            log.info("Replied to Title: {}".format(submission.title))
+            log.info("Replied with: {}".format(response))
+    except praw.exceptions.APIException as e:
+        raise e
+    except Exception as e:
+        log.error(e, exc_info=False)
