@@ -1,6 +1,6 @@
 *.pyc
 *.db*
-*.log
+*.log*
 *.info
 venv
 settings.py

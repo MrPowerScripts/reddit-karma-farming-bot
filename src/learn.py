@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from bot import base_brain, Brain
+import random
 import reddit
 from logger import log
 import os
-from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE
+from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST
 
 
 def learn(subreddit=None):
@@ -22,9 +23,18 @@ def learn(subreddit=None):
         return
 
     try:
-        if subreddit:
+        if subreddit: # learning from a supplied 
+          if isinstance(subreddit, str):
             log.info("learning from: " + subreddit)
             sub = reddit.api.subreddit(subreddit)
+          else:
+            log.info('I have no idea what subreddit you gave me. not going to learn.')
+            return
+        elif SUBREDDIT_LIST: # learn from one of the filtered subreddits
+          sub_name = random.choice(SUBREDDIT_LIST)
+          log.info("SUBREDDIT_LIST is active")
+          log.info("learning from: {}".format(sub_name))
+          sub = reddit.api.subreddit(sub_name)
         else:  # no subreddit supplied, so we learn from a random one
             subok = False
             while subok == False:
