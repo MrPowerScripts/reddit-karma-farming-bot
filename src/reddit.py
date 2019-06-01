@@ -23,6 +23,7 @@ from utils import (
     DB_DIR,
     SCORE_THRESHOLD,
     SUBMISSION_SEARCH_TEMPLATE,
+    SUBREDDIT_LIST,
     MIN_SCORE,
     subreddit,
     prob,
@@ -199,7 +200,23 @@ def random_submission():
     log.info(SD)
     log.info(ED)
     DATE_DIFF = ""
-    subreddits = get_top_subreddits()
+
+    log.info("choosing subreddits")
+    if SUBREDDIT_LIST:
+      log.info('using SUBREDDIT_LIST: {}'.format(SUBREDDIT_LIST))
+      subreddits = []
+      for subname in SUBREDDIT_LIST:
+        subreddits.append(subreddit(
+                            name=subname,
+                            rank=1,
+                            url="https://example.com",
+                            subscribers=1000,
+                            type="what"))
+    else:
+      log.info("using get_top_subreddits")
+      subreddits = get_top_subreddits()
+      log.info(subreddits)
+
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
         log.info("\n{}\n{}".format("#" * 20, sub))
         tops = get_submissions(SD, ED, sub.name)
@@ -208,19 +225,9 @@ def random_submission():
             "found {} posts with score >= {}".format(len(big_upvote_posts), MIN_SCORE)
         )
 
-    log.info(big_upvote_posts[0])
+    log.info("big upvote post: {}".format(big_upvote_posts[0]))
 
     rand_sub = api.submission(id=big_upvote_posts[0])
-
-    subok = False
-    while subok == False:
-        rand_sub = api.subreddit("all").random()
-        if rand_sub.subreddit.over18 == False:  # we don't want nsfw sub
-            if (
-                rand_sub.subreddit.subscribers > 100000
-            ):  # easier to get away with stuff on big subs
-                log.info("posting to: " + rand_sub.subreddit.display_name)
-                subok = True
 
     # Check if there's any items in the submissions list. If not display error
     if rand_sub:
@@ -229,7 +236,7 @@ def random_submission():
             # Set the required params accodingly, and reuse the content
             # from the old post
             log.info("submission title: " + rand_sub.title)
-            log.info("tokenizing title")
+            log.info("posting to: {}".format(rand_sub.subreddit.name))
             if rand_sub.is_self:
                 params = {"title": rand_sub.title, "selftext": rand_sub.selftext}
             else:
