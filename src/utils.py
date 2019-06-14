@@ -12,7 +12,7 @@ from logger import log
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 HOME_DIR = expanduser("~")
-DB_DIR = ROOT_DIR + "/src/brains"
+DB_DIR = ROOT_DIR + "/brains"
 MAIN_DB = DB_DIR + "/brain.db"
 MAIN_DB_MIN_SIZE = 52428800  # in bytes
 MAIN_DB_MAX_SIZE = 209715200  # in bytes
