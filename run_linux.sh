@@ -31,6 +31,7 @@ if [ "$1" = "setup" ]; then
     echo "nada"
   fi
 
+  pip install virtualenv
   virtualenv venv
   source venv/bin/activate
   pip2 install wheel
