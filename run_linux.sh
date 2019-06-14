@@ -41,6 +41,3 @@ else
   source venv/bin/activate
   python2.7 ./src/run.py
 fi
-
-
-
