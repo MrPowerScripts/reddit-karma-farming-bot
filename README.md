@@ -38,18 +38,14 @@ First you need to create a reddit account, and then create an app on reddit.com.
 ```bash
 git clone https://github.com/MrPowerScripts/reddit-karma-farming-bot.git &&\
 cd reddit-karma-farming-bot &&\
-git pull origin master &&\
-git reset --hard HEAD &&\
 docker build -t=com.mrpowerscripts/mrps/reddit-karma-bot . &&\
-mkdir -p ~/reddit-karma-bot/brain &&\
 docker run -it \
   -e REDDIT_CLIENT_ID="MyCoolAppClientID" \
   -e REDDIT_SECRET="MyCoolAppSecret" \
   -e REDDIT_USERNAME="MyCoolUserName" \
   -e REDDIT_PASSWORD="MyPasswordForTheUsername" \
   -e REDDIT_USER_AGENT="script by /u/" \
-  -p 8080:8080 \
-  --mount src=~/reddit-karma-bot,target=/reddit-karma-bot,type=bind \
+  --mount src="$(pwd)/src",target=/reddit-karma-bot-run,type=bind \
   com.mrpowerscripts/mrps/reddit-karma-bot
 ```
 
