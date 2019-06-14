@@ -24,6 +24,8 @@ First you need to create a reddit account, and then create an app on reddit.com.
 
 2. change `src/settings.sample.py` to `src/settings.py` and change the values to your acccount and app values
 
+3. run `run_linux.sh`
+
 ## How to run the bot with docker
 
 1. Install docker https://docs.docker.com/install/
