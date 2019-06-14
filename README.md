@@ -12,16 +12,24 @@ Discord: https://bit.ly/mrps-discord
 Patreon: https://bit.ly/mrps-patreon  
 Power Up!: https://bit.ly/mrps-powerup  
 
+## Prep
+
+First you need to create a reddit account, and then create an app on reddit.com. After creating a reddit account follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
+
 ## For Android running visit the android folder
 
-## How to run the bot
+## How to run the bot on Linux
+
+1. run `run_linux.sh setup` to install the dependencies.
+
+2. change `src/settings.sample.py` to `src/settings.py` and change the values to your acccount and app values
+
+## How to run the bot with docker
 
 1. Install docker https://docs.docker.com/install/
     - Make sure [you enable docker without sudo](https://docs.docker.com/install/linux/linux-postinstall/)
 
 2. Update the environment variables below with your account info
-    - Follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
-
 
 3. Paste the whole command below into your terminal
 
@@ -43,18 +51,16 @@ docker run -it \
   com.mrpowerscripts/mrps/reddit-karma-bot
 ```
 
-### Windows
+- When the docker container is running you can start the bot by browsing to https://127.0.0.1:8080 The default username pass is admin/pass. It will give you an SSL warning because the CA is self-signed. Just click whatever button allowys you to pass through the warning.
+- The bot will store all of the stuff in learns in a folder within your home path (~) called `reddit-karma-bot`.
+- The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be a info.log in the `reddit-karma-bot` folder.
 
-The command above will not readily work on Docker for Windows. Try running each command individually (lines between the `&&`) and put each command on a single line (remove the `\` from each command). If you get a fully working oneliner on Windows do let me know!
-
-You can provide a proxy server for the docker container to connect through
+You can provide also a proxy server for the docker container to connect through
 
 ```bash
 --e HTTPS_PROXY="https://127.0.0.1:3001"
 ```
 
-## The deets
+### Windows
 
-- When the docker container is running you can start the bot by browsing to https://127.0.0.1:8080 The default username pass is admin/pass. It will give you an SSL warning because the CA is self-signed. Just click whatever button allowys you to pass through the warning.
-- The bot will store all of the stuff in learns in a folder within your home path (~) called `reddit-karma-bot`.
-- The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be a info.log in the `reddit-karma-bot` folder.
+The command above will not readily work on Docker for Windows. Try running each command individually (lines between the `&&`) and put each command on a single line (remove the `\` from each command). If you get a fully working oneliner on Windows do let me know!
