@@ -1,3 +1,5 @@
+THANKS TO Laman (Laman#6332) FOR CODING THE WEB DASHBOARD <3
+
 commands to run:
     1)pip install -r requirements
     2)flask initdb
