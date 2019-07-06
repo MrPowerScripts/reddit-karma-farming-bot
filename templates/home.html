@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block body %}
+<ul class=entries>
+    <a href="#" id="addBot">Add a new bot</a>
+    {% for entry in entries %}
+    <li>
+        <div class="entry">
+            <p><span class="bot-name"> {{entry.username }} <sub> {{entry.proxy}}</sub>  </span> <span class="bot-state"> {%if entry.running %} running <span> <a
+                    class="bot-action {{entry.username}} botStop" href="#">STOP</a></span> {% else %} Not
+                running <span> <a class="bot-action {{entry.username}} botRun" href="#">RUN </a></span> {%endif %}</span>
+                <span class="botDeleteDiv"><a href="#" class="botDelete {{entry.username }}">delete</a> </span>
+            </p>
+
+        </div>
+    </li>
+    {% else %}
+    <li><em>No entries here so far</em></li>
+    {% endfor %}
+</ul>
+<form id="botform" action="/save" method="post">
+    <div>
+        <label>username:</label> <input type="text" name="username">
+    </div>
+    <div>
+
+        <label>password:</label> <input type="text" name="password">
+    </div>
+    <div>
+
+        <label>client_id:</label> <input type="text" name="client_id">
+    </div>
+    <div>
+
+        <label>client_secret:</label> <input type="text" name="client_secret">
+    </div>
+    <div>
+
+        <label>proxy:</label> <input type="text" name="proxy">
+    </div>
+    <div class="button">
+        <button type="submit">Save</button>
+    </div>
+</form>
+
+{% endblock %}

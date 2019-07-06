@@ -1,0 +1,17 @@
+<!doctype html>
+<head>
+    <meta charset="UTF-8">
+    <title>Bot</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<div class=page>
+    <h1>Manage bot</h1>
+    {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+    {% endfor %}
+    {% block body %}
+    {% endblock %}
+</div>
+<script src="{{ url_for('static', filename='jquery-3.4.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='app.js') }}"></script>

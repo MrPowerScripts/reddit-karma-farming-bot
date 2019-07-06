@@ -1,0 +1,34 @@
+#botform {
+    margin-top: 20px;
+    display: none;
+}
+
+.bot-name {
+    text-transform: lowercase;
+    margin-left: 5px;
+}
+
+.bot-action {
+    text-transform: uppercase;
+    text-decoration: underline;
+    color: #0c5460;
+}
+
+.bot-state {
+    text-transform: capitalize;
+}
+
+.botStop {
+    color: red;
+}
+
+.botDeleteDiv {
+    text-align: right;
+    margin-left: 5%;
+    border-bottom: 1px dotted red;
+}
+
+.botDelete {
+    text-decoration: none;
+
+}
