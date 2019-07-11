@@ -257,7 +257,7 @@ def random_reply():
         learn(str(api.user.me()), sub_name)
     log.info("Main database: {}".format(MAIN_DB))
 
-    reply_brain = Brain(brain)
+    reply_brain = Brain(MAIN_DB)
 
     try:
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
