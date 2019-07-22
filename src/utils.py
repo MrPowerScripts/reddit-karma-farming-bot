@@ -21,7 +21,7 @@ TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
 MIN_SCORE = 30000  # for posts to repost
 SUBMISSION_SEARCH_TEMPLATE = "https://api.pushshift.io/reddit/submission/search/?after={after}&before={before}&sort_type=score&sort=desc&subreddit={subreddit}"
 DAY = 86400  # POSIX day (exact value)
-PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.02, "LEARN": 0.01, "DELETE": 0.02}
+PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.00, "LEARN": 0.01, "DELETE": 0.02}
 
 
 subreddit = collections.namedtuple(
