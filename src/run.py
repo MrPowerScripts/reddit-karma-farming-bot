@@ -101,7 +101,7 @@ if __name__ == "__main__":
                             )
                         except Exception as e:
                             log.error(
-                                "something weird happened, {}".format(e), exc_info=False
+                                "something weird happened, {}".format(e), exc_info=True
                             )
             if prob(PROBABILITIES["LEARN"]):  # chance we'll learn more
                 log.info("going to learn")

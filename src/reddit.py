@@ -212,15 +212,8 @@ def random_submission():
 
     rand_sub = api.submission(id=big_upvote_posts[0])
 
-    subok = False
-    while subok == False:
-        rand_sub = api.subreddit("all").random()
-        if rand_sub.subreddit.over18 == False:  # we don't want nsfw sub
-            if (
-                rand_sub.subreddit.subscribers > 100000
-            ):  # easier to get away with stuff on big subs
-                log.info("posting to: " + rand_sub.subreddit.display_name)
-                subok = True
+    log.info(rand_sub.title)
+    log.info(str(rand_sub))
 
     # Check if there's any items in the submissions list. If not display error
     if rand_sub:
@@ -255,23 +248,42 @@ def random_reply():
 
     sub_name = submission.subreddit.display_name
     brain = "{}/{}.db".format(DB_DIR, sub_name)
+    log.info(brain)
     if not glob.glob(brain):
         learn(sub_name)
 
     reply_brain = bot.Brain(brain)
+
 
     try:
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
             log.info("replying to a comment")
             comment = random.choice(submission.comments.list())
             response = reply_brain.reply(comment.body)
+            
+            # We might not be able to learn enough from the subreddit to reply
+            # If we don't, then pull a reply from the general database.
+            if "I don't know enough to answer you yet!" in response:
+              log.info("I don't know enough from {}, using main brain db to reply".format(sub_name))
+              brain = "{}/{}.db".format(DB_DIR, "brain")
+              reply_brain = bot.Brain(brain)
+              response = reply_brain.reply(comment.body)
+
             reply = comment.reply(response)
-            log.info("Replied to comment: {}".format(comment))
-            log.info("Replied with: {}".format(reply))
+            log.info("Replied to comment: {}".format(comment.body))
+            log.info("Replied with: {}".format(response))
         else:
             log.info("replying to a submission")
             # Pass the users comment to chatbrain asking for a reply
             response = reply_brain.reply(submission.title)
+
+            # same as above. nobody will ever see this so it's fine.
+            if "I don't know enough to answer you yet!" in response:
+              log.info("I don't know enough from {}, using main brain db to reply".format(sub_name))
+              brain = "{}/{}.db".format(DB_DIR, "brain")
+              reply_brain = bot.Brain(brain)
+              response = reply_brain.reply(submission.title)
+
             submission.reply(response)
             log.info("Replied to Title: {}".format(submission.title))
             log.info("Replied with: {}".format(response))
@@ -279,3 +291,6 @@ def random_reply():
         raise e
     except Exception as e:
         log.error(e, exc_info=False)
+
+
+
