@@ -200,17 +200,23 @@ def random_submission():
     log.info(ED)
     DATE_DIFF = ""
     subreddits = get_top_subreddits()
+    total_posts = []
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
         log.info("\n{}\n{}".format("#" * 20, sub))
         tops = get_submissions(SD, ED, sub.name)
         big_upvote_posts = list(filter(lambda item: item["score"] >= MIN_SCORE, tops))
+        total_posts += big_upvote_posts
         log.info(
             "found {} posts with score >= {}".format(len(big_upvote_posts), MIN_SCORE)
         )
 
-    log.info(big_upvote_posts[0])
+    # log.info(big_upvote_posts[0])
+    # print(total_posts)
+    post_to_repost = random.choice(total_posts)
+    print(post_to_repost)
+    print("doing submission")
+    rand_sub = api.submission(id=post_to_repost["id"])
 
-    rand_sub = api.submission(id=big_upvote_posts[0])
 
     log.info(rand_sub.title)
     log.info(str(rand_sub))
