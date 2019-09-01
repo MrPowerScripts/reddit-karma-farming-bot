@@ -28,7 +28,10 @@ from utils import (
     prob,
     lru_cache,
     DAY,
+    MINUTE,
     TOP_SUBREDDIT_NUM,
+    MAX_CACHE_SIZE,
+    NUMBER_DAYS_FOR_POST_TOBE_OLD,
 )
 
 if os.environ.get("REDDIT_CLIENT_ID"):
@@ -51,7 +54,7 @@ else:
     )
 
 
-@lru_cache(timeout=DAY)
+@lru_cache(timeout=DAY,maxsize = MAX_CACHE_SIZE)
 def _pushshift_search(sub, start, end):
     """Search sub-reddit for submissions withing a given time range.
 
@@ -68,8 +71,8 @@ def _pushshift_search(sub, start, end):
         return None
 
 
-@lru_cache(timeout=DAY)
-def get_submissions(start_date, end_date, sub, submissions=[]):
+@lru_cache(timeout=DAY,maxsize = MAX_CACHE_SIZE)
+def get_submissions(start_date, end_date, sub):
     """'Paginate' function to retrieve all of the submissions
     between a given interval.
     By default pushshift.io only returns maximum of 500 items,
@@ -83,28 +86,42 @@ def get_submissions(start_date, end_date, sub, submissions=[]):
     :param submissions: collected submissions (List[dict])
     :return: submissions, sorted by the created date in ascending order (List[dict])
     """
-    # base case
-    if submissions and submissions[-1]["created_utc"] >= end_date:
-        return submissions
+    
+    submissions = []
+    new_submissions = []
 
-    # get submissions
-    new_submissions = _pushshift_search(sub, start_date, end_date)
-    if not new_submissions:
-        return submissions
-    # 'paginate', use the last retrieved item's created date
-    # for the next request's start date
-    next_start = sorted(new_submissions, key=itemgetter("created_utc"))[-1][
-        "created_utc"
-    ]
-    submissions += new_submissions
-    # we got all in the interval
-    if next_start == start_date:
-        return submissions
-    time.sleep(0.25)  # limit the requests a bit, be nice with pushshift API
-    return get_submissions(next_start, end_date, sub, submissions)
+    while not new_submissions: 
+
+        # get submissions
+        new_submissions = _pushshift_search(sub, start_date, end_date)
+
+        # base case
+        if submissions and submissions[-1]["created_utc"] >= end_date:
+            return submissions
+        
+        # log.info(len(new_submissions))
+        if not new_submissions:
+            return submissions
+
+        # 'paginate', use the last retrieved item's created date
+        # for the next request's start date
+        next_start = sorted(new_submissions, key=itemgetter("created_utc"))[-1][
+            "created_utc"
+        ]
+
+        submissions += new_submissions
+        # we got all in the interval
+        if next_start == start_date:
+            return submissions
+
+        start_date = next_start
+
+        # log.info(len(submissions))
+        time.sleep(0.25)  # limit the requests a bit, be nice with pushshift API
+    return submissions
 
 
-@lru_cache(timeout=DAY)
+@lru_cache(timeout=DAY,maxsize = MAX_CACHE_SIZE)
 def get_top_subreddits(min_subscribers=500000):
     """Scraper for redditlist.com.
     Retrieves top subreddits with at least `min_subscribers`.
@@ -188,7 +205,7 @@ def delete_comments():
 def random_submission():
     log.info("making random submission")
     # Get a random submission from a random subreddit
-    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=364)
+    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=NUMBER_DAYS_FOR_POST_TOBE_OLD)
     ED = END_DATE_PY.strftime("%s")
 
     START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
@@ -201,7 +218,9 @@ def random_submission():
     DATE_DIFF = ""
     subreddits = get_top_subreddits()
     total_posts = []
+
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
+        big_upvote_posts = []
         log.info("\n{}\n{}".format("#" * 20, sub))
         tops = get_submissions(SD, ED, sub.name)
         big_upvote_posts = list(filter(lambda item: item["score"] >= MIN_SCORE, tops))
@@ -209,12 +228,11 @@ def random_submission():
         log.info(
             "found {} posts with score >= {}".format(len(big_upvote_posts), MIN_SCORE)
         )
+        del big_upvote_posts
 
-    # log.info(big_upvote_posts[0])
-    # print(total_posts)
     post_to_repost = random.choice(total_posts)
-    print(post_to_repost)
-    print("doing submission")
+    # print(post_to_repost)
+    # print("doing submission")
     rand_sub = api.submission(id=post_to_repost["id"])
 
 
