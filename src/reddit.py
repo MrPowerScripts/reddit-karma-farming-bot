@@ -281,7 +281,12 @@ def random_submission():
 def random_reply():
     log.info("making random reply")
     # Choose a random submission from /r/all that is currently hot
-    submission = random.choice(list(api.subreddit("all").hot()))
+    if SUBREDDIT_LIST:
+      subreddit = random.choice(SUBREDDIT_LIST)
+      submission = random.choice(list(api.subreddit(subreddit).hot()))
+    else:
+      submission = random.choice(list(api.subreddit("all").hot()))
+    
     submission.comments.replace_more(
         limit=0
     )  # Replace the "MoreReplies" with all of the submission replies
