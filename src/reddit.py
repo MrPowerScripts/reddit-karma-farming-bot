@@ -23,6 +23,7 @@ from utils import (
     DB_DIR,
     SCORE_THRESHOLD,
     SUBMISSION_SEARCH_TEMPLATE,
+    SUBREDDIT_LIST,
     MIN_SCORE,
     subreddit,
     prob,
@@ -250,7 +251,7 @@ def random_submission():
     # print(post_to_repost)
     # print("doing submission")
     rand_sub = api.submission(id=post_to_repost["id"])
-
+    log.info("big upvote post: {}".format(big_upvote_posts[0]))
 
     log.info(rand_sub.title)
     log.info(str(rand_sub))
@@ -262,7 +263,7 @@ def random_submission():
             # Set the required params accodingly, and reuse the content
             # from the old post
             log.info("submission title: " + rand_sub.title)
-            log.info("tokenizing title")
+            log.info("posting to: {}".format(rand_sub.subreddit.name))
             if rand_sub.is_self:
                 params = {"title": rand_sub.title, "selftext": rand_sub.selftext}
             else:
