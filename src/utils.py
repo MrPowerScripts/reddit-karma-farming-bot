@@ -27,7 +27,6 @@ MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TOBE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 
-
 subreddit = collections.namedtuple(
     "Subreddit", ["name", "rank", "url", "subscribers", "type"]
 )
