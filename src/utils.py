@@ -25,7 +25,7 @@ MINUTE = 60
 PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.02, "LEARN": 0.02, "DELETE": 0.02}
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TOBE_OLD = 365
-SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
+SUBREDDIT_LIST = ["me_irl"] # limit learning and posting to these subreddits. Empty = Random
 
 if os.environ.get("SUBREDDIT_LIST"): # Prefer subreddit list from envars
   SUBREDDIT_LIST = os.environ.get("SUBREDDIT_LIST").strip().split(",")

@@ -251,7 +251,6 @@ def random_submission():
     # print(post_to_repost)
     # print("doing submission")
     rand_sub = api.submission(id=post_to_repost["id"])
-    log.info("big upvote post: {}".format(big_upvote_posts[0]))
 
     log.info(rand_sub.title)
     log.info(str(rand_sub))
