@@ -216,7 +216,23 @@ def random_submission():
     log.info(SD)
     log.info(ED)
     DATE_DIFF = ""
-    subreddits = get_top_subreddits()
+
+    log.info("choosing subreddits")
+    if SUBREDDIT_LIST:
+      log.info('using SUBREDDIT_LIST: {}'.format(SUBREDDIT_LIST))
+      subreddits = []
+      for subname in SUBREDDIT_LIST:
+        subreddits.append(subreddit(
+                            name=subname,
+                            rank=1,
+                            url="https://example.com",
+                            subscribers=1000,
+                            type="what"))
+    else:
+      log.info("using get_top_subreddits")
+      subreddits = get_top_subreddits()
+      log.info(subreddits)
+      
     total_posts = []
 
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
