@@ -9,6 +9,7 @@ import collections
 from requests import get
 from os.path import expanduser
 from logger import log
+import random
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 HOME_DIR = expanduser("~")
@@ -24,7 +25,7 @@ DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.02, "LEARN": 0.02, "DELETE": 0.02}
 MAX_CACHE_SIZE = 128
-NUMBER_DAYS_FOR_POST_TOBE_OLD = 365
+NUMBER_DAYS_FOR_POST_TOBE_OLD = random.randint(335,375)
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 
 if os.environ.get("SUBREDDIT_LIST"): # Prefer subreddit list from envars
