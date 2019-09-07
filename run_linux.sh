@@ -10,7 +10,7 @@ case "${unameOut}" in
 esac
 echo "${machine}"
 
-if [ "$1" = "setup" ]; then
+if [ ! -d "$HOME/venv" ]; then
   if [ "${machine}" =  "Linux" ]; then
     apt-get update && \
       apt-get install -y --no-install-recommends \
@@ -27,17 +27,18 @@ if [ "$1" = "setup" ]; then
         python-setuptools \
         python-dev \
         git 
+
+    pip install virtualenv
+    virtualenv venv
+    source venv/bin/activate
+    pip2 install wheel
+    pip2 install --upgrade pip wheel -r ./src/requirements.txt
+
   else
-    echo "nada"
+    echo "No suitable linux version"
   fi
-
-  pip install virtualenv
-  virtualenv venv
-  source venv/bin/activate
-  pip2 install wheel
-  pip2 install --upgrade pip wheel -r ./src/requirements.txt
-
-else
-  source venv/bin/activate
-  python2.7 ./src/run.py
 fi
+
+source venv/bin/activate
+python2.7 ./src/run.py
+

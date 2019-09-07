@@ -20,11 +20,9 @@ First you need to create a reddit account, and then create an app on reddit.com.
 
 ## How to run the bot on Linux
 
-1. run `run_linux.sh setup` to install the dependencies.
+1. change `src/settings.sample.py` to `src/settings.py` and update the values to your acccount and app values
 
-2. change `src/settings.sample.py` to `src/settings.py` and change the values to your acccount and app values
-
-3. run `run_linux.sh`
+1. run `run_linux.sh`
 
 ## How to run the bot with docker
 
