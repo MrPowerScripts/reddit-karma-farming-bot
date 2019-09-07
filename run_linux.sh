@@ -10,7 +10,9 @@ case "${unameOut}" in
 esac
 echo "${machine}"
 
-if [ ! -d "$HOME/venv" ]; then
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+if [ ! -d "$DIR/venv" ]; then
   if [ "${machine}" =  "Linux" ]; then
     apt-get update && \
       apt-get install -y --no-install-recommends \
