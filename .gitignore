@@ -2,6 +2,7 @@
 *.db*
 *.log*
 *.info
+rh.json
 venv
 settings.py
 .DS_Store

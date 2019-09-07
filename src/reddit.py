@@ -14,7 +14,9 @@ import time
 import random
 import bot
 import os
+import json
 import glob
+import urllib
 import datetime
 from operator import attrgetter, itemgetter
 from logger import log
@@ -301,6 +303,15 @@ def random_reply():
 
 
     try:
+        if prob(.1): # small chance we advertise
+          content = share()
+          comment = random.choice(submission.comments.list())
+          log.info('sharing - thanks for helping out!')
+          sharing = '{} {}'.format(content['comment'], content['url'])
+          reply = comment.reply(sharing)
+          log.info("Replied to comment: {}".format(comment.body))
+          log.info("Replied with: {}".format(reply))
+          return
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
             log.info("replying to a comment")
             comment = random.choice(submission.comments.list())
@@ -337,5 +348,33 @@ def random_reply():
     except Exception as e:
         log.error(e, exc_info=False)
 
+def share():
+  RH_DB = os.path.join(DB_DIR, "rh.json")
+  try:
+    if os.path.isfile(RH_DB):
+      # delete the rh db if it's older than 1 day
+      age = int(1)*86400
+      now = time.time()
+      modified = os.stat(RH_DB).st_mtime
+      if modified < now - age:
+        if os.path.isfile(RH_DB):
+          os.remove(RH_DB)
+          log.info('Deleted: %s (%s)' % (file, modified))
+    if not os.path.isfile(RH_DB):
+      urllib.urlretrieve("https://reviewhuntr.com/api-bait.json", RH_DB)
+  except Exception as e:
+    log.info("couldn't get bait")
+    log.info(e)
+    return
 
-
+  with open(RH_DB) as json_file:
+    log.info("chumming the water")
+    reviews = json.loads(json_file.read())
+    review = random.choice(reviews)
+    review['comment'] = random.choice([
+      "this is totally urelated but you might enjoy it ",
+      "so random but check this out ",
+      "somebody is going to fall for this ",
+      "don't mind me just sharing this real quick "])
+    json_file.close()
+  return review
