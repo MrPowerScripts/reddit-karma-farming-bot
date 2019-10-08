@@ -304,13 +304,14 @@ def random_reply():
 
     try:
         if prob(.1): # small chance we advertise
-          content = share()
-          comment = random.choice(submission.comments.list())
-          log.info('sharing - thanks for helping out!')
-          sharing = '{} {}'.format(content['comment'], content['url'])
-          reply = comment.reply(sharing)
-          log.info("Replied to comment: {}".format(comment.body))
-          log.info("Replied with: {}".format(reply))
+          # content = share()
+          # comment = random.choice(submission.comments.list())
+          # log.info('sharing - thanks for helping out!')
+          # sharing = '{} {}'.format(content['comment'], content['url'])
+          # reply = comment.reply(sharing)
+          # log.info("Replied to comment: {}".format(comment.body))
+          # log.info("Replied with: {}".format(reply))
+          log.info("ReviewHuntr replacement therapy")
           return
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
             log.info("replying to a comment")
@@ -361,7 +362,7 @@ def share():
           os.remove(RH_DB)
           log.info('Deleted: %s (%s)' % (file, modified))
     if not os.path.isfile(RH_DB):
-      urllib.urlretrieve("https://reviewhuntr.com/api-bait.json", RH_DB)
+      # urllib.urlretrieve("https://reviewhuntr.com/api-bait.json", RH_DB)
       print('test')
   except Exception as e:
     log.info("couldn't get bait")
