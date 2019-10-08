@@ -89,11 +89,11 @@ def get_submissions(start_date, end_date, sub):
     :param submissions: collected submissions (List[dict])
     :return: submissions, sorted by the created date in ascending order (List[dict])
     """
-    
+
     submissions = []
     new_submissions = []
 
-    while not new_submissions: 
+    while not new_submissions:
 
         # get submissions
         new_submissions = _pushshift_search(sub, start_date, end_date)
@@ -101,7 +101,7 @@ def get_submissions(start_date, end_date, sub):
         # base case
         if submissions and submissions[-1]["created_utc"] >= end_date:
             return submissions
-        
+
         # log.info(len(new_submissions))
         if not new_submissions:
             return submissions
@@ -235,7 +235,7 @@ def random_submission():
       log.info("using get_top_subreddits")
       subreddits = get_top_subreddits()
       log.info(subreddits)
-      
+
     total_posts = []
 
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
@@ -288,7 +288,7 @@ def random_reply():
       submission = random.choice(list(api.subreddit(subreddit).hot()))
     else:
       submission = random.choice(list(api.subreddit("all").hot()))
-    
+
     submission.comments.replace_more(
         limit=0
     )  # Replace the "MoreReplies" with all of the submission replies
@@ -316,7 +316,7 @@ def random_reply():
             log.info("replying to a comment")
             comment = random.choice(submission.comments.list())
             response = reply_brain.reply(comment.body)
-            
+
             # We might not be able to learn enough from the subreddit to reply
             # If we don't, then pull a reply from the general database.
             if "I don't know enough to answer you yet!" in response:
