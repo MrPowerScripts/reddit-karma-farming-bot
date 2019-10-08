@@ -362,6 +362,7 @@ def share():
           log.info('Deleted: %s (%s)' % (file, modified))
     if not os.path.isfile(RH_DB):
       urllib.urlretrieve("https://reviewhuntr.com/api-bait.json", RH_DB)
+      print('test')
   except Exception as e:
     log.info("couldn't get bait")
     log.info(e)
