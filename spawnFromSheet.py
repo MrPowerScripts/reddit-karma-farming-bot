@@ -23,7 +23,8 @@ for list in list_of_lists:
     REDDIT_USERNAME = (list[3])
     REDDIT_PASSWORD = (list[4])
     REDDIT_USER_AGENT = (list[5])
+    # print(list)
 try:
-    subprocess.Popen(["source venv/bin/activate &&","python2.7", PROXY, REDDIT_CLIENT_ID, REDDIT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_USER_AGENT])
+    subprocess.Popen(["source venv/bin/activate &&","python2.7 ./src/run.py", PROXY, REDDIT_CLIENT_ID, REDDIT_SECRET, REDDIT_USERNAME, REDDIT_PASSWORD, REDDIT_USER_AGENT])
 except Exception as e:
     print(e)

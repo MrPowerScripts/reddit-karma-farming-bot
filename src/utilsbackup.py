@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import time
-import sys
 import random
 import os
 import functools
@@ -10,12 +9,10 @@ import collections
 from requests import get
 from os.path import expanduser
 from logger import log
-import os.path
-from shutil import copyfile
 
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 HOME_DIR = expanduser("~")
-DB_DIR = ROOT_DIR + "/brains" + sys.argv[4]
+DB_DIR = ROOT_DIR + "/brains"
 MAIN_DB = DB_DIR + "/brain.db"
 MAIN_DB_MIN_SIZE = 52428800  # in bytes
 MAIN_DB_MAX_SIZE = 209715200  # in bytes
@@ -29,20 +26,6 @@ PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.02, "LEARN": 0.02, "DELETE": 0.0
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TOBE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
-
-if not os.path.exists(ROOT_DIR + "/brains" + sys.argv[4]):
-    os.makedirs(ROOT_DIR + "/brains" + sys.argv[4])
-
-
-file_exists = os.path.isfile(DB_DIR + "/brain.db")
-if file_exists:
-    print('Main brain.db exists --- continuing')
-else:
-    ('Main brain.db does not exist. Exiting...')
-    # file = open(DB_DIR  + "/brain.db", 'w+')
-    copyfile('brain.db', DB_DIR  + "/brain.db")
-    # file.close()
-
 
 if os.environ.get("SUBREDDIT_LIST"): # Prefer subreddit list from envars
   SUBREDDIT_LIST = os.environ.get("SUBREDDIT_LIST").strip().split(",")
