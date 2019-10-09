@@ -37,6 +37,13 @@ from utils import (
     NUMBER_DAYS_FOR_POST_TOBE_OLD,
 )
 
+PROXY = sys.argv[1]
+REDDIT_CLIENT_ID = sys.argv[2]
+REDDIT_SECRET = sys.argv[3]
+REDDIT_USERNAME = sys.argv[4]
+REDDIT_PASSWORD = sys.argv[5]
+REDDIT_USER_AGENT = sys.argv[6]
+
 if os.environ.get("REDDIT_CLIENT_ID"):
     api = praw.Reddit(
         client_id=os.environ.get("REDDIT_CLIENT_ID"),
@@ -49,11 +56,11 @@ else:
     import settings
 
     api = praw.Reddit(
-        client_id=settings.REDDIT_CLIENT_ID,
-        client_secret=settings.REDDIT_SECRET,
-        password=settings.REDDIT_PASSWORD,
-        user_agent=settings.REDDIT_USER_AGENT,
-        username=settings.REDDIT_USERNAME,
+        client_id=REDDIT_CLIENT_ID,
+        client_secret=REDDIT_SECRET,
+        password=REDDIT_PASSWORD,
+        user_agent=REDDIT_USER_AGENT,
+        username=REDDIT_USERNAME,
     )
 
 
