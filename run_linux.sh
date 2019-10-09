@@ -30,12 +30,13 @@ if [ ! -d "$DIR/venv" ]; then
         python-pip \
         python-setuptools \
         python-dev \
-        git 
+        git
 
     pip install virtualenv
     virtualenv venv
     source venv/bin/activate
     pip2 install wheel
+    pip2 install gspread
     pip2 install --upgrade pip wheel -r ./src/requirements.txt
 
   else
@@ -45,4 +46,3 @@ fi
 
 source venv/bin/activate
 python2.7 ./src/run.py
-
