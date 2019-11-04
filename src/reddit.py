@@ -303,15 +303,15 @@ def random_reply():
 
 
     try:
-        if prob(.1): # small chance we advertise
-          content = share()
-          comment = random.choice(submission.comments.list())
-          log.info('sharing - thanks for helping out!')
-          sharing = '{} {}'.format(content['comment'], content['url'])
-          reply = comment.reply(sharing)
-          log.info("Replied to comment: {}".format(comment.body))
-          log.info("Replied with: {}".format(reply))
-          return
+#         if prob(.1): # small chance we advertise
+#           content = share()
+#           comment = random.choice(submission.comments.list())
+#           log.info('sharing - thanks for helping out!')
+#           sharing = '{} {}'.format(content['comment'], content['url'])
+#           reply = comment.reply(sharing)
+#           log.info("Replied to comment: {}".format(comment.body))
+#           log.info("Replied with: {}".format(reply))
+#           return
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
             log.info("replying to a comment")
             comment = random.choice(submission.comments.list())
