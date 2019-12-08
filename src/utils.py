@@ -19,7 +19,7 @@ MAIN_DB_MAX_SIZE = 209715200  # in bytes
 SCORE_THRESHOLD = -2  # downvote
 TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
 MIN_SCORE = 30000  # for posts to repost
-SUBMISSION_SEARCH_TEMPLATE = "https://api.pushshift.io/reddit/search/submission/?after={after}&before=30d&sort_type=score&sort=desc&subreddit={subreddit}"
+SUBMISSION_SEARCH_TEMPLATE = "https://api.pushshift.io/reddit/search/submission/?after={after}&before={before}&sort_type=score&sort=desc&subreddit={subreddit}"
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.02, "LEARN": 0.02, "DELETE": 0.02}
