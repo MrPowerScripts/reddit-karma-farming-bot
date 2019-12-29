@@ -14,10 +14,15 @@ Power Up!: https://bit.ly/mrps-powerup
 
 # NEW! Run it on heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
+
 After deploying it and it says deployed click on `Manage App` Button
+
 Now click `Resources` tab
+
 Click on the Edit Icon and turn on the worker and save
+
 Click on more and view logs to make everything is fine
+
 BOOM! free hosting
 
 ## Prep
