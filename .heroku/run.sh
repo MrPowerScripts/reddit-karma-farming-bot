@@ -16,8 +16,8 @@ if [ ! -d "$DIR/venv" ]; then
   echo "need to install dependencies"
   if [ "${machine}" =  "Linux" ]; then
     echo "this is linux - install linux deps"
-    apt-get update && \
-      apt-get install -y --no-install-recommends \
+    sudo apt-get update && \
+      sudo apt-get install -y --no-install-recommends \
         g++ \
         gcc \
         golang-go \
