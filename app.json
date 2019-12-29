@@ -4,4 +4,26 @@
   "repository": "https://github.com/EliteDaMyth/reddit-karma-farming-bot-1",
   "logo": "https://node-js-sample.herokuapp.com/node.png",
   "keywords": ["boom"]
+  "env": {
+    "REDDIT_CLIENT_ID": {
+      "description": "Client ID",
+      "Value": "enter pls"
+    },
+    "REDDIT_PASSWORD": {
+      "description": "Gay",
+      "Value": "enter pls"
+    },
+    "REDDIT_SECRET": {
+      "description": "Gay",
+      "Value": "enter pls"
+    },
+    "REDDIT_USER_AGENT": {
+      "description": "gay",
+      "Value": "enter pls"
+    },
+    "REDDIT_USERNAME": {
+      "description": "Gay",
+      "Value": "enter pls"
+    }
+  }
 }
