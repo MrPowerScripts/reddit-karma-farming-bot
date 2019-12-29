@@ -12,6 +12,14 @@ Discord: https://bit.ly/mrps-discord
 Patreon: https://bit.ly/mrps-patreon  
 Power Up!: https://bit.ly/mrps-powerup  
 
+# NEW! Run it on heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
+After deploying it and it says deployed click on `Manage App` Button
+Now click `Resources` tab
+Click on the Edit Icon and turn on the worker and save
+Click on more and view logs to make everything is fine
+BOOM! free hosting
+
 ## Prep
 
 First you need to create a reddit account, and then create an app on reddit.com. After creating a reddit account follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
