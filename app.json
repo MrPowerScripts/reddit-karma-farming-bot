@@ -1,7 +1,7 @@
 {
   "name": "Reddit Karma Farming Bot",
-  "description": "BOOM",
-  "repository": "https://github.com/EliteDaMyth/reddit-karma-farming-bot-1",
+  "description": "Deploy it!",
+  "repository": "https://github.com/MrPowerScripts/reddit-karma-farming-bot",
   "logo": "https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_reddit-512.png",
   "keywords": ["boom"],
   "env": {
