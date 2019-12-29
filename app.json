@@ -1,0 +1,29 @@
+{
+  "name": "Reddit Karma Farming Bot",
+  "description": "Deploy it!",
+  "repository": "https://github.com/MrPowerScripts/reddit-karma-farming-bot",
+  "logo": "https://cdn3.iconfinder.com/data/icons/2018-social-media-logotypes/1000/2018_social_media_popular_app_logo_reddit-512.png",
+  "keywords": ["boom"],
+  "env": {
+    "REDDIT_CLIENT_ID": {
+      "description": "Client ID of an reddit SCRIPT app",
+      "Value": "enter pls"
+    },
+    "REDDIT_PASSWORD": {
+      "description": "Password of your account",
+      "Value": "enter pls"
+    },
+    "REDDIT_SECRET": {
+      "description": "Secret of the SCRIPT app",
+      "Value": "enter pls"
+    },
+    "REDDIT_USER_AGENT": {
+      "description": "Random things",
+      "Value": "enter pls"
+    },
+    "REDDIT_USERNAME": {
+      "description": "Username of your account",
+      "Value": "enter pls"
+    }
+  }
+}
