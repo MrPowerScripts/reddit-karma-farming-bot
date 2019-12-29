@@ -1,1 +1,1 @@
-worker: bash run_linux.sh
+worker: python2 ./src/run.py
