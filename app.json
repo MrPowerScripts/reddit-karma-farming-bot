@@ -6,23 +6,23 @@
   "keywords": ["boom"],
   "env": {
     "REDDIT_CLIENT_ID": {
-      "description": "Client ID",
+      "description": "Client ID of an reddit SCRIPT app",
       "Value": "enter pls"
     },
     "REDDIT_PASSWORD": {
-      "description": "Gay",
+      "description": "Password of your account",
       "Value": "enter pls"
     },
     "REDDIT_SECRET": {
-      "description": "Gay",
+      "description": "Secret of the SCRIPT app",
       "Value": "enter pls"
     },
     "REDDIT_USER_AGENT": {
-      "description": "gay",
+      "description": "Random things",
       "Value": "enter pls"
     },
     "REDDIT_USERNAME": {
-      "description": "Gay",
+      "description": "Username of your account",
       "Value": "enter pls"
     }
   }
