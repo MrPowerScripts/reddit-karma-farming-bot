@@ -27,6 +27,9 @@ MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TOBE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 
+# Logging options
+LOG_LEARNED_COMMENTS = False
+
 if os.environ.get("SUBREDDIT_LIST"): # Prefer subreddit list from envars
   SUBREDDIT_LIST = os.environ.get("SUBREDDIT_LIST").strip().split(",")
   log.info("Getting subreddit list from environment")

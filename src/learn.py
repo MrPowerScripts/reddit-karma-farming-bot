@@ -6,7 +6,7 @@ import random
 import reddit
 from logger import log
 import os
-from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST
+from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST, LOG_LEARNED_COMMENTS
 
 
 def learn(subreddit=None):
@@ -74,11 +74,12 @@ def learn(subreddit=None):
                         if (
                             comment.author != submission.author
                         ):  # We only want to learn comments as an ovserver
-                            log.info(
-                                "learning comment. score: {}; comment: {}".format(
-                                    comment.score, comment.body.encode("utf8")
-                                )
-                            )
+                            if LOG_LEARNED_COMMENTS:
+                              log.info(
+                                  "learning comment. score: {}; comment: {}".format(
+                                      comment.score, comment.body.encode("utf8")
+                                  )
+                              )
                             base_brain.learn(
                                 comment.body.encode("utf8")
                             )  # Tell the bot to learn this comment
