@@ -67,8 +67,11 @@ def _pushshift_search(sub, start, end):
     :return: iterable of reddit submissions (List[dict])
     """
     url = SUBMISSION_SEARCH_TEMPLATE.format(after=start, before=end, subreddit=sub)
+    log.info('pushshift api call: {}'.format(url))
     try:
-        return requests.get(url).json().get("data", [])
+        response = requests.get(url).json().get("data", [])
+        log.info(response)
+        return response
     except Exception as e:
         # unable to get data from pushshift
         return None
