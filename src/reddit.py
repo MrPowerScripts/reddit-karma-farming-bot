@@ -70,7 +70,7 @@ def _pushshift_search(sub, start, end):
     log.info('pushshift api call: {}'.format(url))
     try:
         response = requests.get(url).json().get("data", [])
-        log.info(response)
+        #log.info(response)
         return response
     except Exception as e:
         # unable to get data from pushshift
@@ -237,7 +237,7 @@ def random_submission():
     else:
       log.info("using get_top_subreddits")
       subreddits = get_top_subreddits()
-      log.info(subreddits)
+      #log.info(subreddits)
       
     total_posts = []
 
@@ -258,7 +258,7 @@ def random_submission():
     rand_sub = api.submission(id=post_to_repost["id"])
 
     log.info(rand_sub.title)
-    log.info(str(rand_sub))
+    #log.info(str(rand_sub))
 
     # Check if there's any items in the submissions list. If not display error
     if rand_sub:
