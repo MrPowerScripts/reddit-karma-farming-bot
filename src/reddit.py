@@ -211,7 +211,7 @@ def delete_comments():
 def random_submission():
     log.info("making random submission")
     # Get a random submission from a random subreddit
-    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=NUMBER_DAYS_FOR_POST_TOBE_OLD)
+    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=(NUMBER_DAYS_FOR_POST_TOBE_OLD + random.randint(0,30)))
     ED = END_DATE_PY.strftime("%s")
 
     START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
