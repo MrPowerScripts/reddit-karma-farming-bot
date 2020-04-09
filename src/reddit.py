@@ -34,7 +34,7 @@ from utils import (
     MINUTE,
     TOP_SUBREDDIT_NUM,
     MAX_CACHE_SIZE,
-    NUMBER_DAYS_FOR_POST_TOBE_OLD,
+    NUMBER_DAYS_FOR_POST_TO_BE_OLD,
 )
 
 if os.environ.get("REDDIT_CLIENT_ID"):
@@ -211,11 +211,11 @@ def delete_comments():
 def random_submission():
     log.info("making random submission")
     # Get a random submission from a random subreddit
-    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=NUMBER_DAYS_FOR_POST_TOBE_OLD)
-    ED = END_DATE_PY.strftime("%s")
+    END_DATE_PY = datetime.datetime.now() - datetime.timedelta(days=NUMBER_DAYS_FOR_POST_TO_BE_OLD)
+    ED = int((END_DATE_PY  - datetime.datetime(1970,1,1)).total_seconds())
 
     START_DATE_PY = END_DATE_PY - datetime.timedelta(days=1)
-    SD = START_DATE_PY.strftime("%s")
+    SD = int((START_DATE_PY - datetime.datetime(1970,1,1)).total_seconds())
 
     log.info(START_DATE_PY)
     log.info(END_DATE_PY)
@@ -256,6 +256,12 @@ def random_submission():
     # print(post_to_repost)
     # print("doing submission")
     rand_sub = api.submission(id=post_to_repost["id"])
+
+    own_user = api.redditor(settings.REDDIT_USERNAME)
+    for submission in own_user.submissions.new(limit=20):
+        if submission.title == rand_sub.title:
+            log.error("I had posted the post I was just about to make in the last 20 posts, I'm not posting it again.")
+            return
 
     log.info(rand_sub.title)
     #log.info(str(rand_sub))
