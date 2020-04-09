@@ -26,6 +26,7 @@ PROBABILITIES = {"REPLY": 0.02, "SUBMISSION": 0.005, "LEARN": 0.02, "DELETE": 0.
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
+DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
 
 # Logging options
 LOG_LEARNED_COMMENTS = False
@@ -45,6 +46,13 @@ subreddit = collections.namedtuple(
 reddit_bot_action = collections.namedtuple(
     "RedditBotAction", ["name", "action", "probability", "rate_limit_unlock_epoch"]
 )
+
+
+DISALLOWED_WORDS = []
+
+with open(DISALLOWED_WORDS_FILENAME, "r") as disallowed_words_obj:
+    for line in disallowed_words_obj:
+        DISALLOWED_WORDS.append(line.strip())
 
 
 def get_current_epoch():

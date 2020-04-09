@@ -6,7 +6,7 @@ import random
 import reddit
 from logger import log
 import os
-from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST, LOG_LEARNED_COMMENTS
+from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST, LOG_LEARNED_COMMENTS, DISALLOWED_WORDS
 
 
 def learn(subreddit=None):
@@ -74,18 +74,26 @@ def learn(subreddit=None):
                         if (
                             comment.author != submission.author
                         ):  # We only want to learn comments as an ovserver
-                            if LOG_LEARNED_COMMENTS:
-                              log.info(
-                                  "learning comment. score: {}; comment: {}".format(
-                                      comment.score, comment.body.encode("utf8")
-                                  )
-                              )
-                            base_brain.learn(
-                                comment.body.encode("utf8")
-                            )  # Tell the bot to learn this comment
-                            sub_brain.learn(
-                                comment.body.encode("utf8")
-                            )  # Tell the bot to learn this comment
+                            contains_disallowed_word = False
+                            for dis_word in DISALLOWED_WORDS:
+                                if dis_word in comment.body:
+                                    contains_disallowed_word = True
+                                    break
+                            if not contains_disallowed_word:
+                                if LOG_LEARNED_COMMENTS:
+                                    log.info(
+                                        "learning comment. score: {}; comment: {}".format(
+                                            comment.score, comment.body.encode("utf8")
+                                        )
+                                    )
+                                base_brain.learn(
+                                    comment.body.encode("utf8")
+                                )  # Tell the bot to learn this comment
+                                sub_brain.learn(
+                                    comment.body.encode("utf8")
+                                )  # Tell the bot to learn this comment
+                            # else:
+                            #     log.info("Did not learn form this comment as it contained a word from the dissallowed word list.")
         log.info("done learning")
     except Exception as e:
         # If any errors occur just print it to the console
