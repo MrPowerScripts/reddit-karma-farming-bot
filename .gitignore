@@ -8,3 +8,4 @@ settings.py
 .DS_Store
 macos.sh
 .vscode
+scanner.py
