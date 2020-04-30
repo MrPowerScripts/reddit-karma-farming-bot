@@ -63,7 +63,7 @@ if __name__ == "__main__":
             except:
                 pass
 
-            countdown(5)
+            countdown(2)
 
         if (
             size > MAIN_DB_MIN_SIZE
