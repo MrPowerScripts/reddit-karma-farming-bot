@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import time
 import random
+import datetime
 import os
 import functools
 import socket
@@ -27,6 +28,10 @@ MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
+USE_SLEEP_SCHEDULE = False
+#(hours, minutes) using a 24h clock
+AWAKE_TIME = datetime.time(10,30) 
+SLEEP_TIME = datetime.time(21,20)
 
 # Logging options
 LOG_LEARNED_COMMENTS = False
@@ -229,3 +234,21 @@ def prob(probability):
     rando = random.random()
     log.info("prob: " + str(probability) + "rand num: " + str(rando))
     return rando < probability
+
+
+def is_time_between(begin_time, end_time, check_time=None):
+    # If check time is not given, default to current UTC time
+    check_time = check_time or datetime.datetime.utcnow().time()
+    if begin_time < end_time:
+        return check_time >= begin_time and check_time <= end_time
+    else: # crosses midnight
+        return check_time >= begin_time or check_time <= end_time
+
+def should_we_sleep():
+    log.info("awake time: {}, sleep time: {}, current time: {}".format(AWAKE_TIME, SLEEP_TIME, datetime.datetime.utcnow().time()))
+    if is_time_between(AWAKE_TIME, SLEEP_TIME):
+      log.info("No need to sleep")
+      return False
+    else:
+      log.info("it's sleepy time")
+      return True
