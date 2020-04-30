@@ -15,8 +15,10 @@ from utils import (
     check_internet,
     MAIN_DB_MIN_SIZE,
     get_seconds_to_wait,
+    USE_SLEEP_SCHEDULE,
     reddit_bot_action,
     get_current_epoch,
+    should_we_sleep
 )
 from learn import learn
 from logger import log
@@ -71,6 +73,11 @@ if __name__ == "__main__":
             size > MAIN_DB_MIN_SIZE
         ):  # once we learn enough start submissions and replies
             log.info("database size is big enough")
+
+            if USE_SLEEP_SCHEDULE:
+              while should_we_sleep():
+                log.info("zzzzzzzz :snore:")
+                time.sleep(5)
 
             for action in reddit_bot:
                 if action.rate_limit_unlock_epoch != 0:
