@@ -37,6 +37,7 @@ log.info("------------new bot run--------------")
 log.info("user is " + str(reddit.api.user.me()))
 
 reddit_bot = [
+    reddit_bot_action("shadowcheck", reddit.shadow_check, PROBABILITIES["SHADOWCHECK"], 0),
     reddit_bot_action("reply", reddit.random_reply, PROBABILITIES["REPLY"], 0),
     reddit_bot_action(
         "submit", reddit.random_submission, PROBABILITIES["SUBMISSION"], 0
@@ -47,6 +48,7 @@ reddit_bot = [
 
 if __name__ == "__main__":
     log.info("db size size to start replying:" + str(bytesto(MAIN_DB_MIN_SIZE, "m")))
+    reddit.shadow_check()
     while True:
 
         if os.path.isfile(MAIN_DB):

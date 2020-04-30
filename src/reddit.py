@@ -208,6 +208,18 @@ def delete_comments():
     )
 
 
+def shadow_check():
+  response = requests.get("https://www.reddit.com/user/{}/about.json".format(settings.REDDIT_USERNAME),  headers = {'User-agent': 'hiiii its {}'.format(settings.REDDIT_USERNAME)}).json()
+  if "error" in response:
+    if response["error"] == 404:
+      log.info("account {} is shadowbanned. poor bot :( shutting down the script...".format(settings.REDDIT_USERNAME))
+      sys.exit()
+    else:
+      log.info(response)
+  else:
+    log.info("{} is not shadowbanned! We think..".format(settings.REDDIT_USERNAME))
+
+
 def random_submission():
     log.info("making random submission")
     # Get a random submission from a random subreddit
