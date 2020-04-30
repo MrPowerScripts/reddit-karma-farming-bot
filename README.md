@@ -31,6 +31,11 @@ BOOM! free hosting
 
 Important Note: If you restart the Heroku Dyno it will reset the database. We don't have a way of externalizing it at the moment.
 
+## General guid to running on windows / linux
+
+Please look here for a detailed guide to running on windows 10 / linux. The other guides in this readme also work, but this is more step-by-step.
+[Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
+
 ## How to run the bot on Linux
 
 1. change `src/settings.sample.py` to `src/settings.py` and update the values to your acccount and app values
