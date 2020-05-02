@@ -38,22 +38,34 @@ from utils import (
 )
 
 if os.environ.get("REDDIT_CLIENT_ID"):
+    REDDIT_CLIENT_ID=os.environ.get("REDDIT_CLIENT_ID")
+    REDDIT_SECRET=os.environ.get("REDDIT_SECRET")
+    REDDIT_PASSWORD=os.environ.get("REDDIT_PASSWORD")
+    REDDIT_USER_AGENT=os.environ.get("REDDIT_USER_AGENT")
+    REDDIT_USERNAME=os.environ.get("REDDIT_USERNAME")
+    
     api = praw.Reddit(
-        client_id=os.environ.get("REDDIT_CLIENT_ID"),
-        client_secret=os.environ.get("REDDIT_SECRET"),
-        password=os.environ.get("REDDIT_PASSWORD"),
-        user_agent=os.environ.get("REDDIT_USER_AGENT"),
-        username=os.environ.get("REDDIT_USERNAME"),
+      client_id=REDDIT_CLIENT_ID,
+      client_secret=REDDIT_SECRET,
+      password=REDDIT_PASSWORD,
+      user_agent=REDDIT_USER_AGENT,
+      username=REDDIT_USERNAME,
     )
 else:
     import settings
+    
+    REDDIT_CLIENT_ID=settings.REDDIT_CLIENT_ID
+    REDDIT_SECRET=settings.REDDIT_SECRET
+    REDDIT_PASSWORD=settings.REDDIT_PASSWORD
+    REDDIT_USER_AGENT=settings.REDDIT_USER_AGENT
+    REDDIT_USERNAME=settings.REDDIT_USERNAME
 
     api = praw.Reddit(
-        client_id=settings.REDDIT_CLIENT_ID,
-        client_secret=settings.REDDIT_SECRET,
-        password=settings.REDDIT_PASSWORD,
-        user_agent=settings.REDDIT_USER_AGENT,
-        username=settings.REDDIT_USERNAME,
+      client_id=REDDIT_CLIENT_ID,
+      client_secret=REDDIT_SECRET,
+      password=REDDIT_PASSWORD,
+      user_agent=REDDIT_USER_AGENT,
+      username=REDDIT_USERNAME,
     )
 
 
