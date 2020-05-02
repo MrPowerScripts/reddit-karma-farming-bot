@@ -46,7 +46,7 @@ Click on more and view logs to make everything is fine
 
 BOOM! free hosting
 
-Important Note: If you restart the Heroku Dyno it will reset the database. We don't have a way of externalizing it at the moment.
+**Important Note: If you restart the Heroku Dyno it will reset the database. We don't have a way of externalizing it at the moment.**
 
 ## General guide to running on Windows / linux
 
