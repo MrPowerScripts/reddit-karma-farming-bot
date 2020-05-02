@@ -1,5 +1,7 @@
 # Reddit-Karma-Bot
 
+This bot is probably the reason you already saw that post on reddit.
+
 ## Shameless self promotion
 
 [Karma Farming Bot 2.0 Video](https://www.youtube.com/watch?v=CCMGHepPBso)  
@@ -11,6 +13,19 @@ Website: https://bit.ly/mrps-site
 Discord: https://bit.ly/mrps-discord  
 Patreon: https://bit.ly/mrps-patreon  
 Power Up!: https://bit.ly/mrps-powerup  
+
+## Features
+
+- Automatically reposts popular posts from the past to earn post karma
+- Automatically generates unique (somewhat) contexually relevant comments using [cobe](https://github.com/pteichman/cobe)
+- Automatically deletes poor performing comments
+- Configurable frequency of posting, commenting, and other actions
+- Filter the bot from learning certain words
+- Schedule when the bot wakes up and sleeps to run actions.
+- Detects in the account is shadowbanned
+- Run on WSL (windows 10), Linux, and MacOS, Docker
+
+Most of these options can be configured in [utils.py](urils.py)
 
 ## Prep
 
@@ -31,12 +46,12 @@ BOOM! free hosting
 
 Important Note: If you restart the Heroku Dyno it will reset the database. We don't have a way of externalizing it at the moment.
 
-## General guid to running on windows / linux
+## General guide to running on Windows / linux
 
 Please look here for a detailed guide to running on windows 10 / linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
-## How to run the bot on Linux
+## How to run the bot on Linux/MacOS
 
 1. change `src/settings.sample.py` to `src/settings.py` and update the values to your acccount and app values
 
