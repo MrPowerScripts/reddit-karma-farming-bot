@@ -74,7 +74,3 @@ You can provide also a proxy server for the docker container to connect through
 ```bash
 --e HTTPS_PROXY="https://127.0.0.1:3001"
 ```
-
-### Windows
-
-The command above will not readily work on Docker for Windows. Try running each command individually (lines between the `&&`) and put each command on a single line (remove the `\` from each command). If you get a fully working oneliner on Windows do let me know!
