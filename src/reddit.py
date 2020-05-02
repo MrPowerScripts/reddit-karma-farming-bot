@@ -53,7 +53,7 @@ if os.environ.get("REDDIT_CLIENT_ID"):
     )
 else:
     import settings
-    
+
     REDDIT_CLIENT_ID=settings.REDDIT_CLIENT_ID
     REDDIT_SECRET=settings.REDDIT_SECRET
     REDDIT_PASSWORD=settings.REDDIT_PASSWORD
@@ -221,15 +221,15 @@ def delete_comments():
 
 
 def shadow_check():
-  response = requests.get("https://www.reddit.com/user/{}/about.json".format(settings.REDDIT_USERNAME),  headers = {'User-agent': 'hiiii its {}'.format(settings.REDDIT_USERNAME)}).json()
+  response = requests.get("https://www.reddit.com/user/{}/about.json".format(REDDIT_USERNAME),  headers = {'User-agent': 'hiiii its {}'.format(REDDIT_USERNAME)}).json()
   if "error" in response:
     if response["error"] == 404:
-      log.info("account {} is shadowbanned. poor bot :( shutting down the script...".format(settings.REDDIT_USERNAME))
+      log.info("account {} is shadowbanned. poor bot :( shutting down the script...".format(REDDIT_USERNAME))
       sys.exit()
     else:
       log.info(response)
   else:
-    log.info("{} is not shadowbanned! We think..".format(settings.REDDIT_USERNAME))
+    log.info("{} is not shadowbanned! We think..".format(REDDIT_USERNAME))
 
 
 def random_submission():
@@ -281,7 +281,7 @@ def random_submission():
     # print("doing submission")
     rand_sub = api.submission(id=post_to_repost["id"])
 
-    own_user = api.redditor(settings.REDDIT_USERNAME)
+    own_user = api.redditor(REDDIT_USERNAME)
     for submission in own_user.submissions.new(limit=20):
         if submission.title == rand_sub.title:
             log.error("I had posted the post I was just about to make in the last 20 posts, I'm not posting it again.")
