@@ -22,8 +22,8 @@ Power Up!: https://bit.ly/mrps-powerup
 - Configurable frequency of posting, commenting, and other actions
 - Filter the bot from learning certain words
 - Schedule when the bot wakes up and sleeps to run actions.
-- Detects in the account is shadowbanned
-- Run on WSL (windows 10), Linux, and MacOS, Docker
+- Detects if the account is shadowbanned
+- Run on WSL (windows 10), Linux, MacOS, and Docker
 
 ## Configuration
 
