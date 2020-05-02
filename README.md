@@ -25,7 +25,9 @@ Power Up!: https://bit.ly/mrps-powerup
 - Detects in the account is shadowbanned
 - Run on WSL (windows 10), Linux, and MacOS, Docker
 
-Most of these options can be configured in [utils.py](utils.py)
+## Configuration
+
+Most of these options can be configured in [utils.py](src/utils.py)
 
 ## Prep
 
