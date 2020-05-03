@@ -232,7 +232,7 @@ def countdown(seconds):
 
 def prob(probability):
     rando = random.random()
-    log.info("prob: " + str(probability) + "rand num: " + str(rando))
+    log.info("prob: " + str(probability) + " rolled: " + str(rando))
     return rando < probability
 
 

@@ -40,7 +40,7 @@ if [ ! -d "$DIR/venv" ]; then
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
 
     pip install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-    virtualenv venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+    virtualenv -p $(command -v python2.7) venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
     source venv/bin/activate
     pip2 install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
     pip2 install --upgrade pip wheel -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
