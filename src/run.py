@@ -5,6 +5,7 @@ import praw
 import reddit
 import os
 import time
+from db import check_first_run
 from utils import (
     bytesto,
     countdown,
@@ -51,6 +52,8 @@ reddit_bot = [
 if __name__ == "__main__":
     log.info("db size size to start replying:" + str(bytesto(MAIN_DB_MIN_SIZE, "m")))
     reddit.shadow_check()
+    # check if this is the first time running the bot
+    check_first_run()
     while True:
 
         if os.path.isfile(MAIN_DB):
