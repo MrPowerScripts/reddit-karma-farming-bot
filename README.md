@@ -22,14 +22,15 @@ Power Up!: https://bit.ly/mrps-powerup
 - Configurable frequency of posting, commenting, and other actions
 - Filter the bot from learning certain words
 - Schedule when the bot wakes up and sleeps to run actions.
-- Detects if the account is shadowbanned
+- Auto detects if the account is shadowbanned
+- Limit the subbreddits that the bot learns from and posts to
 - Run on WSL (windows 10), Linux, MacOS, and Docker
 
 ## Configuration
 
 Most of these options can be configured in [utils.py](src/utils.py)
 
-## Prep
+## Prep (IMPORTANT)
 
 First you need to create a reddit account, and then create an app on reddit.com. After creating a reddit account follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
 
