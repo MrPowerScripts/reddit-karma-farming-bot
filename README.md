@@ -49,9 +49,9 @@ Click on more and view logs to make everything is fine
 
 BOOM! free hosting
 
+**UBUNTU 20 USERS** python 2 was removed, which is what this bot relies on. We haven't automated a fix, but you can run the bot fine on Ubuntu 18 in a VM for now.
 
-
-## General guide to running on Windows / linux
+## In Depth guide to running on Windows / linux
 
 Please look here for a detailed guide to running on windows 10 / linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
