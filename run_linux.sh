@@ -55,5 +55,5 @@ echo "activating the virtualenv " | tee -a $DEBUG_FILE
 source venv/bin/activate
 
 echo "trying to run the bot" | tee -a $DEBUG_FILE
-python2.7 ./src/run.py
+python2.7 ./src/run.py "$@"
 
