@@ -7,6 +7,7 @@ import os
 import functools
 import socket
 import collections
+import argparse
 from requests import get
 from os.path import expanduser
 from logger import log
@@ -58,6 +59,16 @@ DISALLOWED_WORDS = []
 with open(DISALLOWED_WORDS_FILENAME, "r") as disallowed_words_obj:
     for line in disallowed_words_obj:
         DISALLOWED_WORDS.append(line.strip())
+
+
+def get_args():
+  parser = argparse.ArgumentParser(description='The bot needs stuff')
+  parser.add_argument('-u','--username', default=os.environ.get('REDDIT_USERNAME'))
+  parser.add_argument('-p','--password', default=os.environ.get('REDDIT_PASSWORD'))
+  parser.add_argument('-c','--clientid', default=os.environ.get('REDDIT_CLIENT_ID'))
+  parser.add_argument('-s','--secret', default=os.environ.get('REDDIT_SECRET'))
+  parser.add_argument('-a','--useragent', default=os.environ.get('REDDIT_USER_AGENT'))
+  return  parser.parse_args()
 
 
 def get_current_epoch():

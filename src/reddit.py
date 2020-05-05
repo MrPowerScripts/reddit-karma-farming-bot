@@ -35,14 +35,18 @@ from utils import (
     TOP_SUBREDDIT_NUM,
     MAX_CACHE_SIZE,
     NUMBER_DAYS_FOR_POST_TO_BE_OLD,
+    get_args
 )
 
-if os.environ.get("REDDIT_CLIENT_ID"):
-    REDDIT_CLIENT_ID=os.environ.get("REDDIT_CLIENT_ID")
-    REDDIT_SECRET=os.environ.get("REDDIT_SECRET")
-    REDDIT_PASSWORD=os.environ.get("REDDIT_PASSWORD")
-    REDDIT_USER_AGENT=os.environ.get("REDDIT_USER_AGENT")
-    REDDIT_USERNAME=os.environ.get("REDDIT_USERNAME")
+args = get_args()
+
+if args.username:
+    log.info('using cli args or envars')
+    REDDIT_CLIENT_ID=args.clientid
+    REDDIT_SECRET=args.secret
+    REDDIT_PASSWORD=args.password
+    REDDIT_USER_AGENT=args.useragent
+    REDDIT_USERNAME=args.username
     
     api = praw.Reddit(
       client_id=REDDIT_CLIENT_ID,
@@ -53,7 +57,7 @@ if os.environ.get("REDDIT_CLIENT_ID"):
     )
 else:
     import settings
-
+    logs.info('using settings file')
     REDDIT_CLIENT_ID=settings.REDDIT_CLIENT_ID
     REDDIT_SECRET=settings.REDDIT_SECRET
     REDDIT_PASSWORD=settings.REDDIT_PASSWORD
