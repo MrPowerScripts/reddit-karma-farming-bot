@@ -24,3 +24,4 @@ six==1.10.0
 tempora==1.8
 update-checker==0.16
 urllib3>=1.23
+tinydb==3.15.2
