@@ -57,7 +57,7 @@ if args.username:
     )
 else:
     import settings
-    logs.info('using settings file')
+    log.info('using settings file')
     REDDIT_CLIENT_ID=settings.REDDIT_CLIENT_ID
     REDDIT_SECRET=settings.REDDIT_SECRET
     REDDIT_PASSWORD=settings.REDDIT_PASSWORD
