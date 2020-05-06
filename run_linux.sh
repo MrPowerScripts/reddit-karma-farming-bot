@@ -34,7 +34,7 @@ if [ ! -d "$DIR/venv" ]; then
       wget \
       tmux \
       python3.6 \
-      python-pip \
+      python3-pip \
       python-setuptools \
       python-dev \
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
@@ -45,11 +45,11 @@ if [ ! -d "$DIR/venv" ]; then
 fi
 
 if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
-  pip install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+  pip3 install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
   virtualenv -p "$(command -v python3)" venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
   source venv/bin/activate
-  pip install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
-  pip install --upgrade pip wheel -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
+  pip3 install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
+  pip3 install -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
 fi
 
 echo "activating the virtualenv " | tee -a $DEBUG_FILE
