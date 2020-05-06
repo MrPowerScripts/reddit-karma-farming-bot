@@ -3,9 +3,6 @@
 
 import sys
 
-reload(sys)
-sys.setdefaultencoding("utf8")
-
 import praw
 import requests
 from bs4 import BeautifulSoup

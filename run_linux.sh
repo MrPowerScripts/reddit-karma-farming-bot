@@ -33,27 +33,28 @@ if [ ! -d "$DIR/venv" ]; then
       pkg-config \
       wget \
       tmux \
-      python2.7 \
+      python3.6 \
       python-pip \
       python-setuptools \
       python-dev \
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
-
-    pip install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-    virtualenv -p $(command -v python2.7) venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-    source venv/bin/activate
-    pip2 install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
-    pip2 install --upgrade pip wheel -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
-
   else
     echo "No suitable linux version" | tee -a $DEBUG_FILE
-    exit
+
   fi
+fi
+
+if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
+  pip install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+  virtualenv -p "$(command -v python3)" venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+  source venv/bin/activate
+  pip install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
+  pip install --upgrade pip wheel -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
 fi
 
 echo "activating the virtualenv " | tee -a $DEBUG_FILE
 source venv/bin/activate
 
 echo "trying to run the bot" | tee -a $DEBUG_FILE
-python2.7 ./src/run.py "$@"
+python3 ./src/run.py "$@"
 

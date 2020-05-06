@@ -235,7 +235,7 @@ def is_past_one_day(time_to_compare):
 
 def countdown(seconds):
     log.info("sleeping: " + str(seconds) + " seconds")
-    for i in xrange(seconds, 0, -1):
+    for i in range(seconds, 0, -1):
         print("\x1b[2K\r" + str(i) + " ")
         time.sleep(1)
     log.info("waking up")
