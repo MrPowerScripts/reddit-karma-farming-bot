@@ -48,7 +48,7 @@ if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
   pip3 install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
   virtualenv -p "$(command -v python3)" venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
   source venv/bin/activate
-  pip3 install wheel || { echo 'Installing wheel failed' | tee -a $DEBUG_FILE ; exit 1; }
+  pip3 install cython
   pip3 install -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
 fi
 
