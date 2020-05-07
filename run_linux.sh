@@ -36,7 +36,7 @@ if [ ! -d "$DIR/venv" ]; then
       python3.6 \
       python3-pip \
       python-setuptools \
-      python-dev \
+      python3-dev \
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
   else
     echo "No suitable linux version" | tee -a $DEBUG_FILE
