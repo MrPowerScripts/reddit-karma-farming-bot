@@ -1,6 +1,6 @@
 # Reddit-Karma-Bot
 
-This bot is probably the reason you already saw that post on reddit.
+This bot is probably the reason you saw that post again on Reddit.
 
 ## Shameless self promotion
 
@@ -48,8 +48,6 @@ Click on the Edit Icon and turn on the worker and save
 Click on more and view logs to make everything is fine
 
 BOOM! free hosting
-
-**UBUNTU 20 USERS** python 2 was removed, which is what this bot relies on. We haven't automated a fix, but you can run the bot fine on Ubuntu 18 in a VM for now.
 
 ## In Depth guide to running on Windows / linux
 
