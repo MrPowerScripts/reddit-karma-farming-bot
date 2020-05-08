@@ -37,11 +37,11 @@ SLEEP_TIME = datetime.time(21,20)
 # Logging options
 LOG_LEARNED_COMMENTS = False
 
-if os.environ.get("SUBREDDIT_LIST"): # Prefer subreddit list from envars
-  SUBREDDIT_LIST = os.environ.get("SUBREDDIT_LIST").strip().split(",")
-  log.info("Getting subreddit list from environment")
+if get_args().sublist: # Prefer subreddit list from envars
+  SUBREDDIT_LIST = get_args().sublist.strip().split(",")
+  log.info("Getting subreddit list from envar or args")
 else:
-  log.info('Getting subreddit list from utils.py')
+  log.info('Using subreddit list from utils.py')
 
 log.info(SUBREDDIT_LIST)
 
@@ -68,6 +68,7 @@ def get_args():
   parser.add_argument('-c','--clientid', default=os.environ.get('REDDIT_CLIENT_ID'))
   parser.add_argument('-s','--secret', default=os.environ.get('REDDIT_SECRET'))
   parser.add_argument('-a','--useragent', default=os.environ.get('REDDIT_USER_AGENT'))
+  parser.add_argument('-l','--sublist', default=os.environ.get('REDDIT_SUBREDDITS'))
   return  parser.parse_args()
 
 
