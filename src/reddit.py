@@ -195,19 +195,21 @@ def submission_timespan():
 
 def delete_comments():
     count = 0
-    for comment in api.redditor(api.user.me().name).new(limit=500):
-        if comment.score <= SCORE_THRESHOLD:
+    for item in api.redditor(api.user.me().name).new(limit=500):
+        if item.score <= SCORE_THRESHOLD:
+
+          if isinstance(item, praw.models.Comment):
             log.info(
                 "deleting comment(id={id}, body={body}, score={score}, subreddit={sub}|{sub_id})".format(
-                    id=comment.id,
-                    body=comment.body,
-                    score=comment.score,
-                    sub=comment.subreddit_name_prefixed,
-                    sub_id=comment.subreddit_id,
+                    id=item.id,
+                    body=item.body,
+                    score=item.score,
+                    sub=item.subreddit_name_prefixed,
+                    sub_id=item.subreddit_id,
                 )
             )
             try:
-                comment.delete()
+                item.delete()
             except praw.exceptions.APIException as e:
                 raise e
             except Exception as e:
@@ -217,11 +219,36 @@ def delete_comments():
                     )
                 )
             count += 1
-    log.info(
-        "deleted {number} comments with less than {threshold} vote".format(
-            number=count, threshold=SCORE_THRESHOLD
-        )
-    )
+            log.info(
+                "deleted {number} comments with less than {threshold} vote".format(
+                    number=count, threshold=SCORE_THRESHOLD
+                )
+            )
+          else:
+            log.info(
+                "deleting submission(id={id}, score={score}, subreddit={sub}|{sub_id})".format(
+                    id=item.id,
+                    score=item.score,
+                    sub=item.subreddit_name_prefixed,
+                    sub_id=item.subreddit_id,
+                )
+            )
+            try:
+                item.delete()
+            except praw.exceptions.APIException as e:
+                raise e
+            except Exception as e:
+                log.info(
+                    "unable to delete submission(id={id}), skip...\n{error}".format(
+                        id=item.id, error=e.message
+                    )
+                )
+            count += 1
+            log.info(
+                "deleted {number} submission with less than {threshold} vote".format(
+                    number=count, threshold=SCORE_THRESHOLD
+                )
+            )
 
 
 def shadow_check():

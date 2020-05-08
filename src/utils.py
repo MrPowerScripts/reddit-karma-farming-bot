@@ -37,14 +37,6 @@ SLEEP_TIME = datetime.time(21,20)
 # Logging options
 LOG_LEARNED_COMMENTS = False
 
-if get_args().sublist: # Prefer subreddit list from envars
-  SUBREDDIT_LIST = get_args().sublist.strip().split(",")
-  log.info("Getting subreddit list from envar or args")
-else:
-  log.info('Using subreddit list from utils.py')
-
-log.info(SUBREDDIT_LIST)
-
 subreddit = collections.namedtuple(
     "Subreddit", ["name", "rank", "url", "subscribers", "type"]
 )
@@ -71,6 +63,13 @@ def get_args():
   parser.add_argument('-l','--sublist', default=os.environ.get('REDDIT_SUBREDDITS'))
   return  parser.parse_args()
 
+if get_args().sublist: # Prefer subreddit list from envars
+  SUBREDDIT_LIST = get_args().sublist.strip().split(",")
+  log.info("Getting subreddit list from envar or args")
+else:
+  log.info('Using subreddit list from utils.py')
+
+log.info(SUBREDDIT_LIST)
 
 def get_current_epoch():
     return int(time.time())
