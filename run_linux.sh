@@ -35,7 +35,7 @@ if [ ! -d "$DIR/venv" ]; then
       tmux \
       python3.6 \
       python3-pip \
-      python-setuptools \
+      python3-setuptools \
       python3-dev \
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
   else
