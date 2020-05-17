@@ -1,6 +1,6 @@
 # Reddit-Karma-Bot
 
-This bot is probably the reason you saw that post again on Reddit.
+This bot is probably the reason you saw that post again on Reddit. Need help with the bot? Join us on Discord https://bit.ly/mrps-discord 
 
 ## Shameless self promotion
 
@@ -10,9 +10,6 @@ This bot is probably the reason you saw that post again on Reddit.
 
 Subscribe: http://bit.ly/mrps-yt-sub  
 Website: https://bit.ly/mrps-site  
-Discord: https://bit.ly/mrps-discord  
-Patreon: https://bit.ly/mrps-patreon  
-Power Up!: https://bit.ly/mrps-powerup  
 
 ## Features
 
