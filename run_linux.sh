@@ -40,17 +40,19 @@ if [ ! -d "$DIR/venv" ]; then
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
   else
     echo "No suitable linux version" | tee -a $DEBUG_FILE
-
   fi
+
+  if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
+    pip3 install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+    virtualenv -p "$(command -v python3)" venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
+    source venv/bin/activate
+    pip3 install cython
+    pip3 install -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
+  fi
+
 fi
 
-if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
-  pip3 install virtualenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-  virtualenv -p "$(command -v python3)" venv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-  source venv/bin/activate
-  pip3 install cython
-  pip3 install -r ./src/requirements.txt || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
-fi
+
 
 echo "activating the virtualenv " | tee -a $DEBUG_FILE
 source venv/bin/activate
