@@ -8,6 +8,6 @@ wget
 tmux
 python3.6
 python3-pip
-python-setuptools
-python-dev
+python3-setuptools
+python3-dev
 git
