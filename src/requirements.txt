@@ -1,3 +1,4 @@
+Cython==0.29.17
 attrs==19.3.0
 backports.functools-lru-cache==1.6.1
 beautifulsoup4==4.9.0
@@ -7,7 +8,6 @@ click==7.1.2
 cobe==3.0.0
 configparser==5.0.0
 contextlib2==0.6.0.post1
-Cython==0.29.17
 Flask==1.1.2
 idna==2.9
 importlib-metadata==1.6.0
