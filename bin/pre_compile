@@ -1,2 +1,2 @@
 # !/bin/bash
-pip install cython
+$BUILD_DIR/.heroku/python/bin/python -m pip install cython
