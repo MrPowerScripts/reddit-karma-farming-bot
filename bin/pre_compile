@@ -1,4 +1,2 @@
 # !/bin/bash
-echo ls $BUILD_DIR/.heroku/
-
-$BUILD_DIR/.heroku/python3/bin/python3 -m pip install cython
+python3 -m pip install cython
