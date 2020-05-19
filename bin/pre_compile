@@ -1,2 +1,2 @@
 # !/bin/bash
-python3 -m pip install cython
+/app/.heroku/python3 -m pip install cython
