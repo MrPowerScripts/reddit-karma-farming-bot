@@ -1,4 +1,4 @@
-FROM phusion/baseimage:0.11
+FROM ubuntu:20.10
 
 CMD ["/sbin/my_init"]
 WORKDIR /reddit-karma-bot
