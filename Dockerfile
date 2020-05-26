@@ -14,10 +14,10 @@ RUN apt-get update && \
       pkg-config \
       wget \
       tmux \
-      python2.7 \
-      python-pip \
-      python-setuptools \
-      python-dev \
+      python3.6 \
+      python3-pip \
+      python3-setuptools \
+      python3-dev \
       git \
       ca-certificates && \
     apt-get clean && \
@@ -32,8 +32,8 @@ RUN apt-get update && \
 
 ### set up bot
 ADD ./src/requirements.txt requirements.txt
-RUN pip install wheel
-RUN pip install --upgrade pip wheel -r requirements.txt
+RUN pip3 install cython
+RUN pip3 install -r ./requirements.txt
 COPY ./src /reddit-karma-bot-src
 
 # run it
