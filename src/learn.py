@@ -43,9 +43,18 @@ def learn(subreddit=None):
                     if (
                         sub.subscribers > 100000
                     ):  # easier to get away with stuff on big subs
-                        log.info("found: " + str(sub.display_name))
-                        subok = True
-
+                        
+                        log.info("checking if subreddit is blacklisted")
+                        blacklisted_subreddits = open('src/blacklisted_subreddits.txt')
+                        list_of_blacklisted_subreddits = blacklisted_subreddits.read().splitlines()
+                        blacklisted_subreddits.close()
+                        if (str(sub)) not in list_of_blacklisted_subreddits:
+                            log.info("not blacklisted")
+                            log.info("found: " + str(sub.display_name))
+                            subok = True
+                        else:
+                            log.info("r/" + str(sub) + " is blacklisted")
+                            
         sub_db = "{}/{}.db".format(DB_DIR, str(sub.display_name))
         log.info("active db : {}".format(sub_db))
         sub_brain = Brain(sub_db)
