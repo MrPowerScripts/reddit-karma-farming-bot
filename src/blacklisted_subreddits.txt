@@ -1,1 +1,3 @@
-
+*type the name of the subreddits you want to blacklist, (only the name, without the /r/ at the beginning)* 
+Example:
+worldnews
