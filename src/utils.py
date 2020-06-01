@@ -15,9 +15,9 @@ from logger import log
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
+MAIN_DB_MIN_SIZE = "50mb"
+MAIN_DB_MAX_SIZE = "300mb"
 #MAIN_DB = DB_DIR + "/brain.db"
-MAIN_DB_MIN_SIZE = 52428800  # in bytes
-MAIN_DB_MAX_SIZE = 209715200  # in bytes
 SCORE_THRESHOLD = 0  # downvote
 TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
 MIN_SCORE = 0  # for posts to repost
@@ -74,6 +74,56 @@ log.info(SUBREDDIT_LIST)
 def get_current_epoch():
     return int(time.time())
 
+
+def convert_size_to_bytes(size_str):
+    """Convert human filesizes to bytes.
+    https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python
+    Special cases:
+     - singular units, e.g., "1 byte"
+     - byte vs b
+     - yottabytes, zetabytes, etc.
+     - with & without spaces between & around units.
+     - floats ("5.2 mb")
+
+    To reverse this, see hurry.filesize or the Django filesizeformat template
+    filter.
+
+    :param size_str: A human-readable string representing a file size, e.g.,
+    "22 megabytes".
+    :return: The number of bytes represented by the string.
+    """
+    multipliers = {
+        'kilobyte':  1024,
+        'megabyte':  1024 ** 2,
+        'gigabyte':  1024 ** 3,
+        'terabyte':  1024 ** 4,
+        'petabyte':  1024 ** 5,
+        'exabyte':   1024 ** 6,
+        'zetabyte':  1024 ** 7,
+        'yottabyte': 1024 ** 8,
+        'kb': 1024,
+        'mb': 1024**2,
+        'gb': 1024**3,
+        'tb': 1024**4,
+        'pb': 1024**5,
+        'eb': 1024**6,
+        'zb': 1024**7,
+        'yb': 1024**8,
+    }
+
+    for suffix in multipliers:
+        size_str = size_str.lower().strip().strip('s')
+        if size_str.lower().endswith(suffix):
+            return int(float(size_str[0:-len(suffix)]) * multipliers[suffix])
+    else:
+        if size_str.endswith('b'):
+            size_str = size_str[0:-1]
+        elif size_str.endswith('byte'):
+            size_str = size_str[0:-4]
+    return int(size_str)
+
+MAIN_DB_MIN_SIZE = convert_size_to_bytes(MAIN_DB_MIN_SIZE)  # in bytes
+MAIN_DB_MAX_SIZE = convert_size_to_bytes(MAIN_DB_MAX_SIZE)  # in bytes
 
 def check_internet(host="1.1.1.1", port=53, timeout=5):
     """
