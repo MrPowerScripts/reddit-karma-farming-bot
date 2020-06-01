@@ -32,7 +32,8 @@ from utils import (
     TOP_SUBREDDIT_NUM,
     MAX_CACHE_SIZE,
     NUMBER_DAYS_FOR_POST_TO_BE_OLD,
-    get_args
+    get_args,
+    DISALLOWED_SUBS
 )
 
 args = get_args()
@@ -289,6 +290,8 @@ def random_submission():
     else:
       log.info("using get_top_subreddits")
       subreddits = get_top_subreddits()
+      #filter disallowded
+      subreddits = [y for y in subreddits if y.name not in DISALLOWED_SUBS ]
       #log.info(subreddits)
       
     total_posts = []
@@ -348,7 +351,13 @@ def random_reply():
       subreddit = random.choice(SUBREDDIT_LIST)
       submission = random.choice(list(api.subreddit(subreddit).hot()))
     else:
-      submission = random.choice(list(api.subreddit("all").hot()))
+      subok = False
+      while subok == False:
+        sub = api.subreddit("all")
+        if sub.display_name not in DISALLOWED_SUBS:
+          subok = True
+          
+      submission = random.choice(list(sub.hot()))
     
     submission.comments.replace_more(
         limit=0

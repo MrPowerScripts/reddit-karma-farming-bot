@@ -29,6 +29,7 @@ MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
+DISALLOWED_SUBS_FILENAME = os.path.join(BASE_DIR, "disallowed_subs.txt")
 USE_SLEEP_SCHEDULE = False
 #(hours, minutes) using a 24h clock
 AWAKE_TIME = datetime.time(10,30) 
@@ -50,8 +51,13 @@ DISALLOWED_WORDS = []
 
 with open(DISALLOWED_WORDS_FILENAME, "r") as disallowed_words_obj:
     for line in disallowed_words_obj:
-        DISALLOWED_WORDS.append(line.strip())
+        DISALLOWED_WORDS.append(line.lower().strip())
 
+DISALLOWED_SUBS = []
+
+with open(DISALLOWED_SUBS_FILENAME, "r") as disallowed_subs_obj:
+    for line in disallowed_subs_obj:
+        DISALLOWED_SUBS.append(line.lower().strip())
 
 def get_args():
   parser = argparse.ArgumentParser(description='The bot needs stuff')

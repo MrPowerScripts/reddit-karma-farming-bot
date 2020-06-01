@@ -6,7 +6,7 @@ import random
 import reddit
 from logger import log
 import os
-from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST, LOG_LEARNED_COMMENTS, DISALLOWED_WORDS
+from utils import DB_DIR, MAIN_DB, bytesto, MAIN_DB_MAX_SIZE, SUBREDDIT_LIST, LOG_LEARNED_COMMENTS, DISALLOWED_WORDS, DISALLOWED_SUBS
 
 
 def learn(subreddit=None):
@@ -39,12 +39,14 @@ def learn(subreddit=None):
             subok = False
             while subok == False:
                 sub = reddit.api.subreddit("random")
-                if sub.over18 == False:  # we don't want nsfw sub
-                    if (
-                        sub.subscribers > 100000
-                    ):  # easier to get away with stuff on big subs
-                        log.info("found: " + str(sub.display_name))
-                        subok = True
+
+                if sub.display_name.lower() not in DISALLOWED_SUBS:
+                  if sub.over18 == False:  # we don't want nsfw sub
+                      if (
+                          sub.subscribers > 100000
+                      ):  # easier to get away with stuff on big subs
+                          log.info("found: " + str(sub.display_name))
+                          subok = True
 
         sub_db = "{}/{}.db".format(DB_DIR, str(sub.display_name))
         log.info("active db : {}".format(sub_db))
