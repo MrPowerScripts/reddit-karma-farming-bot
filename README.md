@@ -17,7 +17,7 @@ Website: https://bit.ly/mrps-site
 - Automatically generates unique (somewhat) contexually relevant comments using [cobe](https://github.com/pteichman/cobe)
 - Automatically deletes poor performing comments
 - Configurable frequency of posting, commenting, and other actions
-- Filter the bot from learning certain words
+- Filter the bot from learning certain words, or allow/disallow certain subreddits
 - Schedule when the bot wakes up and sleeps to run actions.
 - Auto detects if the account is shadowbanned
 - Limit the subbreddits that the bot learns from and posts to
