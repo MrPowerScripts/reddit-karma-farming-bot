@@ -291,7 +291,7 @@ def random_submission():
       log.info("using get_top_subreddits")
       subreddits = get_top_subreddits()
       #filter disallowded
-      subreddits = [y for y in subreddits if y.name not in DISALLOWED_SUBS ]
+      subreddits = [y for y in subreddits if y.name.lower().strip() not in DISALLOWED_SUBS ]
       #log.info(subreddits)
       
     total_posts = []
@@ -354,7 +354,7 @@ def random_reply():
       subok = False
       while subok == False:
         sub = api.subreddit("all")
-        if sub.display_name not in DISALLOWED_SUBS:
+        if sub.display_name.lower().strip() not in DISALLOWED_SUBS:
           subok = True
           
       submission = random.choice(list(sub.hot()))
