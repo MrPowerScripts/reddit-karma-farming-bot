@@ -356,6 +356,8 @@ def random_reply():
         sub = api.subreddit("all")
         if sub.display_name.lower().strip() not in DISALLOWED_SUBS:
           subok = True
+        else:
+          log.info(sub.display_name.lower() + " is blocked")
           
       submission = random.choice(list(sub.hot()))
     
