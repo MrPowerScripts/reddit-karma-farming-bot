@@ -47,6 +47,8 @@ def learn(subreddit=None):
                       ):  # easier to get away with stuff on big subs
                           log.info("found: " + str(sub.display_name))
                           subok = True
+                else:
+                  log.info(sub.display_name.lower() + " is blocked")
 
         sub_db = "{}/{}.db".format(DB_DIR, str(sub.display_name))
         log.info("active db : {}".format(sub_db))
