@@ -31,12 +31,25 @@ SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Ra
 DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
 DISALLOWED_SUBS_FILENAME = os.path.join(BASE_DIR, "disallowed_subs.txt")
 USE_SLEEP_SCHEDULE = False
-#(hours, minutes) using a 24h clock
-AWAKE_TIME = datetime.time(10,30) 
-SLEEP_TIME = datetime.time(21,20)
-
 # Logging options
 LOG_LEARNED_COMMENTS = False
+SHOW_SLEEP_LOGGING = True
+
+# array of tuples with time windows. 
+# bot will run if current utc time in between listed values
+# provide a list of tuples, with a two sub tuples
+# the sub tuples should be a start time, annd stop time
+# using (hours, minutes) as a 24h clock
+BOT_SCHEDULES = [
+  ((4,00),(5,00)),
+  ((9,30),(23,20)),
+  ]
+
+SCHEDULES = []
+for schedule in BOT_SCHEDULES:
+  SCHEDULES.append(((datetime.time(schedule[0][0], schedule[0][1])), (datetime.time(schedule[1][0], schedule[1][1]))))
+
+BOT_SCHEDULES = SCHEDULES
 
 subreddit = collections.namedtuple(
     "Subreddit", ["name", "rank", "url", "subscribers", "type"]
@@ -312,9 +325,25 @@ def is_time_between(begin_time, end_time, check_time=None):
         return check_time >= begin_time or check_time <= end_time
 
 def should_we_sleep():
-    log.info("awake time: {}, sleep time: {}, current time: {}".format(AWAKE_TIME, SLEEP_TIME, datetime.datetime.utcnow().time()))
-    if is_time_between(AWAKE_TIME, SLEEP_TIME):
-      log.info("No need to sleep")
+    
+    CHECKS = []
+    for schedule in BOT_SCHEDULES:
+      print(schedule[0], schedule[1])
+      if is_time_between(schedule[0], schedule[1]):
+        if SHOW_SLEEP_LOGGING:
+          log.info("sleep?: {} awake: {}, sleep: {}, current: {}".format(False, schedule[0], schedule[1], datetime.datetime.utcnow().time()))
+        CHECKS.append(True)
+      else:
+        if SHOW_SLEEP_LOGGING:
+          log.info("sleep?: {} awake: {}, sleep: {}, current: {}".format(True, schedule[0], schedule[1], datetime.datetime.utcnow().time()))
+        CHECKS.append(False)
+    
+    # check if any of the time between checks returned true.
+    # if there's a True in the list, it means we're between one of the scheduled times
+    # and so this function returns False so the bot doesn't sleep
+    log.info("check list: {}".format(CHECKS))
+    if True in CHECKS:
+      log.info("no need to sleep")
       return False
     else:
       log.info("it's sleepy time")
