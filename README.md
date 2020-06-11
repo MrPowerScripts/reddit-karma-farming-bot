@@ -2,7 +2,10 @@
 
 This bot is probably the reason you saw that post again on Reddit. Need help with the bot? Join us on Discord https://bit.ly/mrps-discord 
 
-## Shameless self promotion
+### 2020 update video
+[Definitely Watch This](https://www.youtube.com/watch?v=nWYRGXesb3I)
+
+### Older videos
 
 [Karma Farming Bot 2.0 Video](https://www.youtube.com/watch?v=CCMGHepPBso)  
 [Karma Farming on Reddit Video](https://www.youtube.com/watch?v=8DrOERA5FGc)  
