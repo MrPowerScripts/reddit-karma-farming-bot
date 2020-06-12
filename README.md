@@ -45,7 +45,7 @@ Now click `Resources` tab
 
 Click on the Edit Icon and turn on the worker and save
 
-Click on more and view logs to make everything is fine
+Click on more and view logs to make sure everything is fine
 
 BOOM! free hosting
 
