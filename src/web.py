@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 if 'DYNO' in os.environ:
-  port = 80
+  port = os.environ.get('PORT')
 else:
   port = 5000
 
