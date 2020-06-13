@@ -95,11 +95,12 @@ def get_current_epoch():
 
 def get_db_size(human=False):
   if os.path.isfile(MAIN_DB):
-      log.info("db size: " + str(bytesto(os.path.getsize(MAIN_DB), "m")))
+      size = os.path.getsize(MAIN_DB)
+      log.info("db size: " + str(bytesto(size, "m")))
       if human:
-        return bytesto(os.path.getsize(MAIN_DB), "m")
+        return bytesto(size, "m")
       else:
-        return os.path.getsize(MAIN_DB)
+        return size
   else:
       return 0
 
