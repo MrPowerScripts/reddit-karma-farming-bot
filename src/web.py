@@ -6,10 +6,8 @@ import os
 
 app = Flask(__name__)
 
-if 'DYNO' in os.environ:
-  port = os.environ.get('PORT')
-else:
-  port = 5000
+port = os.environ.get('PORT') || 5000
+
 
 @app.route('/')
 def entry_point():
