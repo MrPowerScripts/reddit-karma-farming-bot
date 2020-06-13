@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-port = os.environ.get('PORT') || 5000
+port = os.environ.get('PORT') or 5000
 
 
 @app.route('/')
