@@ -93,6 +93,15 @@ log.info(SUBREDDIT_LIST)
 def get_current_epoch():
     return int(time.time())
 
+def get_db_size(human=False):
+  if os.path.isfile(MAIN_DB):
+      log.info("db size: " + str(bytesto(os.path.getsize(MAIN_DB), "m")))
+      if human:
+        return bytesto(os.path.getsize(MAIN_DB), "m")
+      else:
+        return os.path.getsize(MAIN_DB)
+  else:
+      return 0
 
 def convert_size_to_bytes(size_str):
     """Convert human filesizes to bytes.
