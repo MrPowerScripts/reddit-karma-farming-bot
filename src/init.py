@@ -58,7 +58,7 @@ def init():
           log.info("fast learning")
           learn()
           try:
-              log.info("new db size: " + str(bytesto(os.path.getsize(MAIN_DB), "m")))
+              log.info("new db size: " + str(bytesto(get_db_size(), "m")))
           except:
               pass
 
