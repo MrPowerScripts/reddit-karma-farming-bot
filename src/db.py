@@ -15,7 +15,7 @@ def set_db_size():
     size = os.path.getsize(MAIN_DB)
     db_common.upsert({"config": "db_size", "value": size}, dates.config=="db_size")
   else:
-    log.info('no databse found in: {}'.fomrat(MAIN_DB))
+    log.info('no database found in: {}'.format(MAIN_DB))
 
 def get_db_size(human=False):
   if human:
