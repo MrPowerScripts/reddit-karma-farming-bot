@@ -93,17 +93,6 @@ log.info(SUBREDDIT_LIST)
 def get_current_epoch():
     return int(time.time())
 
-def get_db_size(human=False):
-  if os.path.isfile(MAIN_DB):
-      size = os.path.getsize(MAIN_DB)
-      log.info("db size: " + str(bytesto(size, "m")))
-      if human:
-        return bytesto(size, "m")
-      else:
-        return size
-  else:
-      return 0
-
 def convert_size_to_bytes(size_str):
     """Convert human filesizes to bytes.
     https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python

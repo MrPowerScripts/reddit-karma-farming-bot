@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # coding: utf-8
 from flask import Flask
-from utils import get_db_size
+from db import get_db_size
 import os
 
 app = Flask(__name__)

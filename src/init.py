@@ -8,7 +8,7 @@ import time
 from learn import learn
 from logger import log
 from requests import get
-from db import check_first_run
+from db import check_first_run, set_db_size, get_db_size
 from utils import (
     bytesto,
     countdown,
@@ -23,7 +23,6 @@ from utils import (
     reddit_bot_action,
     get_current_epoch,
     should_we_sleep,
-    get_db_size
 )
 
 try:
@@ -54,6 +53,7 @@ def init():
   # check if this is the first time running the bot
   check_first_run()
   while True:
+      set_db_size()
       if get_db_size() < MAIN_DB_MIN_SIZE:  # learn faster early on
           log.info("fast learning")
           learn()
