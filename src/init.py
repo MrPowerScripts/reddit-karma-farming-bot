@@ -22,7 +22,8 @@ from utils import (
     USE_SLEEP_SCHEDULE,
     reddit_bot_action,
     get_current_epoch,
-    should_we_sleep
+    should_we_sleep,
+    get_db_size
 )
 
 try:
@@ -53,14 +54,7 @@ def init():
   # check if this is the first time running the bot
   check_first_run()
   while True:
-
-      if os.path.isfile(MAIN_DB):
-          size = os.path.getsize(MAIN_DB)
-          log.info("db size: " + str(bytesto(size, "m")))
-      else:
-          size = 0
-
-      if size < MAIN_DB_MIN_SIZE:  # learn faster early on
+      if get_db_size() < MAIN_DB_MIN_SIZE:  # learn faster early on
           log.info("fast learning")
           learn()
           try:
@@ -71,7 +65,7 @@ def init():
           countdown(2)
 
       if (
-          size > MAIN_DB_MIN_SIZE
+          get_db_size() > MAIN_DB_MIN_SIZE
       ):  # once we learn enough start submissions and replies
           log.info("database size is big enough")
 
