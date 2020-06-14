@@ -8,7 +8,7 @@ import time
 from learn import learn
 from logger import log
 from requests import get
-from db import check_first_run, set_db_size, get_db_size
+from db import check_first_run, set_db_size, get_db_size, should_we_sleep
 from utils import (
     bytesto,
     countdown,
@@ -22,7 +22,6 @@ from utils import (
     USE_SLEEP_SCHEDULE,
     reddit_bot_action,
     get_current_epoch,
-    should_we_sleep,
 )
 
 try:
@@ -72,7 +71,7 @@ def init():
           if USE_SLEEP_SCHEDULE:
             while should_we_sleep():
               log.info("zzzzzzzz :snore:")
-              time.sleep(5)
+              time.sleep(60)
 
           for action in reddit_bot:
               if action.rate_limit_unlock_epoch != 0:
