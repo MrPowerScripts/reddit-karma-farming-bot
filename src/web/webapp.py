@@ -13,7 +13,7 @@ port = os.environ.get('PORT') or 5000
 def entry_point():
     return "DB Size: " + str(get_db_size(human=True)) + " MB"
 
-def webapp():
+def run():
   if os.environ.get('PORT'):
     app.run(port=port,host='0.0.0.0')
   else:
