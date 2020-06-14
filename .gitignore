@@ -10,3 +10,4 @@ macos.sh
 .vscode
 scanner.py
 src/db.json
+node_modules
