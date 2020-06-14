@@ -30,7 +30,6 @@ NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
 DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
 DISALLOWED_SUBS_FILENAME = os.path.join(BASE_DIR, "disallowed_subs.txt")
-USE_SLEEP_SCHEDULE = False
 # Logging options
 LOG_LEARNED_COMMENTS = False
 SHOW_SLEEP_LOGGING = True
@@ -40,6 +39,7 @@ SHOW_SLEEP_LOGGING = True
 # provide a list of tuples, with a two sub tuples
 # the sub tuples should be a start time, annd stop time
 # using (hours, minutes) as a 24h clock
+USE_SLEEP_SCHEDULE = False
 BOT_SCHEDULES = [
   ((4,00),(5,00)),
   ((9,30),(23,20)),
