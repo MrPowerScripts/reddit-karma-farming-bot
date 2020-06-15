@@ -8,20 +8,27 @@ import time
 from learn import learn
 from logger import log
 from requests import get
-from db import check_first_run, set_db_size, get_db_size, should_we_sleep
+from db import (
+  check_first_run, 
+  set_db_size, 
+  get_db_size, 
+  should_we_sleep,
+  set_user_info,
+)
+
 from utils import (
-    bytesto,
-    countdown,
-    prob,
-    MAIN_DB,
-    PROBABILITIES,
-    get_public_ip,
-    check_internet,
-    MAIN_DB_MIN_SIZE,
-    get_seconds_to_wait,
-    USE_SLEEP_SCHEDULE,
-    reddit_bot_action,
-    get_current_epoch,
+  bytesto,
+  countdown,
+  prob,
+  MAIN_DB,
+  PROBABILITIES,
+  get_public_ip,
+  check_internet,
+  MAIN_DB_MIN_SIZE,
+  get_seconds_to_wait,
+  USE_SLEEP_SCHEDULE,
+  reddit_bot_action,
+  get_current_epoch,
 )
 
 try:
@@ -49,6 +56,7 @@ reddit_bot = [
 def init():
   log.info("db size size to start replying:" + str(bytesto(MAIN_DB_MIN_SIZE, "m")))
   reddit.shadow_check()
+  set_user_info()
   # check if this is the first time running the bot
   check_first_run()
   while True:

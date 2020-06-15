@@ -1,5 +1,6 @@
 from tinydb import TinyDB, Query
 import datetime
+import json
 from utils import (
                   BASE_DIR, 
                   MAIN_DB, 
@@ -10,6 +11,7 @@ from utils import (
                   SHOW_SLEEP_LOGGING
 )
 from logger import log
+from reddit import api
 import os
 import time
 
@@ -17,8 +19,19 @@ db = TinyDB('{}/db.json'.format(BASE_DIR))
 
 db_dates = db.table('dates')
 db_common = db.table('common')
+db_config = db.table('config')
 Dates = Query()
 Common = Query()
+Config = Query()
+
+def set_user_info():
+  me_data = api.user.me()
+  j = {k: v for k,v in me_data.__dict__.items() if k != '_reddit'}
+  # log.info(j)
+  db_config.upsert({"config": "user", "value": j}, Config.config == "user")
+
+def get_user_info():
+  return db_config.get(Config.config == "user")
 
 def set_db_size():
   if os.path.isfile(MAIN_DB):
