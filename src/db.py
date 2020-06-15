@@ -43,12 +43,14 @@ def set_user_karma():
     },
     "karma_timestamp": int(time.time()), 
     "timestamp": int(time.time())})
+  days_ago = int((int(time.time()) - (DAY * 7)))
+  db_common.remove(Common.karma_timestamp < days_ago)
 
 def set_db_size():
   if os.path.isfile(MAIN_DB):
     size = os.path.getsize(MAIN_DB)
     db_common.insert({"data": "db_size", "value": size, "db_size_timestamp": int(time.time()), "timestamp": int(time.time())})
-    hours_ago_24 = int((int(time.time()) - 86400))
+    hours_ago_24 = int((int(time.time()) - DAY))
     db_common.remove(Common.db_size_timestamp < hours_ago_24)
   else:
     log.info('no database found in: {}'.format(MAIN_DB))
