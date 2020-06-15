@@ -33,6 +33,17 @@ def set_user_info():
 def get_user_info():
   return db_config.get(Config.config == "user")
 
+def set_user_karma():
+  me_data = api.user.me()
+  log.info('CHECKING KARMA - GOOD LUCK')
+  db_common.insert({"data": "karma", 
+    "value": {
+      "link_karma": me_data.link_karma,
+      "comment_karma": me_data.comment_karma
+    },
+    "karma_timestamp": int(time.time()), 
+    "timestamp": int(time.time())})
+
 def set_db_size():
   if os.path.isfile(MAIN_DB):
     size = os.path.getsize(MAIN_DB)

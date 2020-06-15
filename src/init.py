@@ -14,6 +14,7 @@ from db import (
   get_db_size, 
   should_we_sleep,
   set_user_info,
+  set_user_karma,
 )
 
 from utils import (
@@ -43,10 +44,12 @@ except Exception as e:
 RATE_LIMIT = 0
 NEED_TO_WAIT = 0
 log.info("------------new bot run--------------")
-log.info("user is " + str(reddit.api.user.me()))
+log.info("user is " + str(reddit.api.user.me(use_cache=True)))
 
 reddit_bot = [
   reddit_bot_action("shadowcheck", reddit.shadow_check, PROBABILITIES["SHADOWCHECK"], 0),
+  reddit_bot_action("karmacheck", set_user_karma, PROBABILITIES["KARMACHECK"], 0),
+  reddit_bot_action("dbcheck", set_db_size, PROBABILITIES["DBCHECK"], 0),
   reddit_bot_action("reply", reddit.random_reply, PROBABILITIES["REPLY"], 0),
   reddit_bot_action("submit", reddit.random_submission, PROBABILITIES["SUBMISSION"], 0),
   reddit_bot_action("delete", reddit.delete_comments, PROBABILITIES["DELETE"], 0),
@@ -56,11 +59,11 @@ reddit_bot = [
 def init():
   log.info("db size size to start replying:" + str(bytesto(MAIN_DB_MIN_SIZE, "m")))
   reddit.shadow_check()
-  set_user_info()
   # check if this is the first time running the bot
+  set_user_info()
   check_first_run()
+  set_db_size()
   while True:
-      set_db_size()
       if get_db_size() < MAIN_DB_MIN_SIZE:  # learn faster early on
           log.info("fast learning")
           learn()
