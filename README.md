@@ -51,7 +51,7 @@ Now, go to https://uptimerobot.com
 
 Make an account and login.
 
-Create a monitor for a "GET" request every 5 minutes. the URL should be the url of your heroku project.
+Create a monitor for a "GET" request every 5 minutes. the URL should be the url of your heroku project. (it will look something like https://<APP NAME>.herokuapp.com/)
 
 Thats it, Your Free Hosting is complete!
 
