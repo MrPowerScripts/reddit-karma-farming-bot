@@ -47,7 +47,13 @@ Click on the Edit Icon and turn on the worker and save
 
 Click on more and view logs to make sure everything is fine
 
-BOOM! free hosting
+Now, go to https://uptimerobot.com
+
+Make an account and login.
+
+Create a monitor for a "GET" request every 5 minutes. the URL should be the url of your heroku project.
+
+Thats it, Your Free Hosting is complete!
 
 ## In Depth guide to running on Windows / Linux
 
