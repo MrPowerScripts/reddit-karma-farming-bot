@@ -24,6 +24,16 @@ Dates = Query()
 Common = Query()
 Config = Query()
 
+def get_all_karma():
+    karma = db_common.search(Common.data == "karma")
+    karma = sorted(karma, key=lambda k: k['karma_timestamp'])
+    return karma
+
+def get_all_db_size():
+    size = db_common.search(Common.data == "db_size")
+    size = sorted(size, key=lambda k: k['db_size_timestamp'])
+    return size
+
 def set_user_info():
   me_data = api.user.me()
   j = {k: v for k,v in me_data.__dict__.items() if k != '_reddit'}
@@ -49,7 +59,7 @@ def set_user_karma():
 def set_db_size():
   if os.path.isfile(MAIN_DB):
     size = os.path.getsize(MAIN_DB)
-    db_common.insert({"data": "db_size", "value": size, "db_size_timestamp": int(time.time()), "timestamp": int(time.time())})
+    db_common.insert({"data": "db_size", "value": size, "value_mb": bytesto(size, "m"), "db_size_timestamp": int(time.time()), "timestamp": int(time.time())})
     hours_ago_24 = int((int(time.time()) - DAY))
     db_common.remove(Common.db_size_timestamp < hours_ago_24)
   else:
