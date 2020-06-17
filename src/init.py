@@ -71,7 +71,7 @@ def init():
               log.info("new db size: " + str(bytesto(get_db_size(), "m")))
           except:
               pass
-
+          set_db_size()
           countdown(2)
 
       if (
