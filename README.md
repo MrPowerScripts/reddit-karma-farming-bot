@@ -32,7 +32,7 @@ Most of these options can be configured in [utils.py](src/utils.py)
 
 ## Prep (IMPORTANT)
 
-First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account [go here to create an app](https://old.reddit.com/prefs/apps/). follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to lear how to create the app and get your app details such as client ID and secret
+First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account [go here to create an app](https://old.reddit.com/prefs/apps/). follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to learn how to create the app and get your app details such as client ID and secret
 
 ## NEW! Run it on Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
@@ -84,7 +84,7 @@ docker run -it \
 ```
 
 - When the docker container is running you can start the bot by browsing to https://127.0.0.1:8080 The default username pass is admin/pass. It will give you an SSL warning because the CA is self-signed. Just click whatever button allows you to pass through the warning.
-- The bot will store all of the stuff in learns in a folder within your home path (~) called `reddit-karma-bot`.
+- The bot will store all of the stuff it learns in a folder within your home path (~) called `reddit-karma-bot`.
 - The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be a info.log in the `reddit-karma-bot` folder.
 
 You can provide also a proxy server for the docker container to connect through
