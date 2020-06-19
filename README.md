@@ -32,7 +32,7 @@ Most of these options can be configured in [utils.py](src/utils.py)
 
 ## Prep (IMPORTANT)
 
-First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to get your app details such as client ID and secret
+First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account [go here to create an app](https://old.reddit.com/prefs/apps/). follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to lear how to create the app and get your app details such as client ID and secret
 
 ## NEW! Run it on Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
