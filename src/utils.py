@@ -44,7 +44,7 @@ SHOW_SLEEP_LOGGING = False
 # array of tuples with time windows. 
 # bot will run if current utc time in between listed values
 # provide a list of tuples, with a two sub tuples
-# the sub tuples should be a start time, annd stop time
+# the sub tuples should be a start time, and stop time
 # using (hours, minutes) as a 24h clock
 # "days" is used to define how many days after the first bot run to use that schedule
 # You can add multiple schedules to be run after x days of the bots life
