@@ -50,7 +50,7 @@ SHOW_SLEEP_LOGGING = False
 # You can add multiple schedules to be run after x days of the bots life
 USE_SLEEP_SCHEDULE = False
 BOT_SCHEDULES = [
-  {"days": 0, "schedule": [((4,00),(5,00)), (17,30),(19,30))]},
+  {"days": 0, "schedule": [((4,00),(5,00)), ((17,30),(19,30))]},
   {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
   ]
 
