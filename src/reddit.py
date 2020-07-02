@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-
 import praw
 import requests
 from bs4 import BeautifulSoup
@@ -18,6 +17,7 @@ import datetime
 from operator import attrgetter, itemgetter
 from logger import log
 from learn import learn
+
 from utils import (
     DB_DIR,
     SCORE_THRESHOLD,
@@ -33,7 +33,14 @@ from utils import (
     MAX_CACHE_SIZE,
     NUMBER_DAYS_FOR_POST_TO_BE_OLD,
     get_args,
-    DISALLOWED_SUBS
+    append_params_to_url,
+    rewrite_text,
+    DISALLOWED_SUBS,
+    DO_WE_SPIN_TITLES,
+    DO_WE_SPIN_COMMENTS,
+    DO_WE_REUPLOAD_TO_IMGUR,
+    DO_WE_ADD_PARAMS_REUPLOAD,
+    SPINNER_API
 )
 
 args = get_args()
@@ -45,7 +52,7 @@ if args.username:
     REDDIT_PASSWORD=args.password
     REDDIT_USER_AGENT=args.useragent
     REDDIT_USERNAME=args.username
-    
+
     api = praw.Reddit(
       client_id=REDDIT_CLIENT_ID,
       client_secret=REDDIT_SECRET,
@@ -106,11 +113,11 @@ def get_submissions(start_date, end_date, sub):
     :param submissions: collected submissions (List[dict])
     :return: submissions, sorted by the created date in ascending order (List[dict])
     """
-    
+
     submissions = []
     new_submissions = []
 
-    while not new_submissions: 
+    while not new_submissions:
 
         # get submissions
         new_submissions = _pushshift_search(sub, start_date, end_date)
@@ -118,7 +125,7 @@ def get_submissions(start_date, end_date, sub):
         # base case
         if submissions and submissions[-1]["created_utc"] >= end_date:
             return submissions
-        
+
         # log.info(len(new_submissions))
         if not new_submissions:
             return submissions
@@ -293,7 +300,7 @@ def random_submission():
       #filter disallowded
       subreddits = [y for y in subreddits if y.name.lower().strip() not in DISALLOWED_SUBS ]
       #log.info(subreddits)
-      
+
     total_posts = []
 
     for sub in subreddits[:TOP_SUBREDDIT_NUM]:
@@ -327,12 +334,19 @@ def random_submission():
             # Check if the we're reposting a selfpost or a link post.
             # Set the required params accodingly, and reuse the content
             # from the old post
+            if DO_WE_SPIN_TITLES:
+                rand_sub.title = rewrite_text(SPINNER_API, rand_sub.title)
+            else:
+                rand_sub.title = rand_sub.title
             log.info("submission title: " + rand_sub.title)
             log.info("posting to: {}".format(rand_sub.subreddit.name))
             if rand_sub.is_self:
                 params = {"title": rand_sub.title, "selftext": rand_sub.selftext}
             else:
-                params = {"title": rand_sub.title, "url": rand_sub.url}
+                if DO_WE_REUPLOAD_TO_IMGUR: ## Returns the same result currently. Imgur Module needs more testing and url parsing. Automatically adds ? to end of url in preparation of obfusacating the URL from 'other discussion tab'
+                    params = {"title": rand_sub.title, "url": append_params_to_url(DO_WE_ADD_PARAMS_REUPLOAD, rand_sub.url)}
+                else:
+                    params = {"title": rand_sub.title, "url": append_params_to_url(DO_WE_ADD_PARAMS_REUPLOAD, rand_sub.url)}
 
             # Submit the same content to the same subreddit. Prepare your salt picks
             api.subreddit(rand_sub.subreddit.display_name).submit(**params)
@@ -358,9 +372,9 @@ def random_reply():
           subok = True
         else:
           log.info(sub.display_name.lower() + " is blocked")
-          
+
       submission = random.choice(list(sub.hot()))
-    
+
     submission.comments.replace_more(
         limit=0
     )  # Replace the "MoreReplies" with all of the submission replies
@@ -387,15 +401,21 @@ def random_reply():
         if prob(.35):  # There's a larger chance that we'll reply to a comment.
             log.info("replying to a comment")
             comment = random.choice(submission.comments.list())
-            response = reply_brain.reply(comment.body)
-            
+            if DO_WE_SPIN_COMMENTS:
+                response = reply_brain.reply(rewrite_text(SPINNER_API, comment.body))
+            else:
+                response = reply_brain.reply(comment.body)
+
             # We might not be able to learn enough from the subreddit to reply
             # If we don't, then pull a reply from the general database.
             if "I don't know enough to answer you yet!" in response:
               log.info("I don't know enough from {}, using main brain db to reply".format(sub_name))
               brain = "{}/{}.db".format(DB_DIR, "brain")
               reply_brain = bot.Brain(brain)
-              response = reply_brain.reply(comment.body)
+              if DO_WE_SPIN_COMMENTS:
+                  response = reply_brain.reply(rewrite_text(SPINNER_API, comment.body))
+              else:
+                  response = reply_brain.reply(comment.body)
 
             reply = comment.reply(response)
             log.info("Replied to comment: {}".format(comment.body))
@@ -403,14 +423,22 @@ def random_reply():
         else:
             log.info("replying to a submission")
             # Pass the users comment to chatbrain asking for a reply
-            response = reply_brain.reply(submission.title)
+
+            if DO_WE_SPIN_COMMENTS:
+                response = reply_brain.reply(rewrite_text(SPINNER_API, submission.title))
+            else:
+                response = reply_brain.reply(submission.title)
 
             # same as above. nobody will ever see this so it's fine.
             if "I don't know enough to answer you yet!" in response:
               log.info("I don't know enough from {}, using main brain db to reply".format(sub_name))
               brain = "{}/{}.db".format(DB_DIR, "brain")
               reply_brain = bot.Brain(brain)
-              response = reply_brain.reply(submission.title)
+              if DO_WE_SPIN_COMMENTS:
+                  response = reply_brain.reply(rewrite_text(SPINNER_API, submission.title))
+              else:
+                  response = reply_brain.reply(submission.title)
+
 
             submission.reply(response)
             log.info("Replied to Title: {}".format(submission.title))
