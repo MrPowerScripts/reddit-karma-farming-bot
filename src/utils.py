@@ -8,9 +8,14 @@ import functools
 import socket
 import collections
 import argparse
+import requests
+from requests.models import PreparedRequest
+import json
 from requests import get
 from os.path import expanduser
 from logger import log
+import string
+
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
@@ -25,12 +30,12 @@ SUBMISSION_SEARCH_TEMPLATE = "https://api.pushshift.io/reddit/search/submission/
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {
-  "REPLY": 0.02, 
-  "SUBMISSION": 0.005, 
+  "REPLY": 0.002,
+  "SUBMISSION": 0.005,
   "SHADOWCHECK": 0.002,
   "DBCHECK": 0.005,
   "KARMACHECK" : 0.005,
-  "LEARN": 0.02, 
+  "LEARN": 0.02,
   "DELETE": 0.02 }
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
@@ -41,7 +46,25 @@ DISALLOWED_SUBS_FILENAME = os.path.join(BASE_DIR, "disallowed_subs.txt")
 LOG_LEARNED_COMMENTS = False
 SHOW_SLEEP_LOGGING = False
 
-# array of tuples with time windows. 
+#Text Spinning options
+# DO_WE_SPIN = True
+SPINNER_API = 'spinrewriter' # 'free'
+
+DO_WE_SPIN_TITLES = False
+DO_WE_SPIN_COMMENTS = False
+
+SPINREWRITER_EMAIL_ADDRESS = ""
+SPINREWRITER_API_KEY = ""
+
+#IMGUR UPLOAD OPTIONS
+DO_WE_REUPLOAD_TO_IMGUR = False
+imgur_client_id = ""
+imgur_client_secret = ""
+
+DO_WE_ADD_PARAMS_REUPLOAD = False
+
+
+# array of tuples with time windows.
 # bot will run if current utc time in between listed values
 # provide a list of tuples, with a two sub tuples
 # the sub tuples should be a start time, and stop time
@@ -328,8 +351,8 @@ def is_past_one_day(time_to_compare):
 def countdown(seconds):
     log.info("sleeping: " + str(seconds) + " seconds")
     for i in range(seconds, 0, -1):
-        print("\x1b[2K\r" + str(i) + " ")
-        time.sleep(1)
+        # print("\x1b[2K\r" + str(i) + " ")
+        time.sleep(3)
     log.info("waking up")
 
 
@@ -347,3 +370,58 @@ def is_time_between(begin_time, end_time, check_time=None):
     else: # crosses midnight
         return check_time >= begin_time or check_time <= end_time
 
+
+def rewrite_text(SPINNER_API, text):
+    log.info(f'SPINNER_API: {SPINNER_API}. Text to be spun: {text}')
+    if SPINNER_API == 'spinrewriter':
+        data = {
+            "email_address": SPINREWRITER_EMAIL_ADDRESS,
+            "api_key": SPINREWRITER_API_KEY,
+            "text": text,
+            "action": "unique_variation"
+        }
+        r = requests.post("https://www.spinrewriter.com/action/api", data=data)
+        if r.status_code == 200:
+            if 'API quota exceeded' in r.text:
+                log.info("API quota exceeded. We are not spinning.")
+                return text
+            else:
+                json_data = json.loads(r.text)
+                if json_data['response']:
+                    return json_data['response']
+                else:
+                    return text
+    else:
+        log.info('SPINNER_API not found or other error')
+        return text
+
+
+### NOT USED.. YET?
+def reupload_image_to_imgur(url):
+    try:
+        if 'jpg' in url:
+            client = ImgurClient(IMGUR_CLIENT_ID, IMGUR_CLIENT_SECRET)
+            # print(client.credits)
+            time.sleep(3) # Be nice to Imgur, we're a bot in no rush.
+            print("Uploading image")
+            item = client.upload_from_url(url)
+            return item['link']
+        else:
+            return url
+    except Exception as e:
+        print(f"error in reupload_image_to_imgur() : {e}")
+        return url
+
+
+def random_char(y): ## Needed for generating random characters for appending to URL in append_params_to_url().
+    return ''.join(random.choice(string.ascii_letters) for x in range(y))
+
+
+def append_params_to_url(DO_WE_ADD_PARAMS_REUPLOAD, url): ## Used for appending random strings as query parameters to URLS in the reposting module. This gives a unique variation of the URL.
+    if DO_WE_ADD_PARAMS_REUPLOAD:
+        params = {random_char(5):random_char(5)}
+        req = PreparedRequest()
+        req.prepare_url(url, params)
+        return req.url
+    else:
+        return url
