@@ -54,6 +54,7 @@ Thats it, Your Free Hosting is complete!
 
 ## In Depth guide to running on Windows / Linux
 
+**DO NOT USE THIS!! There is a bug that we don't know the cause for that only seems to affect this version. Please either use heroku or install a normal ubuntu VM**
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
