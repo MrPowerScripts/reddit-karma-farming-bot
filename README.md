@@ -27,7 +27,7 @@ Website: https://bit.ly/mrps-site
 - Schedule when the bot wakes up and sleeps to run actions.
 - Auto detects if the account is shadowbanned
 - Limit the subreddits that the bot learns from and posts to
-- Run on WSL (Windows 10), Linux, MacOS, and Docker
+- Run on Linux, MacOS, Docker, or Windows (using Linux in VirtualBox)
 
 ## Configuration
 
@@ -54,7 +54,7 @@ Thats it, Your Free Hosting is complete!
 
 ## In Depth guide to running on Windows / Linux
 
-**DO NOT USE THIS!! There is a bug that we don't know the cause for that only seems to affect this version. Please either use heroku or install a normal ubuntu VM**
+**WSL is currently now supported. Please either use heroku or install Ubuntu in Virtualbox and use Liux instructions**
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
