@@ -2,7 +2,7 @@
 
 This bot is probably the reason you saw that post again on Reddit. Need help with the bot? Join us on Discord https://bit.ly/mrps-discord 
 
-![farm karma 1](https://user-images.githubusercontent.com/1307942/86153108-0a42e280-baf9-11ea-912b-8ec6754b8af3.png)
+![farm karma 1](https://user-images.githubusercontent.com/1307942/86540032-7e1a2c00-bef9-11ea-9266-16830c5b9dfa.png)
 ![farm karma bot](https://user-images.githubusercontent.com/1307942/86153469-a40a8f80-baf9-11ea-80b5-d86dd31108d6.png)
 
 ### 2020 update video
