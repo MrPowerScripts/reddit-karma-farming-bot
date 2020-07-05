@@ -4,6 +4,7 @@ This bot is probably the reason you saw that post again on Reddit. Need help wit
 
 ![farm karma 1](https://user-images.githubusercontent.com/1307942/86153108-0a42e280-baf9-11ea-912b-8ec6754b8af3.png)
 ![farm karma bot](https://user-images.githubusercontent.com/1307942/86153469-a40a8f80-baf9-11ea-80b5-d86dd31108d6.png)
+![farm karma bots](https://user-images.githubusercontent.com/1307942/86539797-5de96d80-bef7-11ea-9fe5-90461ccf1e11.png)
 
 ### 2020 update video
 [Definitely Watch This](https://www.youtube.com/watch?v=nWYRGXesb3I)
