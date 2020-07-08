@@ -30,6 +30,9 @@ Website: https://bit.ly/mrps-site
 - Auto detects if the account is shadowbanned
 - Limit the subreddits that the bot learns from and posts to
 - Run on Linux, MacOS, Docker, or Windows (using Linux in VirtualBox)
+- Charts that show Brain database size, and Post/Comment Karma growth over time
+
+![Karma Charts](https://user-images.githubusercontent.com/1307942/86981035-67840700-c17d-11ea-9e6b-828e1ad2dd9c.png)
 
 ## Configuration
 
