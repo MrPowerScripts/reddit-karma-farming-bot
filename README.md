@@ -5,8 +5,10 @@ This bot is probably the reason you saw that post again on Reddit. Need help wit
 ![farm karma 1](https://user-images.githubusercontent.com/1307942/86540032-7e1a2c00-bef9-11ea-9266-16830c5b9dfa.png)
 ![farm karma bot](https://user-images.githubusercontent.com/1307942/86153469-a40a8f80-baf9-11ea-80b5-d86dd31108d6.png)
 
-### 2020 update video
-[Definitely Watch This](https://www.youtube.com/watch?v=nWYRGXesb3I)
+### 2020 update videos
+[Definitely Watch This One](https://www.youtube.com/watch?v=nWYRGXesb3I)
+
+[2020 Bot Code Walkthrough](https://www.youtube.com/watch?v=83zWIz3b7o0)
 
 ### Older videos
 
