@@ -1,8 +1,21 @@
 #!/usr/bin/env bash
 
 DEBUG_FILE="./run_linux.log"
+SETTINGS_FILE="./src/settings.py"
 
 date '+%d/%m/%Y %H:%M:%S' | tee $DEBUG_FILE
+
+if [[ $# -eq 0 ]] ; then
+    echo "no arguments supplied - checking settings file" | tee -a $DEBUG_FILE
+    if [[ ! -f "$SETTINGS_FILE" ]]; then
+      echo "No ./src/settings.py file? You need to set the creds" | tee -a $DEBUG_FILE
+      exit 1
+    else
+      echo "found settings file - gonna try that!" | tee -a $DEBUG_FILE
+    fi
+else
+  echo "found arguments - I hope they're correct!" | tee -a $DEBUG_FILE
+fi
 
 unameOut="$(uname -s)"
 case "${unameOut}" in
