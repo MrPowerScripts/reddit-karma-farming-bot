@@ -10,6 +10,7 @@ import collections
 import argparse
 import requests
 from requests.models import PreparedRequest
+from imgurpython import ImgurClient
 import json
 from requests import get
 from os.path import expanduser
@@ -47,7 +48,7 @@ LOG_LEARNED_COMMENTS = False
 SHOW_SLEEP_LOGGING = False
 
 #Text Spinning options
-# DO_WE_SPIN = True
+DO_WE_SPIN = False
 SPINNER_API = 'spinrewriter' # 'free'
 
 DO_WE_SPIN_TITLES = False
