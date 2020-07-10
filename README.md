@@ -28,6 +28,8 @@ Website: https://bit.ly/mrps-site
 - Filter the bot from learning certain words, or allow/disallow certain subreddits
 - Schedule when the bot wakes up and sleeps to run actions.
 - Auto detects if the account is shadowbanned
+- Use Spinwriter API to mix up comments and titles, making them less detectable as reposts
+- Re-upload images to Imgur to make reposts less detectable
 - Limit the subreddits that the bot learns from and posts to
 - Run on Linux, MacOS, Docker, or Windows (using Linux in VirtualBox)
 - Charts that show Brain database size, and Post/Comment Karma growth over time
