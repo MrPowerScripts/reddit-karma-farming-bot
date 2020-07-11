@@ -67,6 +67,7 @@ MarkupSafe = "==1.1.1"
 PyStemmer = "==2.0.0.1"
 websocket_client = "==0.57.0"
 Werkzeug = "==1.0.1"
+imgurpython = "*"
 
 [requires]
 python_version = "3.7"

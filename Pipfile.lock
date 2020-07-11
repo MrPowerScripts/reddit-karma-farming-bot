@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "708b174e21ffad1d3c6632ed6de7cfd584f2ed3f308a699d3a4bf9b3df920632"
+            "sha256": "286515cdd49a1c5cbaacb5968f818743ca122b1e344e5e5eb1d2cec0285f1e70"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -142,6 +142,13 @@
             ],
             "index": "pypi",
             "version": "==2.9"
+        },
+        "imgurpython": {
+            "hashes": [
+                "sha256:3ac28501c2f699a78f93a4ab34df7443cebd39a170c9de4adecf0f3852cbdc33"
+            ],
+            "index": "pypi",
+            "version": "==1.1.7"
         },
         "importlib-metadata": {
             "hashes": [
@@ -478,9 +485,9 @@
         },
         "requests": {
             "hashes": [
-                "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6",
                 "sha256:43999036bfa82904b6af1d99e4882b560e5e2c68e5c4b0aa03b655f3d7d73fee",
-                "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4"
+                "sha256:5d2d0ffbb515f39417009a46c14256291061ac01ba8f875b90cad137de83beb4",
+                "sha256:b3f43d496c6daba4493e7c431722aeb7dbc6288f52a6e04e7b6023b0247817e6"
             ],
             "index": "pypi",
             "version": "==2.23.0"
