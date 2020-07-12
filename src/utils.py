@@ -49,7 +49,7 @@ SHOW_SLEEP_LOGGING = False
 
 #Text Spinning options
 DO_WE_SPIN = False
-SPINNER_API = 'spinrewriter' # 'free'
+SPINNER_API = 'spinrewriter' # requires spinwriter subscription
 
 DO_WE_SPIN_TITLES = False
 DO_WE_SPIN_COMMENTS = False
