@@ -29,3 +29,12 @@ socialanxiety
 stopselfharm
 suicidewatch
 therapy
+depressionregimens
+adhd
+drugs
+eatingdisorders
+schizophrenia
+borderlinepdisorder
+cptsd
+bipolar2
+stopdrinking
