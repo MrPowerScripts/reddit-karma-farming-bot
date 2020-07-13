@@ -25,9 +25,10 @@ MAIN_DB_MIN_SIZE = "50mb"
 MAIN_DB_MAX_SIZE = "300mb"
 #MAIN_DB = DB_DIR + "/brain.db"
 SCORE_THRESHOLD = 0  # downvote
+SUBREDDIT_THRESHOLD = 10000
 TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
 MIN_SCORE = 0  # for posts to repost
-SUBMISSION_SEARCH_TEMPLATE = "https://api.pushshift.io/reddit/search/submission/?after={after}&before={before}&sort_type=score&sort=desc&subreddit={subreddit}"
+SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission/?after=\{after}&before=\{before}&sort_type=score&sort=desc&subreddit=\{subreddit}&score=>{SUBREDDIT_THRESHOLD}"
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {
