@@ -44,7 +44,6 @@ addiction
 addictionprevention 
 alcoholism
 stopsmoking
-stopdrinking
 petioles
 stopspeeding
 healthproject
@@ -56,7 +55,6 @@ bodyacceptance
 downsyndrome
 dysmorphicdisorder 
 healthanxiety
-ocd 
 ocpd
 shizoaffective
 tourettes
