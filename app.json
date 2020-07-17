@@ -27,11 +27,11 @@
     },
     "SUBMISSION_PROBABILITY": {
       "description": "Probability of Submission (default is 0.005)",
-      "Value": "enter pls"
+      "Value": "0.005"
     },
     "COMMENT_PROBABILITY": {
       "description": "Probability of Comment (default is 0.002)",
-      "Value": "enter pls"
+      "Value": "0.005"
     }
   }
 }
