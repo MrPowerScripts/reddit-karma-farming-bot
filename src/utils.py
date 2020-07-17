@@ -17,7 +17,8 @@ from os.path import expanduser
 from logger import log
 import string
 
-
+COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
+SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
@@ -32,8 +33,8 @@ SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {
-  "REPLY": 0.002,
-  "SUBMISSION": 0.005,
+  "REPLY": COMMENT_PROBABILITY,
+  "SUBMISSION": SUBMISSION_PROBABILITY,
   "SHADOWCHECK": 0.002,
   "DBCHECK": 0.005,
   "KARMACHECK" : 0.005,

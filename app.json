@@ -24,6 +24,14 @@
     "REDDIT_USERNAME": {
       "description": "Username of your account",
       "Value": "enter pls"
+    },
+    "SUBMISSION_PROBABILITY": {
+      "description": "Probability of Submission (default is 0.005",
+      "Value": "enter pls"
+    },
+    "COMMENT_PROBABILITY": {
+      "description": "Probability of Comment (default is 0.002",
+      "Value": "enter pls"
     }
   }
 }
