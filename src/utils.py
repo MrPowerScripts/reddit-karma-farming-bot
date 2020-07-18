@@ -17,6 +17,16 @@ from os.path import expanduser
 from logger import log
 import string
 
+if os.environ.get('COMMENT_PROBABILITY') != None:
+    COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
+else:
+    COMMENT_PROBABILITY = 0.002
+
+if os.environ.get('SUBMISSION_PROBABILITY') != None:
+    SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
+else:
+    SUBMISSION_PROBABILITY = 0.005
+
 COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
 SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

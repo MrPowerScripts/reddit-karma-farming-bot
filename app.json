@@ -31,7 +31,7 @@
     },
     "COMMENT_PROBABILITY": {
       "description": "Probability of Comment (default is 0.002)",
-      "Value": "0.005"
+      "Value": "0.002"
     }
   }
 }
