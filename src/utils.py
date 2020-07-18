@@ -17,16 +17,6 @@ from os.path import expanduser
 from logger import log
 import string
 
-if os.environ.get('COMMENT_PROBABILITY') != None:
-    COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
-else:
-    COMMENT_PROBABILITY = 0.002
-
-if os.environ.get('SUBMISSION_PROBABILITY') != None:
-    SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
-else:
-    SUBMISSION_PROBABILITY = 0.005
-
 COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
 SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -43,8 +33,8 @@ SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {
-  "REPLY": COMMENT_PROBABILITY,
-  "SUBMISSION": SUBMISSION_PROBABILITY,
+  "REPLY": 0.002,
+  "SUBMISSION": 0.005,
   "SHADOWCHECK": 0.002,
   "DBCHECK": 0.005,
   "KARMACHECK" : 0.005,
@@ -90,6 +80,7 @@ BOT_SCHEDULES = [
   {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
   ]
 
+#HEROKU STUFF
 if os.environ.get('PORT'):
   # This is heroku, use a default schedule
   if not os.environ.get('NOSCHEDULE'):
@@ -99,7 +90,11 @@ if os.environ.get('PORT'):
       {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
       {"days": 12, "schedule": [((9,00),(12,30)), ((18,00),(22,00))]},
       ]
-
+  if os.environ.get('COMMENT_PROBABILITY'):
+    PROBABILITIES["REPLY"] = os.environ.get('COMMENT_PROBABILITY')
+  if os.environ.get('SUBMISSION_PROBABILITY'):
+    PROBABILITIES["SUBMISSION"] = os.environ.get('SUBMISSION_PROBABILITY')
+    
 SCHEDULES = []
 for schedules in BOT_SCHEDULES:
   print(schedules)
