@@ -17,8 +17,6 @@ from os.path import expanduser
 from logger import log
 import string
 
-COMMENT_PROBABILITY = os.environ.get('COMMENT_PROBABILITY')
-SUBMISSION_PROBABILITY = os.environ.get('SUBMISSION_PROBABILITY')
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
