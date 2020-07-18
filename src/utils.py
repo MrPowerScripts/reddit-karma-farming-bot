@@ -17,7 +17,6 @@ from os.path import expanduser
 from logger import log
 import string
 
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
@@ -79,6 +78,7 @@ BOT_SCHEDULES = [
   {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
   ]
 
+#HEROKU STUFF
 if os.environ.get('PORT'):
   # This is heroku, use a default schedule
   if not os.environ.get('NOSCHEDULE'):
@@ -88,7 +88,11 @@ if os.environ.get('PORT'):
       {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
       {"days": 12, "schedule": [((9,00),(12,30)), ((18,00),(22,00))]},
       ]
-
+  if os.environ.get('COMMENT_PROBABILITY'):
+    PROBABILITIES["REPLY"] = os.environ.get('COMMENT_PROBABILITY')
+  if os.environ.get('SUBMISSION_PROBABILITY'):
+    PROBABILITIES["SUBMISSION"] = os.environ.get('SUBMISSION_PROBABILITY')
+    
 SCHEDULES = []
 for schedules in BOT_SCHEDULES:
   print(schedules)
