@@ -57,11 +57,11 @@ Click on the Edit Icon and turn on the worker and save
 
 Click on more and view logs to make sure everything is fine
 
-Thats it, Your Free Hosting is complete!
+That's it, Your Free Hosting is complete!
 
 ## In Depth guide to running on Windows / Linux
 
-**WSL is currently not supported. Please either use heroku or install Ubuntu in Virtualbox and use Liux instructions**
+**WSL is currently not supported. Please either use Heroku or install Ubuntu in Virtualbox and use Linux instructions**
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
@@ -96,7 +96,7 @@ docker run -it \
 
 - When the docker container is running you can start the bot by browsing to https://127.0.0.1:8080 The default username pass is admin/pass. It will give you an SSL warning because the CA is self-signed. Just click whatever button allows you to pass through the warning.
 - The bot will store all of the stuff it learns in a folder within your home path (~) called `reddit-karma-bot`.
-- The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be a info.log in the `reddit-karma-bot` folder.
+- The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be an info.log in the `reddit-karma-bot` folder.
 
 You can provide also a proxy server for the docker container to connect through
 
