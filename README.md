@@ -46,7 +46,7 @@ Most of these options can be configured in [utils.py](src/utils.py)
 First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account [go here to create an app](https://old.reddit.com/prefs/apps/). follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to learn how to create the app and get your app details such as client ID and secret
 
 
-## Run it on Heroku
+## Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
 
 **Important Note: If you restart the Heroku Dyno it will reset the database. Heroku is good if you have absolutely no coding experience at all and just want to see it in action. Otherwise, you're better off installing and running the bot on Ubuntu**
