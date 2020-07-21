@@ -55,9 +55,9 @@ After deploying it and it says deployed click on `Manage App` Button
 
 Now click `Resources` tab
 
-Click on the Edit Icon and turn on the worker and save
+Click on the `Edit` Icon and turn on the worker and save
 
-Click on more and view logs to make sure everything is fine
+Click on `more` and `view logs` to make sure everything is fine
 
 That's it, Your Free Hosting is complete!
 
@@ -66,7 +66,9 @@ That's it, Your Free Hosting is complete!
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
-## Linux (Ubuntu 20 tested)/MacOS (may need to manually install some deps)
+## Linux/MacOS
+Designed for Ubuntu 20. MacOS mmay require manually installing some deps through brew.
+
 
 1. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values
 
