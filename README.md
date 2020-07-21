@@ -67,7 +67,7 @@ Please look here for a detailed guide to running on windows 10 / Linux. The othe
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
 ## Linux/MacOS
-Designed for Ubuntu 20. MacOS mmay require manually installing some deps through brew.
+Designed for Ubuntu 20. MacOS may require manually installing some deps through brew.
 
 
 1. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values
