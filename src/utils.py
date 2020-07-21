@@ -89,9 +89,9 @@ if os.environ.get('PORT'):
       {"days": 12, "schedule": [((9,00),(12,30)), ((18,00),(22,00))]},
       ]
   if os.environ.get('COMMENT_PROBABILITY'):
-    PROBABILITIES["REPLY"] = os.environ.get('COMMENT_PROBABILITY')
+    PROBABILITIES["REPLY"] = float(os.environ.get('COMMENT_PROBABILITY'))
   if os.environ.get('SUBMISSION_PROBABILITY'):
-    PROBABILITIES["SUBMISSION"] = os.environ.get('SUBMISSION_PROBABILITY')
+    PROBABILITIES["SUBMISSION"] = float(os.environ.get('SUBMISSION_PROBABILITY'))
     
 SCHEDULES = []
 for schedules in BOT_SCHEDULES:
