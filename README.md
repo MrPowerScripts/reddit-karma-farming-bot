@@ -41,12 +41,12 @@ Website: https://bit.ly/mrps-site
 
 Most of these options can be configured in [utils.py](src/utils.py)
 
-## Prep 🔈 (!!YOU MUST DO THIS FIRST!!) 🔈
+## Prep 🔈(!!YOU MUST DO THIS FIRST!!)🔈
 
 First, you need to create a Reddit account, and then create an app on reddit.com. After creating a Reddit account [go here to create an app](https://old.reddit.com/prefs/apps/). follow step 1 [of this guide](https://hackernoon.com/build-a-serverless-reddit-bot-in-3-steps-with-node-js-and-stdlib-sourcecode-e5296b78fc64) to learn how to create the app and get your app details such as client ID and secret
 
 
-## #1 Run it on Heroku
+## Run it on Heroku
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
 
 **Important Note: If you restart the Heroku Dyno it will reset the database. Heroku is good if you have absolutely no coding experience at all and just want to see it in action. Otherwise, you're better off installing and running the bot on Ubuntu**
@@ -61,12 +61,12 @@ Click on more and view logs to make sure everything is fine
 
 That's it, Your Free Hosting is complete!
 
-## In Depth guide to running on Windows 10 (WSL2) / Linux
+## Windows 10 (WSL2)
 
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
-## How to run the bot on Linux/MacOS
+## Linux (Ubuntu 20 tested)/MacOS (may need to manually install some deps)
 
 1. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values
 
