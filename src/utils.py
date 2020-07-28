@@ -20,7 +20,7 @@ import string
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
-MAIN_DB_MIN_SIZE = "50mb"
+MAIN_DB_MIN_SIZE = "200mb"
 MAIN_DB_MAX_SIZE = "300mb"
 #MAIN_DB = DB_DIR + "/brain.db"
 SCORE_THRESHOLD = 0  # downvote
