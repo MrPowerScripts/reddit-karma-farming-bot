@@ -47,7 +47,7 @@ First, you need to create a Reddit account, and then create an app on reddit.com
 
 
 ## Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/MrPowerScripts/reddit-karma-farming-bot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/psywarrior1998/reddit-karma-farming-bot)
 
 **Important Note: If you restart the Heroku Dyno it will reset the database. Heroku is good if you have absolutely no coding experience at all and just want to see it in action. Otherwise, you're better off installing and running the bot on Ubuntu**
 
