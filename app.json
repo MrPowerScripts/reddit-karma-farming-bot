@@ -17,10 +17,6 @@
       "description": "Secret of the SCRIPT app",
       "Value": "enter pls"
     },
-    "REDDIT_USER_AGENT": {
-      "description": "Random things",
-      "Value": "enter pls"
-    },
     "REDDIT_USERNAME": {
       "description": "Username of your account",
       "Value": "enter pls"
