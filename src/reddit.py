@@ -70,7 +70,7 @@ else:
     REDDIT_USERNAME=settings.REDDIT_USERNAME
     if os.environ["PORT"]:
       #auto set for heroku
-      REDDIT_USER_AGENT="djsaffjfawuiwefwf"
+      REDDIT_USER_AGENT=settings.REDDIT_USERNAME
       
     api = praw.Reddit(
       client_id=REDDIT_CLIENT_ID,
