@@ -46,7 +46,7 @@ First, you need to create a Reddit account, and then create an app on reddit.com
 
 ## In Depth guide to running on Windows / Linux
 
-**WSL is currently not supported. Please either use heroku or install Ubuntu in Virtualbox and use Liux instructions**
+**WSL is currently not supported. Please install Ubuntu in Virtualbox and use Linux instructions if you want to run it on Windows**
 Please look here for a detailed guide to running on windows 10 / Linux. The other guides in this readme also work, but this is more step-by-step.
 [Click here for the google docs link](https://docs.google.com/document/d/1we5QR5E1nVNz862OG40oic9lnYhULStkWKlprmYlKFo/edit?usp=sharing)
 
