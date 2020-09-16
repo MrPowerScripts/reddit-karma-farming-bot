@@ -51,6 +51,8 @@ if [ ! -d "$DIR/venv" ]; then
       python3-setuptools \
       python3-dev \
       git || { echo 'Installing dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
+  elif [ "${machine}" =  "Mac" ]; then
+    xcode-select --install
   else
     echo "No suitable linux version" | tee -a $DEBUG_FILE
   fi
