@@ -73,7 +73,7 @@ DO_WE_ADD_PARAMS_REUPLOAD = False
 # using (hours, minutes) as a 24h clock
 # "days" is used to define how many days after the first bot run to use that schedule
 # You can add multiple schedules to be run after x days of the bots life
-USE_SLEEP_SCHEDULE = False
+USE_SLEEP_SCHEDULE = True
 BOT_SCHEDULES = [
   {"days": 0, "schedule": [((4,00),(5,00)), ((17,30),(19,30))]},
   {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
