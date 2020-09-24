@@ -79,7 +79,6 @@ docker run -it \
   com.mrpowerscripts/mrps/reddit-karma-bot
 ```
 
-- When the docker container is running you can start the bot by browsing to https://127.0.0.1:8080 The default username pass is admin/pass. It will give you an SSL warning because the CA is self-signed. Just click whatever button allows you to pass through the warning.
 - The bot will store all of the stuff it learns in a folder within your home path (~) called `reddit-karma-bot`.
 - The bot will wait until it has 50MB worth of material learned before it will start commenting. This can take a while. The logs on the browser will tell you everything that is happening. There will also be a info.log in the `reddit-karma-bot` folder.
 
