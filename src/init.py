@@ -30,6 +30,7 @@ from utils import (
   USE_SLEEP_SCHEDULE,
   reddit_bot_action,
   get_current_epoch,
+  COMMENTS_DISABLED,
 )
 
 try:
@@ -64,7 +65,10 @@ def init():
   check_first_run()
   set_db_size()
   while True:
-      if get_db_size() < MAIN_DB_MIN_SIZE:  # learn faster early on
+      if get_db_size() < MAIN_DB_MIN_SIZE and not COMMENTS_DISABLED:  # learn faster early on
+          log.info("""
+          THE BOT IS WORKING. IT WILL TAKE ABOUT 8 HOURS FOR IT TO LEARN AND START COMMENTING.
+          """)
           log.info("fast learning")
           learn()
           try:
@@ -75,7 +79,7 @@ def init():
           countdown(2)
 
       if (
-          get_db_size() > MAIN_DB_MIN_SIZE
+          get_db_size() > MAIN_DB_MIN_SIZE or COMMENTS_DISABLED
       ):  # once we learn enough start submissions and replies
           log.info("database size is big enough")
 

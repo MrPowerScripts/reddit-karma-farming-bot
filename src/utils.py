@@ -39,6 +39,7 @@ PROBABILITIES = {
   "KARMACHECK" : 0.005,
   "LEARN": 0.02,
   "DELETE": 0.02 }
+COMMENTS_DISABLED = True
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
@@ -108,6 +109,9 @@ reddit_bot_action = collections.namedtuple(
     "RedditBotAction", ["name", "action", "probability", "rate_limit_unlock_epoch"]
 )
 
+if COMMENTS_DISABLED:
+  log.info("COMMENTS ARE DISABLED")
+  PROBABILITIES['REPLY'] = 0.0
 
 DISALLOWED_WORDS = []
 
