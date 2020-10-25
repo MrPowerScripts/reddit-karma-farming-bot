@@ -36,6 +36,10 @@ Website: https://bit.ly/mrps-site
 
 ![Karma Charts](https://user-images.githubusercontent.com/1307942/86981035-67840700-c17d-11ea-9e6b-828e1ad2dd9c.png)
 
+## Warnings
+The bot used to have a Heroku option - till they found out and now using the bot on heroku will get your account banned. 
+New accounts will likely get banned with the bot. Let an account sit for a few days before using it. Do not use an account that you don't want to lose.
+
 ## Configuration
 
 Most of these options can be configured in [utils.py](src/utils.py)
