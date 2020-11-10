@@ -26,8 +26,8 @@ MAIN_DB_MAX_SIZE = "300mb"
 #MAIN_DB = DB_DIR + "/brain.db"
 SCORE_THRESHOLD = 0  # downvote
 SUBREDDIT_THRESHOLD = 5000
-TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
-MIN_SCORE = 0  # for posts to repost
+TOP_SUBREDDIT_NUM = 20  # number of subreddits to search for repost-able content
+MIN_SCORE = 100  # for posts to repost
 SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission/?after={{after}}&before={{before}}&sort_type=score&sort=desc&subreddit={{subreddit}}&score=>{SUBREDDIT_THRESHOLD}"
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
@@ -39,7 +39,7 @@ PROBABILITIES = {
   "KARMACHECK" : 0.005,
   "LEARN": 0.02,
   "DELETE": 0.02 }
-COMMENTS_DISABLED = True
+COMMENTS_DISABLED = False
 MAX_CACHE_SIZE = 128
 NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
 SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
