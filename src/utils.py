@@ -28,7 +28,7 @@ SCORE_THRESHOLD = 0  # downvote
 SUBREDDIT_THRESHOLD = 5000
 TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
 MIN_SCORE = 0  # for posts to repost
-SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission/?after={{after}}&before={{before}}&sort_type=score&sort=desc&subreddit={{subreddit}}&score=>{SUBREDDIT_THRESHOLD}"
+SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission/?before={{before}}&sort_type=score&mod_removed=false&user_removed=false&sort=desc&subreddit={{subreddit}}&score=>{SUBREDDIT_THRESHOLD}"
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
 PROBABILITIES = {
