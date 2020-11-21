@@ -1,6 +1,6 @@
 #!/bin/bash
 # v 1.0
-echo "# Reddit API" >> src/settings.py
+echo "# Reddit API" > src/settings.py
 
 echo -e "Please enter your CLIENT_ID: "
 read ID
