@@ -19,3 +19,4 @@ read PW
 echo "REDDIT_PASSWORD=\"$PW"\" >> src/settings.py
 
 echo "REDDIT_USER_AGENT=\"This can be anything you want."\" >> src/settings.py
+echo "done!"
