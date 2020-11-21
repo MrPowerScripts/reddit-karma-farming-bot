@@ -127,7 +127,7 @@ Please look here for a detailed guide to running on windows 10 / Linux. The othe
 
 1.b. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values.
 
-1. run `run_linux.sh`.
+2. run `run_linux.sh`.
 
 ## How to run the bot with docker
 
