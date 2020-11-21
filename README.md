@@ -121,9 +121,11 @@ Please look here for a detailed guide to running on windows 10 / Linux. The othe
 
 ## How to run the bot on Linux/MacOS
 
-1. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values
+1.a. run `sudo sh reddit_credentials.sh` . 
+**OR**
+1.b. change `src/settings.sample.py` to `src/settings.py` and update the values to your account and app values.
 
-1. run `run_linux.sh`
+1. run `run_linux.sh`.
 
 ## How to run the bot with docker
 
