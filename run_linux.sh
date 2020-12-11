@@ -44,6 +44,7 @@ if [ ! -d "$DIR/venv" ]; then
       libc6-dev \
       make \
       pkg-config \
+      libffi-dev \
       wget \
       tmux \
       python3.6 \
