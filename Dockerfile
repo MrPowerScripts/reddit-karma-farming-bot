@@ -11,6 +11,7 @@ RUN apt-get update && \
       golang-go \
       libc6-dev \
       make \
+      libffi-dev \
       pkg-config \
       wget \
       tmux \
