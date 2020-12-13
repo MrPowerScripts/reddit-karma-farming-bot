@@ -8,13 +8,10 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       g++ \
       gcc \
-      golang-go \
       libc6-dev \
       make \
       libffi-dev \
       pkg-config \
-      wget \
-      tmux \
       python3.6 \
       python3-pip \
       python3-setuptools \
