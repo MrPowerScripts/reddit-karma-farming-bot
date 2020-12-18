@@ -1,0 +1,26 @@
+{"config": [{
+  "MAIN_DB_MIN_SIZE": "50mb",
+  "MAIN_DB_MAX_SIZE": "300mb",
+  "SCORE_THRESHOLD": 0,
+  "SUBREDDIT_THRESHOLD": 5000,
+  "TOP_SUBREDDIT_NUM": 10,
+  "MIN_SCORE": 0,
+  "PROBABILITIES": {
+   "REPLY": 0.002,
+   "SUBMISSION": 0.005,
+   "SHADOWCHECK": 0.002,
+   "DBCHECK": 0.005,
+   "KARMACHECK" : 0.005,
+   "LEARN": 0.02,
+   "DELETE": 0.02
+ },
+ "COMMENTS_DISABLED": true,
+ "MAX_CACHE_SIZE": 128,
+ "NUMBER_DAYS_FOR_POST_TO_BE_OLD": 365,
+ "SUBREDDIT_LIST": [],
+ "USE_SLEEP_SCHEDULE": true,
+ "BOT_SCHEDULES": [
+{"days": 0, "schedule": [[[4, 0], [5, 0]], [[17, 30], [19, 30]]]},
+{"days": 4, "schedule": [[[8, 0], [10, 0]], [[20, 30], [23, 20]]]}
+]
+}]}
