@@ -17,32 +17,29 @@ from os.path import expanduser
 from logger import log
 import string
 
+with open('config.json') as config_file:
+    configfile = json.load(config_file)
+    for config in configfile['config']:
+        print('done')
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(BASE_DIR, "brains/brain.db")
-MAIN_DB_MIN_SIZE = "50mb"
-MAIN_DB_MAX_SIZE = "300mb"
+MAIN_DB_MIN_SIZE = config['MAIN_DB_MIN_SIZE']
+MAIN_DB_MAX_SIZE = config['MAIN_DB_MAX_SIZE']
 #MAIN_DB = DB_DIR + "/brain.db"
-SCORE_THRESHOLD = 0  # downvote
-SUBREDDIT_THRESHOLD = 5000
-TOP_SUBREDDIT_NUM = 10  # number of subreddits to search for repost-able content
-MIN_SCORE = 0  # for posts to repost
+SCORE_THRESHOLD = config['SCORE_THRESHOLD']  # downvote
+SUBREDDIT_THRESHOLD = config['SUBREDDIT_THRESHOLD']
+TOP_SUBREDDIT_NUM = config['TOP_SUBREDDIT_NUM']  # number of subreddits to search for repost-able content
+MIN_SCORE = config['MIN_SCORE']  # for posts to repost
 SUBMISSION_SEARCH_TEMPLATE = f"https://api.pushshift.io/reddit/search/submission/?before={{before}}&sort_type=score&mod_removed=false&user_removed=false&sort=desc&subreddit={{subreddit}}&score=>{SUBREDDIT_THRESHOLD}"
 DAY = 86400  # POSIX day (exact value)
 MINUTE = 60
-PROBABILITIES = {
-  "REPLY": 0.002,
-  "SUBMISSION": 0.005,
-  "SHADOWCHECK": 0.002,
-  "DBCHECK": 0.005,
-  "KARMACHECK" : 0.005,
-  "LEARN": 0.02,
-  "DELETE": 0.02 }
-COMMENTS_DISABLED = True
-MAX_CACHE_SIZE = 128
-NUMBER_DAYS_FOR_POST_TO_BE_OLD = 365
-SUBREDDIT_LIST = [] # limit learning and posting to these subreddits. Empty = Random
+PROBABILITIES = config['PROBABILITIES']
+COMMENTS_DISABLED = config['COMMENTS_DISABLED']
+MAX_CACHE_SIZE = config['MAX_CACHE_SIZE']
+NUMBER_DAYS_FOR_POST_TO_BE_OLD = config['NUMBER_DAYS_FOR_POST_TO_BE_OLD']
+SUBREDDIT_LIST = config['SUBREDDIT_LIST'] # limit learning and posting to these subreddits. Empty = Random
 DISALLOWED_WORDS_FILENAME = os.path.join(BASE_DIR, "disallowed_words.txt")
 DISALLOWED_SUBS_FILENAME = os.path.join(BASE_DIR, "disallowed_subs.txt")
 # Logging options
@@ -74,11 +71,8 @@ DO_WE_ADD_PARAMS_REUPLOAD = False
 # using (hours, minutes) as a 24h clock
 # "days" is used to define how many days after the first bot run to use that schedule
 # You can add multiple schedules to be run after x days of the bots life
-USE_SLEEP_SCHEDULE = True
-BOT_SCHEDULES = [
-  {"days": 0, "schedule": [((4,00),(5,00)), ((17,30),(19,30))]},
-  {"days": 4, "schedule": [((8,00),(10,00)), ((20,30),(23,20))]},
-  ]
+USE_SLEEP_SCHEDULE = config['USE_SLEEP_SCHEDULE']
+BOT_SCHEDULES = config['BOT_SCHEDULES']
 
 if os.environ.get('PORT'):
   # This is heroku, use a default schedule
