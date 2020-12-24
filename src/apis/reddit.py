@@ -1,6 +1,5 @@
 from praw import Reddit
 from utils import random_string
-from config import reddit
 
 
 class RedditAPI():

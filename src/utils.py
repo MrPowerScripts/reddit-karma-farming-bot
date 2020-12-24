@@ -1,12 +1,20 @@
-import os, binascii, collections, random, time
-
-BotAction = collections.namedtuple('BotAction', ['action', 'init'])
+import os
+import collections
+import random
+import time
+import yaml
+import string
 
 def random_string(length: int) -> str:
-  return str(binascii.hexlify(os.urandom(length)))
+  letters = string.ascii_lowercase
+  return ''.join(random.choice(letters) for i in range(length))  
 
 def get_current_epoch() -> int:
   return int(time.time())
+
+def load_config(config: str):
+  with open(f"{os.path.join(os.path.dirname(__file__))}/config/{config}.yml") as file:
+    return yaml.load(file, Loader=yaml.FullLoader)
 
 def convert_size_to_bytes(size_str: str):
   """Convert human filesizes to bytes.
@@ -54,9 +62,6 @@ def convert_size_to_bytes(size_str: str):
       elif size_str.endswith('byte'):
           size_str = size_str[0:-4]
   return int(size_str)
-
-# MAIN_DB_MIN_SIZE = convert_size_to_bytes(MAIN_DB_MIN_SIZE)  # in bytes
-# MAIN_DB_MAX_SIZE = convert_size_to_bytes(MAIN_DB_MAX_SIZE)  # in bytes
 
 def check_internet(host="1.1.1.1", port=53, timeout=5):
     """

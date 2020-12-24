@@ -9,3 +9,7 @@ macos.sh
 .vscode
 src/db.json
 node_modules
+.pytest_cache
+.venv
+.env
+__pycache__

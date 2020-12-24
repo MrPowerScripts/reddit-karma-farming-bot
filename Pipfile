@@ -8,6 +8,8 @@ verify_ssl = true
 [packages]
 psaw = "*"
 praw = "*"
+pyyaml = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.9"
