@@ -1,7 +1,7 @@
 from apis import reddit_api
 from config import reddit_config
 from utils import chance
-from bots.reddit.actions.posts import Posts
+from bots.reddit.actions.post_actions import Posts
 from logs.logger import log
 import time, sys
 
