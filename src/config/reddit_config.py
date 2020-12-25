@@ -1,6 +1,7 @@
 import os
 import string
 import datetime
+from logs.logger import log
 
 AUTH = {
   # app creds
@@ -11,13 +12,15 @@ AUTH = {
   "password":"",
 }
 
-for config in AUTH:
-  # print(os.environ)
-  if os.environ.get(f"BOT_{config}".upper()):
+for config in list(AUTH):
+  config_envar = f"BOT_{config}".upper()
+  if os.environ.get(config_envar):
     # print(os.environ.get(f"BOT_{config}".upper()))
-    AUTH[config]=os.environ.get(f"BOT_{config}".upper())
+    AUTH[config]=os.environ.get(config_envar)
+  else:
+    log.info(f"no environment config for: {config_envar}")
 
-print(AUTH)
+log.info(AUTH)
 
 CONFIG = {
   "chances": {
