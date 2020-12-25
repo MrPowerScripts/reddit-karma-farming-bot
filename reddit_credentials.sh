@@ -1,22 +1,21 @@
 #!/bin/bash
 # v 1.0
-echo "# Reddit API" > src/settings.py
+echo "# Reddit API" > .env
 
 echo -e "Please enter your CLIENT_ID: "
-read ID
-echo "REDDIT_CLIENT_ID=\"$ID"\" >> src/settings.py
+read -r ID
+echo "REDDIT_BOT_CLIENT_ID=\"$ID"\" >> .env
 
 echo -e "Please enter your SECRET: "
-read SE
-echo "REDDIT_SECRET=\"$SE"\" >> src/settings.py
+read -r SE
+echo "REDDIT_BOT_SECRET=\"$SE"\" >> .env
 
 echo -e "Please enter your USERNAME: "
-read UN
-echo "REDDIT_USERNAME=\"$UN"\" >> src/settings.py
+read -r UN
+echo "REDDIT_BOT_USERNAME=\"$UN"\" >> .env
 
 echo -e "Please enter your PASSWORD: "
-read PW
-echo "REDDIT_PASSWORD=\"$PW"\" >> src/settings.py
+read -r PW
+echo "REDDIT_BOT_PASSWORD=\"$PW"\" >> .env
 
-echo "REDDIT_USER_AGENT=\"This can be anything you want."\" >> src/settings.py
 echo "done!"

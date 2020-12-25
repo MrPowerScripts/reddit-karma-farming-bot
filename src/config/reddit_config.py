@@ -13,7 +13,7 @@ AUTH = {
 }
 
 for config in list(AUTH):
-  config_envar = f"BOT_{config}".upper()
+  config_envar = f"REDD_BOT_{config}".upper()
   if os.environ.get(config_envar):
     # print(os.environ.get(f"BOT_{config}".upper()))
     AUTH[config]=os.environ.get(config_envar)
