@@ -8,14 +8,22 @@ class Posts(Action):
     self.psapi = pushshift_api
     self.rapi = reddit_api
 
-  def repost(self, roll=None):
-    roll = 1 if roll == None else roll
+  def get_post(subreddit=None):
+    if subreddit:
+      # if no subreddit supplied choose randomly
+      subreddit = self.rapi.subreddit(subreddit)
+    else:
+      subreddit = self.rapi.random_subreddit(nsfw=False)
+    
+    log.info(f"choosing subreddit: {subreddit}")
+    
+    return self.rapi.submission(id=self.psapi.get_posts(subreddit.display_name)[0]['id'])
+
+  def repost(self, roll=1, subreddit=None):
     if chance(roll):
       log.info("running repost")
       # log.info("running _repost")
-      subreddit = self.api.random_subreddit(nsfw=False)
-      log.info(f"reposting to {subreddit.display_name}")
-      post = self.api.submission(id=self.psapi.get_posts(subreddit.display_name)[0]['id'])
+      post = self.get_post()
       log.debug(post)
 
       if post.is_self:
