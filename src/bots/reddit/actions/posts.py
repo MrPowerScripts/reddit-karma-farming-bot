@@ -1,7 +1,7 @@
 from apis import pushshift_api, reddit_api
 from actions import Action
 from utils import chance
-from logging import log
+from logs.logger import log
 
 class Posts(Action):
   def __init__(self):
@@ -31,7 +31,7 @@ class Posts(Action):
       else:
         params = {"title": post.title, "url": post.url}
 
-      self.api.subreddit(subreddit.display_name).submit(**params)
+      self.rapi.subreddit(subreddit.display_name).submit(**params)
     else:
       log.info("not running repost")
       # log.info("not running _repost")
