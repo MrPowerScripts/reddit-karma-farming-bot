@@ -2,7 +2,8 @@ from apis import reddit_api
 from config import reddit_config
 from utils import chance
 from bots.reddit.actions.posts import Posts
-import time
+from logs.logger import log
+import time, sys
 
 class RedditBot():
   def __init__(self, config=reddit_config.CONFIG):
@@ -12,8 +13,13 @@ class RedditBot():
     self.config = config
 
   def _init(self):
-    print(f"running as user: {self.api.user.me()}")
-    self.ready = True
+    user = self.api.user.me()
+    if user == None:
+      log.info("User auth failed, Reddit bot shutting down")
+      sys.exit()
+    else:
+      log.info(f"running as user: {user}")
+      self.ready = True
 
   def run(self):
     if self.ready:
