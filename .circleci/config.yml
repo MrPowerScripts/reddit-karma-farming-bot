@@ -1,17 +1,23 @@
 version: 2.1
-
-executors:
-  default:
-    docker:
-      - image: circleci/python:2.7
+orbs:
+  python: circleci/python@1.0.0
 
 jobs:
   build:
-    executor: default
+    executor:
+      name: python/default
+      tag: 3.9
     steps:
-      - run: echo hello
+      - checkout
+      - python/install-packages:
+          args: pytest
+          pkg-manager: pipenv
+      - run:
+          command: |
+            pipenv run pytest --version
+          name: Test it
 
 workflows:
-  build-test-deploy:
+  main:
     jobs:
       - build
