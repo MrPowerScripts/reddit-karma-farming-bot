@@ -4,6 +4,10 @@ import random
 import time
 import yaml
 import string
+import logs.logger
+from config.common_config import ENVAR_PREFIX
+
+log = logs.logger.log
 
 def random_string(length: int) -> str:
   letters = string.ascii_lowercase
@@ -11,6 +15,17 @@ def random_string(length: int) -> str:
 
 def get_current_epoch() -> int:
   return int(time.time())
+
+def prefer_envar(configs: dict) -> dict:
+  for config in list(configs):
+    config_envar = f"{ENVAR_PREFIX}{config}".upper()
+    if os.environ.get(config_envar):
+      log.info(f"loading {config_envar} from envar. Value: {configs[config]}")
+      configs[config]=os.environ.get(config_envar)
+    else:
+      log.info(f"no environment config for: {config_envar}")
+  
+  return configs
 
 def load_config(config: str):
   with open(f"{os.path.join(os.path.dirname(__file__))}/config/{config}.yml") as file:

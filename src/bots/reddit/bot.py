@@ -24,7 +24,7 @@ class RedditBot():
   def run(self):
     if self.ready:
       # log.info("running reddit bot")
-      self.posts.repost(roll=self.config['chances']['post'])
+      self.posts.repost(roll=self.config['reddit_post_chance'])
     else:
       self._init()
       self.run()

@@ -8,7 +8,7 @@ class Posts(Action):
     self.psapi = pushshift_api
     self.rapi = reddit_api
 
-  def get_post(subreddit=None):
+  def get_post(self, subreddit=None):
     if subreddit:
       # if no subreddit supplied choose randomly
       subreddit = self.rapi.subreddit(subreddit)
@@ -31,7 +31,7 @@ class Posts(Action):
       else:
         params = {"title": post.title, "url": post.url}
 
-      self.rapi.subreddit(subreddit.display_name).submit(**params)
+      self.rapi.subreddit(post.subreddit.display_name).submit(**params)
     else:
       log.info("not running repost")
       # log.info("not running _repost")

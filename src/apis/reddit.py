@@ -4,15 +4,15 @@ from utils import random_string
 
 class RedditAPI():
   def __init__(self,
-              client_id,
-              client_secret,
-              password,
-              username):
+              reddit_client_id,
+              reddit_client_secret,
+              reddit_password,
+              reddit_username):
 
-    self.client_id = client_id
-    self.client_secret = client_secret
-    self.password = password
-    self.username = username
+    self.client_id = reddit_client_id
+    self.client_secret = reddit_client_secret
+    self.password = reddit_password
+    self.username = reddit_username
     self.user_agent = random_string(10)
     self.api = Reddit(
         client_id=self.client_id,

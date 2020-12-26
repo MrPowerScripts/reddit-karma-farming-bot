@@ -1,30 +1,22 @@
 import os
 import string
 import datetime
+from utils import prefer_envar
 from logs.logger import log
 
-AUTH = {
+AUTH = prefer_envar({
   # app creds
-  "client_id":"",
-  "client_secret":"",
+  "reddit_client_id":"",
+  "reddit_client_secret":"",
   # reddit account creds
-  "username":"",
-  "password":"",
-}
-
-for config in list(AUTH):
-  config_envar = f"REDDIT_BOT_{config}".upper()
-  if os.environ.get(config_envar):
-    log.info(f"loading {config_envar} from envar")
-    AUTH[config]=os.environ.get(config_envar)
-  else:
-    log.info(f"no environment config for: {config_envar}")
+  "reddit_username":"",
+  "reddit_password":"",
+})
 
 log.info(AUTH)
 
-CONFIG = {
-  "chances": {
-  "post": 0.05,
-  }
-}
+CONFIG = prefer_envar({
+  "reddit_post_chance": 0.05,
+})
 
+log.info(CONFIG)

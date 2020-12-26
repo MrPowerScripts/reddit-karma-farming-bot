@@ -5,7 +5,7 @@ import requests
 import time
 
 
-class PushShift():
+class PS():
   def __init__(self):
     self.api = PushshiftAPI()
 
