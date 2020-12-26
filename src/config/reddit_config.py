@@ -14,6 +14,7 @@ log.info(AUTH)
 
 CONFIG = prefer_envar({
   "reddit_post_chance": 0.05,
+  "reddit_comment_chance": 0.5,
 })
 
 log.info(CONFIG)

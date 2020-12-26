@@ -2,6 +2,7 @@ from apis import reddit_api
 from config import reddit_config
 from utils import chance
 from bots.reddit.actions.post_actions import Posts
+from bots.reddit.actions.comments.comment_actions import Comments
 from logs.logger import log
 import time, sys
 
@@ -10,6 +11,7 @@ class RedditBot():
     self.api = reddit_api
     self.ready = False
     self.posts = Posts()
+    self.comments = Comments()
     self.config = config
 
   def _init(self):
@@ -25,6 +27,7 @@ class RedditBot():
     if self.ready:
       # log.info("running reddit bot")
       self.posts.repost(roll=self.config['reddit_post_chance'])
+      self.comments.comment(roll=self.config['reddit_comment_chance'])
     else:
       self._init()
       self.run()

@@ -11,6 +11,7 @@ praw = "*"
 pyyaml = "*"
 pytest = "*"
 coverage = "*"
+cobe = "*"
 
 [requires]
 python_version = "3.9"

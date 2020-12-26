@@ -1,9 +1,8 @@
 from apis import pushshift_api, reddit_api
-from actions import Action
 from utils import chance
 from logs.logger import log
 
-class Posts(Action):
+class Posts():
   def __init__(self):
     self.psapi = pushshift_api
     self.rapi = reddit_api

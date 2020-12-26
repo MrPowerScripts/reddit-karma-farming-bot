@@ -4,8 +4,8 @@ import random
 import time
 import yaml
 import string
-from .config.common_config import ENVAR_PREFIX
-from .logs.logger import log
+from config.common_config import ENVAR_PREFIX
+from logs.logger import log
 
 def random_string(length: int) -> str:
   letters = string.ascii_lowercase
@@ -21,7 +21,7 @@ def prefer_envar(configs: dict) -> dict:
       log.info(f"loading {config_envar} from envar. Value: {configs[config]}")
       configs[config]=os.environ.get(config_envar)
     else:
-      log.info(f"no environment config for: {config_envar}")
+      log.debug(f"no environment config for: {config_envar}")
   
   return configs
 
