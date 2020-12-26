@@ -19,7 +19,7 @@ jobs:
           path: ./htmlcov
           destination: htmlcov
       - store_test_results:
-          path: ./junit/junit.xml
+          path: ./junit
 
 workflows:
   main:
