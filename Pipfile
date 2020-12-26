@@ -10,6 +10,7 @@ psaw = "*"
 praw = "*"
 pyyaml = "*"
 pytest = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.9"

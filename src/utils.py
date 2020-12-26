@@ -4,10 +4,8 @@ import random
 import time
 import yaml
 import string
-import logs.logger
-from config.common_config import ENVAR_PREFIX
-
-log = logs.logger.log
+from .config.common_config import ENVAR_PREFIX
+from .logs.logger import log
 
 def random_string(length: int) -> str:
   letters = string.ascii_lowercase
