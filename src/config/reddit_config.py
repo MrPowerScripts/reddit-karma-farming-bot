@@ -13,8 +13,13 @@ AUTH = prefer_envar({
 log.info(AUTH)
 
 CONFIG = prefer_envar({
+  # the chance the bot will repost a post
   "reddit_post_chance": 0.05,
+  # the chance the bot will make a comment
   "reddit_comment_chance": 0.5,
+  # the chance the bot will reply to a comment
+  # otherwise it will reply to a post
+  "reddit_reply_to_comment": 0.35,
 })
 
 log.info(CONFIG)

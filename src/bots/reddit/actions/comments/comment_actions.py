@@ -1,10 +1,15 @@
 from .sources.cobe import Cobe
 from logs.logger import log
 from utils import chance
+from apis import reddit_api
+from config import reddit_config
+import random
 
 class Comments():
   def __init__(self, source='cobe'):
     self.ready = False
+    self.config = reddit_config.CONFIG
+    self.rapi = reddit_api
     self.source = source
     self.cobe = Cobe()
 
@@ -23,14 +28,32 @@ class Comments():
       self.init()
 
     if chance(roll):
-      log.info("would have commented if this was finished")
+      log.info("going to make a comment")
+      
+      # pick a subreddit to comment on
+      subreddit = self.rapi.random_subreddit(nsfw=False)
+      # get a random hot post from the subreddit
+      post = random.choice(list(subreddit.hot()))
+      # replace the "MoreReplies" with all of the submission replies
+      post.comments.replace_more(limit=0)
+      # pick a comment, any comment
 
-  def get_comment(self, respond_to=""):
-    if self.ready:
-      # get the comment 
-      pass
-    else:
-      #not ready to get a comment
-      pass
+      if self.source == 'cobe':
+        reply_getter = self.cobe.get_reply
+
+      # choose if we're replying to the post or to a comment
+      if chance(self.config.get('reddit_reply_to_comment')):
+        # reply to the post with a response based on the post title
+        log.info('replying directly to post')
+        post.reply(reply_getter(post.title))
+      else:
+        # get a random comment from the post
+        comment = random.choice(post.comments.list())
+        # reply to the comment
+        log.info('replying to comment')
+        comment.reply(reply_getter(comment.body))
+
+        
+
 
 
