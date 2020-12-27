@@ -23,7 +23,7 @@ if [ ! -d "$DIR/.venv" ]; then
   if [ "${machine}" =  "Linux" ]; then
     echo "this is linux - install linux deps"
     apt-get update || { echo 'apt-get failed failed' | tee -a $DEBUG_FILE ; exit 1; }
-    
+
     apt-get install -y --no-install-recommends \
       g++ \
       gcc \
@@ -49,8 +49,4 @@ if [ ! -d "$DIR/.venv" ]; then
 fi
 
 echo "trying to run the bot" | tee -a $DEBUG_FILE
-pipenv run python3 ./src/init.py "$@"
-
-
-
-
+pipenv run python3 ./src/menu.py "$@"

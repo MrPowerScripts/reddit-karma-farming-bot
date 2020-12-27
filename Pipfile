@@ -12,6 +12,7 @@ pyyaml = "*"
 pytest = "*"
 coverage = "*"
 cobe = "*"
+urwide = "*"
 
 [requires]
 python_version = "3.9"
