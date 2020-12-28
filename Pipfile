@@ -13,6 +13,7 @@ pytest = "*"
 coverage = "*"
 cobe = "*"
 urwide = "*"
+pyfiglet = "*"
 
 [requires]
 python_version = "3.9"
