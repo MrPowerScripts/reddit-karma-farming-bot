@@ -1,6 +1,12 @@
 from utils import prefer_envar
 from logs.logger import log
+import sys
+import json
 
+file = open("config.json", "r")
+AUTH = prefer_envar(json.loads(file.read()))
+
+"""
 AUTH = prefer_envar({
   # app creds
   "reddit_client_id":"",
@@ -9,7 +15,7 @@ AUTH = prefer_envar({
   "reddit_username":"",
   "reddit_password":"",
 })
-
+"""
 log.info(AUTH)
 
 CONFIG = prefer_envar({
