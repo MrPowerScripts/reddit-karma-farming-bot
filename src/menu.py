@@ -1,6 +1,6 @@
 import urwide
 import pyfiglet
-import configmenu
+from config import config_menu
 import bot
 
 # This is the description of the actual interface
@@ -13,11 +13,12 @@ Txt Status: stopped                     args:#status
 
 GFl
 Btn [Start]                       #start &press=started
-Btn [Log]                         &press=log
 Btn [Config]                         &press=config
 Btn [Exit]                          &press=exit
 End
 """
+
+# add when working: Btn [Log]                         &press=log
 
 # This is the handling code, providing the logic
 class Handler(urwide.Handler):
@@ -28,7 +29,7 @@ class Handler(urwide.Handler):
         else:
             self.ui.widgets.status.set_text("Status: stopped")
     def onConfig( self, button ):
-        configmenu.run()
+        config_menu.run()
     def onExit( self, button ):
         self.ui.end("Exit")
 
@@ -39,5 +40,6 @@ ui.widgets.header.set_text(pyfiglet.figlet_format("Reddit Karma Farming Bot", fo
 
 def run():
     ui.main()
+
 if __name__ == "__main__":
     run()
