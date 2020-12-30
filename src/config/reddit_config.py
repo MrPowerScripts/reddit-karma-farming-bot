@@ -26,12 +26,15 @@ CONFIG = prefer_envar({
   "reddit_comment_chance": 0.005,
   # the chance the bot will reply to a comment
   # otherwise it will reply to a post
-  "reddit_reply_to_comment": 0.35,
+  "reddit_reply_to_comment": 0.002,
   # chance the bot will remove poor performing
   # posts and comments
-  "reddit_remove_low_scores": 0.02,
+  "reddit_remove_low_scores": 0.002,
   # posts/comments that get downvoted to this score will be deleted
-  "reddit_low_score_threshold": 0 
+  "reddit_low_score_threshold": 0,
+  # chance to check if the bot is shadowbanned, 
+  # and shut down the script automatically
+  "reddit_shadowban_check": 0.002,
 })
 
 log.info(CONFIG)

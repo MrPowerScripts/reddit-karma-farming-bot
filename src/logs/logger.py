@@ -3,20 +3,16 @@
 
 import logging
 import os
-from logging.handlers import RotatingFileHandler
+from logs.log_utils import NewLineFileHandler, NewLineStreamHandler
 
-log_formatter = logging.Formatter(
-    "%(asctime)s %(levelname)s %(funcName)s(%(lineno)d) %(message)s"
-)
 
+log_formatter = logging.Formatter("%(asctime)s %(levelname)s %(funcName)s(%(lineno)d) %(message)s")
 logFile = "info.log"
 
-file_handler = RotatingFileHandler(
-    logFile, mode="a", maxBytes=15 * 1024 * 1024, backupCount=2, encoding=None, delay=0
-)
+file_handler = NewLineFileHandler(logFile, mode="a", maxBytes=15 * 1024 * 1024, backupCount=2, encoding=None, delay=0)
 file_handler.setFormatter(log_formatter)
 
-stream_handler = logging.StreamHandler()
+stream_handler =  NewLineStreamHandler()
 stream_handler.setFormatter(log_formatter)
 
 log = logging.getLogger(__name__)

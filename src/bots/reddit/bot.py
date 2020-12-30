@@ -6,17 +6,27 @@ from bots.reddit.actions.comments.comment_actions import Comments
 from bots.reddit.actions.cleanup_actions import Cleanup
 from logs.logger import log
 import time, sys
+from collections import namedtuple
+
+BotAction = namedtuple("BotAction", 'name call')
 
 class RedditBot():
   def __init__(self, config=reddit_config.CONFIG):
     self.api = reddit_api
     self.ready = False
+    self.config = config
     self.posts = Posts()
     self.comments = Comments()
     self.cleanup = Cleanup()
-    self.config = config
+    self.actions = [
+      BotAction('reddit_post_chance', self.posts.repost),
+      BotAction('reddit_comment_chance', self.comments.comment),
+      BotAction('reddit_shadowban_check', self.cleanup.shadow_check),
+      BotAction('reddit_remove_low_scores', self.cleanup.remove_low_scores),
+    ]
 
   def _init(self):
+    # check if account is set
     user = self.api.user.me()
     if user == None:
       log.info("User auth failed, Reddit bot shutting down")
@@ -24,13 +34,19 @@ class RedditBot():
     else:
       log.info(f"running as user: {user}")
       self.ready = True
+    # check if account is shadowbanned
+    self.cleanup.shadow_check()
+    log.info("The bot is now running. It has a chance to perform an action every second. Be patient")
+
+  def tick(self):
+    for action in self.actions:
+      if chance(self.config[action.name]):
+        log.info(f"running action: {action.name}")
+        action.call()
 
   def run(self):
     if self.ready:
-      # log.info("running reddit bot")
-      self.posts.repost(roll=self.config['reddit_post_chance'])
-      self.comments.comment(roll=self.config['reddit_comment_chance'])
-      self.cleanup.remove_low_scores(roll=self.config['reddit_remove_low_scores'])
+      self.tick()
     else:
       self._init()
       self.run()
