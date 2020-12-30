@@ -1,4 +1,6 @@
 import pyfiglet
+import sys
+from logs.logger import log
 from config import config_menu
 from libs import urwide
 import bot
@@ -33,6 +35,8 @@ class Handler(urwide.Handler):
 
     def onExit( self, button ):
         self.ui.end("Exit")
+        log.info("Exiting Karma Bot Menu: Bye! :D")
+        sys.exit()
 
 # We create a console application
 ui = urwide.Console()

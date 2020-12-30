@@ -53,7 +53,6 @@ class Handler(urwide.Handler):
       config_file.write(json.dumps(config_data, indent=4, sort_keys=True))
       config_file.close()
     
-    self.ui.end()
     menu.run()
 
 
