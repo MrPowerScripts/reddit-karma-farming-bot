@@ -1,6 +1,6 @@
-import urwide
 import pyfiglet
 from config import config_menu
+from libs import urwide
 import bot
 
 # This is the description of the actual interface
@@ -30,13 +30,16 @@ class Handler(urwide.Handler):
             self.ui.widgets.status.set_text("Status: stopped")
     def onConfig( self, button ):
         config_menu.run()
+
     def onExit( self, button ):
         self.ui.end("Exit")
 
 # We create a console application
 ui = urwide.Console()
 ui.create(CONSOLE_STYLE, CONSOLE_UI, Handler())
-ui.widgets.header.set_text(pyfiglet.figlet_format("Reddit Karma Farming Bot", font="slant"))
+ui.widgets.header.set_text("Reddit Karma Farming Bot")
+
+# bring this back later pyfiglet.figlet_format("Reddit Karma Farming Bot", font="slant")
 
 def run():
     ui.main()

@@ -49,4 +49,12 @@ if [ ! -d "$DIR/.venv" ]; then
 fi
 
 echo "trying to run the bot" | tee -a $DEBUG_FILE
-pipenv run python3 ./src/menu.py "$@"
+
+# start bot directly if nomenu passed in to script
+if [[ $1 == *"nomenu"* ]]; then
+  echo "running without menu" | tee -a $DEBUG_FILE
+  pipenv run python3 ./src/init.py "$@"
+else
+  echo "running with menu" | tee -a $DEBUG_FILE
+  pipenv run python3 ./src/menu.py "$@"
+fi

@@ -1,7 +1,7 @@
 from utils import prefer_envar
 from pathlib import Path
 from logs.logger import log
-from common_config import SRC_ROOT
+from .common_config import SRC_ROOT
 import os
 
 BASE_DIR = os.path.join(SRC_ROOT, 'bots/reddit/actions/comments')
