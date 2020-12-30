@@ -6,10 +6,11 @@ import yaml
 import string
 from config.common_config import ENVAR_PREFIX
 from logs.logger import log
+import urllib.request
 
 def random_string(length: int) -> str:
   letters = string.ascii_lowercase
-  return ''.join(random.choice(letters) for i in range(length))  
+  return ''.join(random.choice(letters) for i in range(length))
 
 def get_current_epoch() -> int:
   return int(time.time())
@@ -22,74 +23,21 @@ def prefer_envar(configs: dict) -> dict:
       configs[config]=os.environ.get(config_envar)
     else:
       log.debug(f"no environment config for: {config_envar}")
-  
+
   return configs
 
 def load_config(config: str):
   with open(f"{os.path.join(os.path.dirname(__file__))}/config/{config}.yml") as file:
     return yaml.load(file, Loader=yaml.FullLoader)
 
-def convert_size_to_bytes(size_str: str):
-  """Convert human filesizes to bytes.
-  https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python
-  Special cases:
-    - singular units, e.g., "1 byte"
-    - byte vs b
-    - yottabytes, zetabytes, etc.
-    - with & without spaces between & around units.
-    - floats ("5.2 mb")
-
-  To reverse this, see hurry.filesize or the Django filesizeformat template
-  filter.
-
-  :param size_str: A human-readable string representing a file size, e.g.,
-  "22 megabytes".
-  :return: The number of bytes represented by the string.
-  """
-  multipliers = {
-      'kilobyte':  1024,
-      'megabyte':  1024 ** 2,
-      'gigabyte':  1024 ** 3,
-      'terabyte':  1024 ** 4,
-      'petabyte':  1024 ** 5,
-      'exabyte':   1024 ** 6,
-      'zetabyte':  1024 ** 7,
-      'yottabyte': 1024 ** 8,
-      'kb': 1024,
-      'mb': 1024**2,
-      'gb': 1024**3,
-      'tb': 1024**4,
-      'pb': 1024**5,
-      'eb': 1024**6,
-      'zb': 1024**7,
-      'yb': 1024**8,
-  }
-
-  for suffix in multipliers:
-      size_str = size_str.lower().strip().strip('s')
-      if size_str.lower().endswith(suffix):
-          return int(float(size_str[0:-len(suffix)]) * multipliers[suffix])
-  else:
-      if size_str.endswith('b'):
-          size_str = size_str[0:-1]
-      elif size_str.endswith('byte'):
-          size_str = size_str[0:-4]
-  return int(size_str)
-
-def check_internet(host="1.1.1.1", port=53, timeout=5):
-    """
-    Host: 1.1.1.1 (cloudflare DNS)
-    OpenPort: 53/tcp
-    Service: domain (DNS/TCP)
-    """
+# Checks if the machine has internet and also can connect to reddit
+def check_internet(host="https://reddit.com", timeout=5):
     try:
-        socket.setdefaulttimeout(timeout)
-        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect((host, port))
+        urllib.request.urlopen(host, None, timeout)
         return True
     except Exception as ex:
         log.error(ex.message)
         return False
-
 
 def get_seconds_to_wait(ex_msg=None):
     try:
@@ -103,19 +51,13 @@ def get_seconds_to_wait(ex_msg=None):
     except:
         return 60
 
-
 def get_public_ip():
     try:
-        for service in ["https://api.ipify.org", "http://ip.42.pl/raw"]:
-            external_ip = get(service).text
-            if external_ip:
-                return external_ip
+        external_ip = get("https://api.ipify.org").text
+        if external_ip:
+            return external_ip
     except Exception as e:
-        # try one more before giving up
-        try:
-            return get("http://httpbin.org/ip").json()["origin"].split(",")[0]
-        except:
-            log.error("could not check external ip")
+        log.error("could not check external ip")
 
 
 def bytesto(bytes, to, bsize=1024):
@@ -180,19 +122,9 @@ def tobytes(size_str):
         'kilobyte':  1024,
         'megabyte':  1024 ** 2,
         'gigabyte':  1024 ** 3,
-        'terabyte':  1024 ** 4,
-        'petabyte':  1024 ** 5,
-        'exabyte':   1024 ** 6,
-        'zetabyte':  1024 ** 7,
-        'yottabyte': 1024 ** 8,
         'kb': 1024,
         'mb': 1024**2,
         'gb': 1024**3,
-        'tb': 1024**4,
-        'pb': 1024**5,
-        'eb': 1024**6,
-        'zb': 1024**7,
-        'yb': 1024**8,
     }
 
     for suffix in multipliers:
