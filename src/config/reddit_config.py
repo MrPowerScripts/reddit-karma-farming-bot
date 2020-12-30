@@ -21,12 +21,17 @@ log.info(AUTH)
 
 CONFIG = prefer_envar({
   # the chance the bot will repost a post
-  "reddit_post_chance": 0.05,
+  "reddit_post_chance": 0.005,
   # the chance the bot will make a comment
-  "reddit_comment_chance": 0.5,
+  "reddit_comment_chance": 0.005,
   # the chance the bot will reply to a comment
   # otherwise it will reply to a post
   "reddit_reply_to_comment": 0.35,
+  # chance the bot will remove poor performing
+  # posts and comments
+  "reddit_remove_low_scores": 0.02,
+  # posts/comments that get downvoted to this score will be deleted
+  "reddit_low_score_threshold": 0 
 })
 
 log.info(CONFIG)

@@ -3,6 +3,7 @@ from config import reddit_config
 from utils import chance
 from bots.reddit.actions.post_actions import Posts
 from bots.reddit.actions.comments.comment_actions import Comments
+from bots.reddit.actions.cleanup_actions import Cleanup
 from logs.logger import log
 import time, sys
 
@@ -12,6 +13,7 @@ class RedditBot():
     self.ready = False
     self.posts = Posts()
     self.comments = Comments()
+    self.cleanup = Cleanup()
     self.config = config
 
   def _init(self):
@@ -28,6 +30,7 @@ class RedditBot():
       # log.info("running reddit bot")
       self.posts.repost(roll=self.config['reddit_post_chance'])
       self.comments.comment(roll=self.config['reddit_comment_chance'])
+      self.cleanup.remove_low_scores(roll=self.config['reddit_remove_low_scores'])
     else:
       self._init()
       self.run()
