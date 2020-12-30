@@ -2,20 +2,21 @@ from utils import prefer_envar
 from logs.logger import log
 import sys
 import json
+import os
 
-file = open("config.json", "r")
-AUTH = prefer_envar(json.loads(file.read()))
+if os.path.isfile('config.json'):
+  file = open("config.json", "r")
+  AUTH = prefer_envar(json.loads(file.read()))
+else:
+  AUTH = prefer_envar({
+    # app creds
+    "reddit_client_id":"",
+    "reddit_client_secret":"",
+    # reddit account creds
+    "reddit_username":"",
+    "reddit_password":"",
+  })
 
-"""
-AUTH = prefer_envar({
-  # app creds
-  "reddit_client_id":"",
-  "reddit_client_secret":"",
-  # reddit account creds
-  "reddit_username":"",
-  "reddit_password":"",
-})
-"""
 log.info(AUTH)
 
 CONFIG = prefer_envar({

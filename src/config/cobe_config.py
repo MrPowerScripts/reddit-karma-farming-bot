@@ -1,12 +1,10 @@
 from utils import prefer_envar
 from pathlib import Path
 from logs.logger import log
+from .common_config import SRC_ROOT
 import os
 
-CONFIG_PATH = Path(os.path.abspath(__file__))
-log.info(f"cobe config path: {CONFIG_PATH}")
-BASE_DIR = os.path.join(CONFIG_PATH.parents[1].absolute(), 
-  'bots/reddit/actions/comments')
+BASE_DIR = os.path.join(SRC_ROOT, 'bots/reddit/actions/comments')
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(DB_DIR, "brain.db")
 

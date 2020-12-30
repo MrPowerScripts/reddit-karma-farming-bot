@@ -17,3 +17,4 @@ __pycache__
 htmlcov
 junit
 brainss
+config.json
