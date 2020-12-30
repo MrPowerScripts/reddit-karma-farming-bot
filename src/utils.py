@@ -39,17 +39,6 @@ def check_internet(host="https://reddit.com", timeout=5):
         log.error(ex.message)
         return False
 
-def get_seconds_to_wait(ex_msg=None):
-    try:
-        msg = ex_msg.lower()
-        search = re.search(r"\b(minutes)\b", msg)
-        # I found out that if the message said 3 minute
-        # it could be 3 minute 20 seconds, so to be safe and avoid another exception,
-        # we wait a full extra minute
-        minutes = int(msg[search.start() - 2]) + 1
-        return minutes * 60
-    except:
-        return 60
 
 def get_public_ip():
     try:
