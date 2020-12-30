@@ -21,7 +21,7 @@ class Cleanup():
             try:
               i.delete()
             except Exception as e:
-              log.info("unable to delete comment(id={i.id}), skip...\n{e.message}")
+              log.info(f"unable to delete comment(id={i.id}), skip...\n{e.message}")
             comment_count += 1
           else:
             log.info(f"deleting post(id={i.id}, score={i.score}, subreddit={i.subreddit_name_prefixed}|{i.subreddit_id})")
