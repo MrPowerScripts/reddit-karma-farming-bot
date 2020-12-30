@@ -1,4 +1,9 @@
+import sys
 import bot
 
 if __name__ == "__main__":
-  bot.run()
+  try:
+    bot.run()
+  except KeyboardInterrupt:
+    # quit
+    sys.exit()
