@@ -3,6 +3,7 @@ from config.cobe_config import CONFIG
 from apis import pushshift_api, reddit_api
 from logs.logger import log
 from utils import bytesto, tobytes
+from ...utils import AVOID_WORDS, get_subreddit
 import os, sys
 
 class Cobe():
@@ -28,7 +29,6 @@ class Cobe():
     if os.path.isfile(main_db):
       # set the initial size
       self.size = os.path.getsize(main_db)
-      log.info(f"cobe db size is: {str(bytesto(self.size, 'm'))}")
     else:
       log.info(f"cobe db failed to initialize. exiting")
       sys.exit()
@@ -40,7 +40,7 @@ class Cobe():
       log.info(f"cobe db size is: {str(bytesto(self.size, 'm'))}, need {self.config.get('cobe_min_db_size')} - learning...")
       
       # just learn from random subreddits for now
-      subreddit = self.rapi.random_subreddit(nsfw=False)
+      subreddit = get_subreddit(getsubclass=True)
       
       log.info(f"learning from /r/{subreddit}")
       
@@ -55,7 +55,10 @@ class Cobe():
         # bot responses are better when it learns from short comments
         if len(comment.body) < 240:
           log.debug(f"learning comment: {comment.body.encode('utf8')}")
-          self.brain.learn(comment.body.encode("utf8")) 
+          
+          # only learn comments that don't contain an avoid word
+          if not any(word in comment.body for word in AVOID_WORDS):
+            self.brain.learn(comment.body.encode("utf8")) 
 
       # update the class size variable so the while loop
       # knows when to break

@@ -8,6 +8,9 @@ BASE_DIR = os.path.join(SRC_ROOT, 'bots/reddit/actions/comments')
 DB_DIR = os.path.join(BASE_DIR, "brains")
 MAIN_DB = os.path.join(DB_DIR, "brain.db")
 
+if not os.path.exists(DB_DIR):
+  os.makedirs(DB_DIR, exist_ok=True)
+
 CONFIG = prefer_envar({
   # cobe config
   "cobe_base_dir": BASE_DIR,

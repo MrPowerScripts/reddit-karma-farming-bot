@@ -4,7 +4,7 @@ from collections import namedtuple
 from utils import chance
 from apis import reddit_api
 from config import reddit_config
-from ..utils import get_subreddit
+from ..utils import get_subreddit, AVOID_WORDS
 import random
 
 Source = namedtuple('Source', ['name', 'api'])
@@ -36,6 +36,7 @@ class Comments():
     if chance(roll):
       log.info("going to make a comment")
 
+      # keep searching posts until we find one with comments
       post_with_comments = False
       while not post_with_comments:
         # pick a subreddit to comment on
@@ -60,7 +61,6 @@ class Comments():
         log.info('replying to comment')
         comment.reply(self.comments.get_reply(comment.body))
 
-        
 
 
 

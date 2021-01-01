@@ -8,6 +8,10 @@ with open(f"{CONFIG_ROOT}/reddit/reddit_avoid_subs.txt", "r") as subfile:
   AVOID_SUBS = subfile.read().splitlines()
   subfile.close()
 
+with open(f"{CONFIG_ROOT}/reddit/reddit_avoid_words.txt", "r") as wordfile:
+  AVOID_WORDS = wordfile.read().splitlines()
+  wordfile.close()
+
 log.debug(f"avoiding subs: {AVOID_SUBS}")
 
 def get_subreddit(nsfw=False, getsubclass=False):
