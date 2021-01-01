@@ -21,6 +21,7 @@ class Cobe():
       log.info(f"cobe not initialized, run init")
 
   def init(self):
+    log.info("using cobe to generate comments")
     main_db = self.config.get("cobe_main_db")
     
     # make sure db was initialized correctly
