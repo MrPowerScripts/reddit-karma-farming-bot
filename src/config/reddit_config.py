@@ -1,5 +1,6 @@
 from utils import prefer_envar
 from logs.logger import log
+from config.reddit.reddit_sub_lists import REDDIT_APPROVED_SUBS
 import sys
 import json
 import os
@@ -35,6 +36,8 @@ CONFIG = prefer_envar({
   # chance to check if the bot is shadowbanned, 
   # and shut down the script automatically
   "reddit_shadowban_check": 0.002,
+  # list of subreddits for the bot to use
+  "reddit_sub_list": REDDIT_APPROVED_SUBS,
 })
 
 log.info(CONFIG)

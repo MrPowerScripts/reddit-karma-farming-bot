@@ -1,5 +1,6 @@
 from apis import pushshift_api, reddit_api
 from utils import chance
+from .utils import get_subreddit
 from logs.logger import log
 
 class Posts():
@@ -12,7 +13,7 @@ class Posts():
       # if no subreddit supplied choose randomly
       subreddit = self.rapi.subreddit(subreddit)
     else:
-      subreddit = self.rapi.random_subreddit(nsfw=False)
+      subreddit = get_subreddit(getsubclass=True)
     
     log.info(f"choosing subreddit: {subreddit}")
     

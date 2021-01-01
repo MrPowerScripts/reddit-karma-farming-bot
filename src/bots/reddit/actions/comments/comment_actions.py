@@ -3,6 +3,7 @@ from logs.logger import log
 from utils import chance
 from apis import reddit_api
 from config import reddit_config
+from ..utils import get_subreddit
 import random
 
 class Comments():
@@ -31,7 +32,7 @@ class Comments():
       log.info("going to make a comment")
       
       # pick a subreddit to comment on
-      subreddit = self.rapi.random_subreddit(nsfw=False)
+      subreddit = get_subreddit(getsubclass=True)
       # get a random hot post from the subreddit
       post = random.choice(list(subreddit.hot()))
       # replace the "MoreReplies" with all of the submission replies
