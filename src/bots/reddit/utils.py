@@ -60,17 +60,21 @@ def should_we_sleep():
     else:
       log.info("it's sleepy time.. zzzzz :snore: zzzz")
       whats_left = []
-      # log.info(TIME_LEFT)
+
       for time_stamp in TIME_LEFT:
         next_start = datetime.datetime.combine(datetime.date.today(), time_stamp)
         ts = int(next_start.timestamp())
         # collect all the seconds left for each time schedule to start
         whats_left.append(ts - int(time.time()))
       
-      #get the shortest duration of time left before starting
+      #remove negative values and
+      # get the shortest duration of time left before starting
+      whats_left = [item for item in whats_left if item >= 0]
       time_left = min(whats_left)
+
       log.info(f"waking up in: {datetime.timedelta(seconds=time_left)} at {next_start}")
-      sleep_time = time_left / 3
+      sleep_time = int(time_left / 3)
+
       # have the bot sleep for a short while instead of tons of messages every second
       time.sleep(sleep_time)
       return True
