@@ -38,6 +38,16 @@ CONFIG = prefer_envar({
   "reddit_shadowban_check": 0.002,
   # list of subreddits for the bot to use
   "reddit_sub_list": REDDIT_APPROVED_SUBS,
+  # bot schedules. all times are UTC
+  # add the schedule number to the array
+  # and the bot will run within that time range
+  # leave the array empty for no schedule: []
+  # 1 - 7am-10am ((7,00),(10,00))
+  # 2 - 10am-2pm ((10,00),(14,00))
+  # 3 - 2pm-6pm ((14,00),(18,00))
+  # 4 - 6pm-10pm ((18,00),(22,00))
+  # 5 - 10pm-2am ((22,00),(2,00))
+  "reddit_sleep_schedule": [2, 4]
 })
 
 log.info(CONFIG)

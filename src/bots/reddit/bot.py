@@ -7,6 +7,7 @@ from bots.reddit.actions.cleanup_actions import Cleanup
 from logs.logger import log
 import time, sys
 from collections import namedtuple
+from .utils import should_we_sleep
 
 BotAction = namedtuple("BotAction", 'name call')
 
@@ -39,10 +40,11 @@ class RedditBot():
     log.info("The bot is now running. It has a chance to perform an action every second. Be patient")
 
   def tick(self):
-    for action in self.actions:
-      if chance(self.config[action.name]):
-        log.info(f"running action: {action.name}")
-        action.call()
+    if not should_we_sleep():
+      for action in self.actions:
+        if chance(self.config[action.name]):
+          log.info(f"running action: {action.name}")
+          action.call()
 
   def run(self):
     if self.ready:
