@@ -43,14 +43,26 @@ def should_we_sleep():
       whats_left = []
       TIME_LEFT = [schedule[0] for schedule in BOT_SCHEDULE]
       for time_stamp in TIME_LEFT:
+        # log.info(time_stamp)
         next_start = datetime.datetime.combine(datetime.date.today(), time_stamp)
+        # log.info(f"next start: {next_start}")
         ts = int(next_start.timestamp())
+        # if this goes negative then the next start is probably tomorrow
+        if ts < int(time.time()):
+          next_start = datetime.datetime.combine((datetime.date.today() + datetime.timedelta(days=1)), time_stamp)
+          ts = next_start.timestamp()
+          
         # collect all the seconds left for each time schedule to start
+        # log.info(f"ts: {ts}")
+        # log.info(f"time: {int(time.time())}")
         whats_left.append(ts - int(time.time()))
       
       #remove negative values and
       # get the shortest duration of time left before starting
+      log.info(whats_left)
       whats_left = [item for item in whats_left if item >= 0]
+
+      log.info(whats_left)
       time_left = int(min(whats_left))
 
       if time_left > 600:
