@@ -40,7 +40,7 @@ Website: https://bit.ly/mrps-site
 
 ### How to configure the bot
 
-The bot has many configuration options, and some are enabled/disabled by default. View all of the config options in the [utils.py](src/config) folder.
+The bot has many configuration options, and some are enabled/disabled by default. View all of the config options in the [src/config](src/config) folder.
 
 ### Environment Variables
 

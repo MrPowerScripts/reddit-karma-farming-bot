@@ -51,9 +51,11 @@ def should_we_sleep():
       #remove negative values and
       # get the shortest duration of time left before starting
       whats_left = [item for item in whats_left if item >= 0]
-      time_left = min(whats_left)
+      time_left = int(min(whats_left))
 
-      log.info(f"waking up in: {datetime.timedelta(seconds=time_left)} at {next_start}")
+      if time_left > 600:
+        log.info(f"waking up in: {datetime.timedelta(seconds=time_left)} at {next_start}")
+      
       sleep_time = int(time_left / 3)
 
       # have the bot sleep for a short while instead of tons of messages every second
