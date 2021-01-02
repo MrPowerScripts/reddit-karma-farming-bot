@@ -37,7 +37,7 @@ class Cobe():
     # loop through learning comments until we reach the min db size
     while self.size <= tobytes(self.config.get("cobe_min_db_size")):
 
-      log.info(f"cobe db size is: {str(bytesto(self.size, 'm'))}, need {self.config.get('cobe_min_db_size')} - learning...")
+      log.info(f"cobe db size is: {str(bytesto(self.size, 'm'))}mb, need {self.config.get('cobe_min_db_size')} - learning...")
       
       # just learn from random subreddits for now
       subreddit = get_subreddit(getsubclass=True)
