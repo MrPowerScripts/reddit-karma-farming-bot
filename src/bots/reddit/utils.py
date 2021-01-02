@@ -3,8 +3,6 @@ from logs.logger import log
 from config.reddit_config import CONFIG
 import time
 
-BOT_SCHEDULE = []
-
 EASY_SCHEDULES = {
   1: ((7,00),(10,00)),
   2: ((10,00),(14,00)),
@@ -14,22 +12,12 @@ EASY_SCHEDULES = {
 }
 
 # convert the easy schedules to the tuple values
-for schedule in CONFIG['reddit_sleep_schedule']:
-  BOT_SCHEDULE.append(EASY_SCHEDULES.get(schedule))
+BOT_SCHEDULE = [EASY_SCHEDULES.get(schedule) for schedule in CONFIG['reddit_sleep_schedule']]
 
 log.info(f"using schedules: {BOT_SCHEDULE}")
 
 # transform the schedule with datetime formatting
-updated_schedules = []
-for schedule in BOT_SCHEDULE:
-  # log.info(f"processing schedule: {schedule}")
-  # log.info(schedule)
-  bs1 = schedule[0][0]
-  bs2 = schedule[0][1]
-  bs3 = schedule[1][0]
-  bs4 = schedule[1][1]
-  # log.info(f"base schedules: {bs1}, {bs2} - {bs3}, {bs4}")
-  updated_schedules.append(((datetime.time(bs1, bs2)), (datetime.time(bs3, bs4))))
+updated_schedules = [((datetime.time(schedule[0][0], schedule[0][1])), (datetime.time(schedule[1][0], schedule[1][1]))) for schedule in BOT_SCHEDULE]
 
 BOT_SCHEDULE = updated_schedules
 
@@ -43,14 +31,7 @@ def is_time_between(begin_time, end_time, check_time=None):
         return check_time >= begin_time or check_time <= end_time
 
 def should_we_sleep():
-    CHECKS = []
-    TIME_LEFT = []
-    for schedule in BOT_SCHEDULE:
-      if is_time_between(schedule[0], schedule[1]):
-        CHECKS.append(True)
-      else:
-        CHECKS.append(False)
-        TIME_LEFT.append(schedule[0])
+    CHECKS = [True for schedule in BOT_SCHEDULE if is_time_between(schedule[0], schedule[1])]
     # check if any of the time between checks returned true.
     # if there's a True in the list, it means we're between one of the scheduled times
     # and so this function returns False so the bot doesn't sleep
@@ -60,7 +41,7 @@ def should_we_sleep():
     else:
       log.info("it's sleepy time.. zzzzz :snore: zzzz")
       whats_left = []
-
+      TIME_LEFT = [schedule[0] for schedule in BOT_SCHEDULE]
       for time_stamp in TIME_LEFT:
         next_start = datetime.datetime.combine(datetime.date.today(), time_stamp)
         ts = int(next_start.timestamp())
