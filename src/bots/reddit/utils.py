@@ -59,10 +59,10 @@ def should_we_sleep():
       
       #remove negative values and
       # get the shortest duration of time left before starting
-      log.info(whats_left)
+      # log.info(whats_left)
       whats_left = [item for item in whats_left if item >= 0]
 
-      log.info(whats_left)
+      # log.info(whats_left)
       time_left = int(min(whats_left))
 
       if time_left > 600:
