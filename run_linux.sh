@@ -51,10 +51,10 @@ fi
 echo "trying to run the bot" | tee -a $DEBUG_FILE
 
 # start bot directly if nomenu passed in to script
-if [[ $1 == *"nomenu"* ]]; then
+if [[ $1 == *"menu"* ]]; then
+  echo "running without menu" | tee -a $DEBUG_FILE
+  pipenv run python3 ./src/menu.py "$@"
+else
   echo "running without menu" | tee -a $DEBUG_FILE
   pipenv run python3 ./src/init.py "$@"
-else
-  echo "running with menu" | tee -a $DEBUG_FILE
-  pipenv run python3 ./src/menu.py "$@"
 fi
