@@ -1,5 +1,6 @@
 from utils import prefer_envar
 from logs.logger import log
+from logs.log_utils import log_json
 from config.reddit.reddit_sub_lists import REDDIT_APPROVED_SUBS
 import sys
 import json
@@ -18,7 +19,7 @@ else:
     "reddit_password":"",
   })
 
-log.info(AUTH)
+log.info(f"REDDIT AUTH CONFIG:\n {log_json(AUTH)}")
 
 CONFIG = prefer_envar({
   # the chance the bot will repost a post
@@ -50,4 +51,4 @@ CONFIG = prefer_envar({
   "reddit_sleep_schedule": [2, 4]
 })
 
-log.info(CONFIG)
+log.info(f"REDDIT CONNFIG:\n {log_json(CONFIG)}")

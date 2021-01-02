@@ -19,8 +19,8 @@ def prefer_envar(configs: dict) -> dict:
   for config in list(configs):
     config_envar = f"{ENVAR_PREFIX}{config}".upper()
     if os.environ.get(config_envar):
-      log.info(f"loading {config_envar} from envar. Value: {configs[config]}")
       configs[config]=os.environ.get(config_envar)
+      log.info(f"loading {config_envar} from envar. Value: {configs.get(config)}")
     else:
       log.debug(f"no environment config for: {config_envar}")
 

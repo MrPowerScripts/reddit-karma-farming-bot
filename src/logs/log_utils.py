@@ -1,6 +1,9 @@
 import logging
+import json
 from logging.handlers import RotatingFileHandler
 
+def log_json(tojson: object) -> str:
+  return json.dumps(tojson, indent=2, sort_keys=True)
 
 class NewLineFileHandler(RotatingFileHandler):
   """Handler that controls the writing of the newline character"""

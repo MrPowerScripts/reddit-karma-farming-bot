@@ -1,6 +1,7 @@
 from utils import prefer_envar
 from pathlib import Path
 from logs.logger import log
+from logs.log_utils import log_json
 from .common_config import SRC_ROOT
 import os
 
@@ -20,4 +21,4 @@ CONFIG = prefer_envar({
   "cobe_max_db_size":"300mb",
 })
 
-log.info(CONFIG)
+log.info(f"COBE CONFIG:\n {log_json(CONFIG)}")
