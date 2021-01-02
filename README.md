@@ -1,4 +1,6 @@
-# Reddit-Karma-Bot
+# Reddit Karma Farming Bot
+
+## Videos and links
 
 This bot is probably the reason you saw that post again on Reddit. Need help with the bot? Join us on Discord https://bit.ly/mrps-discord 
 
@@ -6,6 +8,7 @@ This bot is probably the reason you saw that post again on Reddit. Need help wit
 ![farm karma bot](https://user-images.githubusercontent.com/1307942/86153469-a40a8f80-baf9-11ea-80b5-d86dd31108d6.png)
 
 ### 2020 update videos
+
 [Definitely Watch This One](https://www.youtube.com/watch?v=nWYRGXesb3I)
 
 [2020 Bot 3.0 Code Walkthrough](https://www.youtube.com/watch?v=83zWIz3b7o0)
@@ -19,6 +22,12 @@ This bot is probably the reason you saw that post again on Reddit. Need help wit
 Subscribe: http://bit.ly/mrps-yt-sub  
 Website: https://bit.ly/mrps-site  
 
+## Getting Started
+
+1. Follow the [getting started guide](docs/1-getting-started.md) to create your Reddit app and learn how to configure the bot.
+
+2. Then follow the [macOS/Linux](docs/2-linux-macos.md), or [Windows](docs/3-windows.md) guides to start the bot after everything is set up.
+
 ## Features
 
 - Run on Linux, MacOS, or Windows (using Linux in VirtualBox).
@@ -29,18 +38,6 @@ Website: https://bit.ly/mrps-site
 - Filter the bot from learning certain words, or avoid certain subreddits.
 - Schedule when the bot wakes up and sleeps to run actions.
 - Auto detects if the account is shadowbanned.
-
-## Getting Started
-
-1. Follow the [getting started guide](docs/1-getting-started.md) to create your Reddit app.
-
-2. Then follow the [macOS/Linux](docs/2-liunx-macos.md), or [Windows](docs/3-windows.md) guides.
-
-## How to run the bot on Linux/MacOS
-
-1. Change `.env.sample.py` to `.env` and update the values to your account and app values.
-
-2. run `run_linux.sh`
 
 ## Warnings
 
