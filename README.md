@@ -36,16 +36,6 @@ Website: https://bit.ly/mrps-site
 
 2. Then follow the [macOS/Linux](docs/2-liunx-macos.md), or [Windows](docs/3-windows.md) guides.
 
-## Configuration
-
-### How to configure the bot
-
-The bot has many configuration options, and some are enabled/disabled by default. View all of the config options in the [src/config](src/config) folder.
-
-### Environment Variables
-
-All of the bot settings can be cofigured through environment variables. The enviroment variable to configure a setting is the name of the setting prefixed by `BOT_` and fully uppercased. For example, the `reddit_client_id` config can be set with the envar `BOT_REDDIT_CLIENT_ID`. You can add these enviroment variables to a `.env` file in the root of the repo, and the bot will automatically pick them up when run using `run_linux.sh`.
-
 ## How to run the bot on Linux/MacOS
 
 1. Change `.env.sample.py` to `.env` and update the values to your account and app values.
