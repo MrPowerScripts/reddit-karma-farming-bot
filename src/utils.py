@@ -83,15 +83,8 @@ def chance(value=.20):
     # log.info("prob: " + str(value) + " rolled: " + str(rando))
     return rando < value
 
-
-def is_time_between(begin_time, end_time, check_time=None):
-    # If check time is not given, default to current UTC time
-    check_time = check_time or datetime.datetime.utcnow().time()
-    if begin_time < end_time:
-        return check_time >= begin_time and check_time <= end_time
-    else: # crosses midnight
-        return check_time >= begin_time or check_time <= end_time
-
+  
+  
 def tobytes(size_str):
     """Convert human filesizes to bytes.
     https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python
