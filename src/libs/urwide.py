@@ -729,7 +729,7 @@ class UI:
 		self._add(self._createWidget(urwid.Text,data, ui=ui, args=args, kwargs=kwargs))
 
 	def _parseHdr( self, data ):
-		if self._header != None:
+		if self._header is not None:
 			raise UISyntaxError("Header can occur only once")
 		attr, data = self._argsFind(data)
 		ui, args, kwargs = self._parseAttributes(attr)
@@ -914,7 +914,7 @@ class Console(UI):
 		self._listbox.set_focus(focused)
 		while True:
 			if not self.isFocusable(self.getFocused()) \
-			and self._listbox.body.get_next(focused)[0] != None:
+			and self._listbox.body.get_next(focused)[0] is not None:
 				focused += 1
 				self._listbox.set_focus(focused)
 			else:
@@ -1024,7 +1024,7 @@ class Console(UI):
 	def draw( self ):
 		"""Main loop to draw the console. This takes into account the fact that
 		there may be a dialog to display."""
-		if self._dialog != None:
+		if self._dialog is not None:
 			o = urwid.Overlay( self._dialog.view(), self._frame,
 				"center",
 				self._dialog.width(),
@@ -1165,7 +1165,7 @@ class Dialog(UI):
 		self._parent._dialog = None
 
 	def _parseHdr( self, data ):
-		if self._header != None:
+		if self._header is not None:
 			raise UISyntaxError("Header can occur only once")
 		attr, data = self._argsFind(data)
 		ui, args, kwargs = self._parseAttributes(attr)
