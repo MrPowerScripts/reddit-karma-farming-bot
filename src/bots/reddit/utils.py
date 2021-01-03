@@ -2,6 +2,20 @@ import datetime
 from logs.logger import log
 from config.reddit_config import CONFIG
 import time
+from praw.models.redditors import Redditors
+
+## USER UTILS
+
+def parse_user(user: Redditors):
+  i = {}
+  i['comment_karma'] = user.comment_karma
+  i['link_karma'] = user.link_karma
+  i['username'] = user.name
+  i['created_utc'] = user.created_utc
+
+  return i
+
+## SCHEDULE UTILS
 
 EASY_SCHEDULES = {
   1: ((7,00),(10,00)),
