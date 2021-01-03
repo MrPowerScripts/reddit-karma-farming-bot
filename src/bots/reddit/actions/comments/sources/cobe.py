@@ -50,7 +50,10 @@ class Cobe():
       # go through 500 comments per subreddit
       for x in range(500):
         # get the comment from the generator function
-        comment = next(comments)
+        try:
+          comment = next(comments)
+        except StopIteration as e:
+          log.info(f"end of comments")
         
         # bot responses are better when it learns from short comments
         if len(comment.body) < 240:
