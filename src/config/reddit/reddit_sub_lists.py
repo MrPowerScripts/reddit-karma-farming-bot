@@ -17,7 +17,7 @@ REDDIT_APPROVED_SUBS = [
 # where content can be crossposted
 # the first array item is the source,
 # and the rest are where it could be re-posted to
-CROSSPOST_SUBS [
+CROSSPOST_SUBS = [
   ["aww", "pics", "animals"],
   ["catpictures", "aww"]
 ]
