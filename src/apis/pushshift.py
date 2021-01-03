@@ -1,6 +1,7 @@
 # data sources for comment learning
 from psaw import PushshiftAPI
 from logs.logger import log
+from utils import DAY, YEAR
 import requests
 import time
 
@@ -16,11 +17,11 @@ class PS():
 
   def get_comments(self, subreddit):
     return self.api.search_comments(q='', subreddit=subreddit)
-
+31536000
   def _ps_search(self, subreddit, before=None, after=None, score=None, limit=1):
     cur_time = int(time.time())
-    after=(cur_time - 31556952) if after is None else None
-    before=(cur_time - 31449600) if before is None else None
+    after=(cur_time - YEAR) if after is None else None
+    before=(cur_time - (YEAR - DAY)) if before is None else None
     score = 5000 if score is None else None
     url = f"https://api.pushshift.io/reddit/search/submission/?subreddit={subreddit}"
     url = (url + f"&before={before}") if before else ""

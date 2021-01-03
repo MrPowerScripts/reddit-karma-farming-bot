@@ -8,6 +8,13 @@ from config.common_config import ENVAR_PREFIX
 from logs.logger import log
 import urllib.request
 
+## HELPER VARS
+
+DAY = 86400
+MONTH = 2678400
+YEAR = 31536000
+
+
 def random_string(length: int) -> str:
   letters = string.ascii_lowercase
   return ''.join(random.choice(letters) for i in range(length))
