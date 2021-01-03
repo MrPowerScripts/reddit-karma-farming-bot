@@ -17,7 +17,7 @@ class PS():
 
   def get_comments(self, subreddit):
     return self.api.search_comments(q='', subreddit=subreddit)
-31536000
+
   def _ps_search(self, subreddit, before=None, after=None, score=None, limit=1):
     cur_time = int(time.time())
     after=(cur_time - YEAR) if after is None else None
