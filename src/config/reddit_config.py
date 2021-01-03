@@ -22,6 +22,7 @@ else:
 log.info(f"REDDIT AUTH CONFIG:\n {log_json(AUTH)}")
 
 CONFIG = prefer_envar({
+  "reddit_crosspost_enabled": True,
   # the chance the bot will repost a post
   "reddit_post_chance": 0.005,
   # the chance the bot will make a comment

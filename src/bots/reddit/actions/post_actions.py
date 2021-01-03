@@ -3,6 +3,7 @@ from utils import chance
 import random
 from .utils import get_subreddit, AVOID_WORDS
 from config.reddit_config import CONFIG
+from config.reddit.reddit_sub_lists import CROSSPOST_SUBS
 from logs.logger import log
 from praw.exceptions import APIException
 
@@ -25,6 +26,11 @@ class Posts():
         # if there are subreddits in the subreddit list pull randomly from that
         # otherwise pull a totally random subreddit
         sub = self.rapi.subreddit(random.choice(CONFIG['reddit_sub_list'])) if CONFIG['reddit_sub_list'] else get_subreddit(getsubclass=True)
+        
+        # randomly choose a potential subreddit to cross post
+        if CONFIG['reddit_crosspost_enabled']:
+          sub = self.rapi.subreddit(self.crosspost(sub.display_name))
+          
         log.info(f"searching post in sub: {sub.display_name}")
       try:
         post_id = self.psapi.get_posts(sub.display_name)[0]['id']
@@ -42,6 +48,12 @@ class Posts():
           return
 
     return self.rapi.submission(id=post_id)
+
+  def crosspost(self, subreddit):
+    for idx, subs in enumerate(CROSSPOST_SUBS):
+      if subs[0] == subreddit:
+        return random.choice(subs[idx])
+
 
   def repost(self, roll=1, subreddit=None):
     if chance(roll):
