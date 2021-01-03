@@ -4,6 +4,7 @@ from apis import pushshift_api, reddit_api
 from config import reddit_config
 from utils import chance
 from logs.logger import log
+import sys
 
 class Cleanup():
   def __init__(self):
