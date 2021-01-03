@@ -1,2 +1,0 @@
-# !/bin/bash
-/app/.heroku/python -m pip install cython

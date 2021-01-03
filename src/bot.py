@@ -1,10 +1,9 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
+from bots.reddit import RedditBot
+from utils import countdown
+from logs.logger import log
 
-import copy
-from cobe.brain import Brain
-from logger import log
-from utils import MAIN_DB
-
-log.info("Main database: {}".format(MAIN_DB))
-base_brain = Brain(MAIN_DB)
+def run():
+  reddit = RedditBot()
+  while True:
+    reddit.run()
+    countdown(1)
