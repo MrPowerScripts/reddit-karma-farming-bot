@@ -29,7 +29,7 @@ class RedditBot():
   def _init(self):
     # check if account is set
     user = self.api.user.me()
-    if user == None:
+    if user is None:
       log.info("User auth failed, Reddit bot shutting down")
       sys.exit()
     else:
@@ -53,6 +53,3 @@ class RedditBot():
       self._init()
       self.run()
       # log.info("not running reddit bot - not ready")
-
-
-

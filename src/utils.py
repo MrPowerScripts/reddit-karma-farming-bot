@@ -12,9 +12,6 @@ def random_string(length: int) -> str:
   letters = string.ascii_lowercase
   return ''.join(random.choice(letters) for i in range(length))
 
-def get_current_epoch() -> int:
-  return int(time.time())
-
 def prefer_envar(configs: dict) -> dict:
   for config in list(configs):
     config_envar = f"{ENVAR_PREFIX}{config}".upper()
@@ -83,8 +80,8 @@ def chance(value=.20):
     # log.info("prob: " + str(value) + " rolled: " + str(rando))
     return rando < value
 
-  
-  
+
+
 def tobytes(size_str):
     """Convert human filesizes to bytes.
     https://stackoverflow.com/questions/44307480/convert-size-notation-with-units-100kb-32mb-to-number-of-bytes-in-python
