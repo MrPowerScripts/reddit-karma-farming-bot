@@ -26,10 +26,6 @@ class Posts():
         # if there are subreddits in the subreddit list pull randomly from that
         # otherwise pull a totally random subreddit
         sub = self.rapi.subreddit(random.choice(CONFIG['reddit_sub_list'])) if CONFIG['reddit_sub_list'] else get_subreddit(getsubclass=True)
-        
-        # randomly choose a potential subreddit to cross post
-        if CONFIG['reddit_crosspost_enabled']:
-          sub = self.rapi.subreddit(self.crosspost(sub.display_name))
           
         log.info(f"searching post in sub: {sub.display_name}")
       try:
@@ -66,8 +62,15 @@ class Posts():
         params = {"title": post.title, "selftext": post.selftext}
       else:
         params = {"title": post.title, "url": post.url}
+
+      sub = post.subreddit
+
+      # randomly choose a potential subreddit to cross post
+      if CONFIG['reddit_crosspost_enabled']:
+        sub = self.rapi.subreddit(self.crosspost(sub.display_name))
+
       try:
-        self.rapi.subreddit(post.subreddit.display_name).submit(**params)
+        self.rapi.subreddit(sub.display_name).submit(**params)
       except APIException as e:
         log.info(f"REPOST ERROR: {e}")
     else:
