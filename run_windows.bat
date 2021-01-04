@@ -4,7 +4,7 @@ if not exist ".env-created" (
   echo no virtualenv detected doing setup before running
   Powershell.exe -executionpolicy remotesigned -File ./deps/windows/windows.ps1
   pip3 install pipenv
-  pip3 install ./libs/PyStemmer-2.0.1-cp39-cp39-win_amd64.whl
+  pip3 install ./deps/PyStemmer-2.0.1-cp39-cp39-win_amd64.whl
   pipenv install
 )
 if "%1"=="" (
