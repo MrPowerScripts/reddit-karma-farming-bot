@@ -39,22 +39,22 @@ if [ ! -d "$DIR/.venv" ]; then
   elif [ "${machine}" =  "Mac" ]; then
     $(xcode-select -p) || xcode-select --install
   else
-    echo "No suitable linux version" | tee -a $DEBUG_FILE
+    echo "No suitable linux version!" | tee -a $DEBUG_FILE
   fi
 
   if [ "${machine}" =  "Linux" ] || [ "${machine}" =  "Mac" ]; then
     pip3 install pipenv || { echo 'Installing virtualenv failed' | tee -a $DEBUG_FILE ; exit 1; }
-    pipenv install || { echo 'Installing python deps failed' | tee -a $DEBUG_FILE ; exit 1; }
+    pipenv install || { echo 'Installing python dependencies failed' | tee -a $DEBUG_FILE ; exit 1; }
   fi
 fi
 
-echo "trying to run the bot" | tee -a $DEBUG_FILE
+echo "Trying to run the bot" | tee -a $DEBUG_FILE
 
 # start bot directly if nomenu passed in to script
 if [[ $1 == *"menu"* ]]; then
-  echo "running with menu" | tee -a $DEBUG_FILE
+  echo "Running with menu" | tee -a $DEBUG_FILE
   pipenv run python3 ./src/menu.py "$@"
 else
-  echo "running without menu" | tee -a $DEBUG_FILE
+  echo "Running without menu" | tee -a $DEBUG_FILE
   pipenv run python3 ./src/init.py "$@"
 fi
