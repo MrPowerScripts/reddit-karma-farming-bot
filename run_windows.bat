@@ -14,3 +14,6 @@ if "%1"=="menu" (
   echo running with menu
   pipenv run python ./src/menu.py
 )
+
+echo exiting...
+pause
