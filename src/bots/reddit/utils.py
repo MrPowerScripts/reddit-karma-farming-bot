@@ -12,7 +12,7 @@ def parse_user(user: Redditors):
   i['link_karma'] = user.link_karma
   i['username'] = user.name
   i['created_utc'] = user.created_utc
-  i['created_utc'] = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()(user.created_utc)) 
+  i['created_utc_human'] = time.strftime('%Y-%m-%d %H:%M:%S', time.gmtime()(user.created_utc)) 
   return i
 
 ## SCHEDULE UTILS
