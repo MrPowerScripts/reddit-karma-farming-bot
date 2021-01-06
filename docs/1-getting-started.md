@@ -4,7 +4,7 @@
 
 In your browser, when you are logged in with the Reddit account you want to use, go to this URL: https://www.reddit.com/prefs/apps
 
-Once there, click the “are you a developer? create an app...” button at the bottom. Name the app anything you want, I recommend not naming it Reddit Karma bot. Instead, go for something generic like “Test script”. Then **cCLICK THE SCRIPT OPTION**, this is important.
+Once there, click the “are you a developer? create an app...” button at the bottom. Name the app anything you want, I recommend not naming it Reddit Karma bot. Instead, go for something generic like “Test script”. Then **CLICK THE SCRIPT OPTION**, this is important.
 
 You can leave the description and about URL empty, but you need to put a value for the redirect URI. This can be anything as long as it is a valid URL. I recommend doing something similar to http://example.com or http://nourl.com. 
 
