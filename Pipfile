@@ -16,5 +16,3 @@ urwide = "*"
 pyfiglet = "*"
 urwid = "*"
 
-[requires]
-python_version = "3.9"
