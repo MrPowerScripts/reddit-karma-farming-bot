@@ -2,6 +2,7 @@ from utils import prefer_envar
 from logs.logger import log
 from logs.log_utils import log_json
 from config.reddit.reddit_sub_lists import REDDIT_APPROVED_SUBS
+from config.reddit.config_gen import config_gen
 import sys
 import json
 import os
@@ -18,6 +19,12 @@ else:
     "reddit_username":"",
     "reddit_password":"",
   })
+
+for envar in AUTH:
+  if AUTH[envar] == "":
+    # reddit auth not configured correctly. 
+    # instruct user to generate a .env file
+    config_gen()
 
 log.info(f"REDDIT AUTH CONFIG:\n {log_json(AUTH)}")
 
