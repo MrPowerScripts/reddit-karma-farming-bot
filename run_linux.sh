@@ -56,5 +56,5 @@ if [[ $1 == *"menu"* ]]; then
   pipenv run python3 ./src/menu.py "$@"
 else
   echo "Running without menu" | tee -a $DEBUG_FILE
-  pipenv run python3 ./src/init.py "$@"
+  pipenv run python3 reddit-karma-farming-bot/src/init.py "$@"
 fi
