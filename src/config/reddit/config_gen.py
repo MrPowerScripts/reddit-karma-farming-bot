@@ -1,6 +1,7 @@
 import configparser
 import praw
 import sys
+import os
 from logs.logger import log
 from prawcore import ResponseException
 from ..common_config import ENV_FILE
