@@ -1,8 +1,17 @@
+$install_help = "Read windows installation guide https://github.com/MrPowerScripts/reddit-karma-farming-bot/blob/master/docs/3-windows.md"
+
+if (!(get-command python)) {
+  write-host "Python not found"
+  write-host $install_help
+  exit 1
+} else {write-host "Python found!"}
+
+# make sure visual studio C++ build tools
 if (Test-Path -Path "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools") {
   Write-Host "Found VS 2019 Build Tools - Excellent"
 } else {
   Write-Host "VS 2019 Build Tools not found"
-  Write-Host "Read windows installation guide https://github.com/MrPowerScripts/reddit-karma-farming-bot/blob/master/docs/3-windows.md"
+  Write-Host $install_help
   exit 1
 }
 
