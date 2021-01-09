@@ -10,7 +10,10 @@ class Cleanup():
   def __init__(self):
     self.psapi = pushshift_api
     self.rapi = reddit_api
-    self.username = self.rapi.user.me().name
+    self.username = None
+
+  def init(self):
+    self. username = self.rapi.user.me().name
 
   def shadow_check(self, roll=1):
     if chance(roll):

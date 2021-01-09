@@ -38,6 +38,7 @@ class RedditBot():
       log.info(f"running as user: {user}")
       
     # check if account is shadowbanned
+    self.cleanup.init()
     self.cleanup.shadow_check()
     self.user = parse_user(user)
     log.info(f"account info:\n{log_json(self.user)}")
