@@ -21,7 +21,7 @@ def random_string(length: int) -> str:
 
 def prefer_envar(configs: dict) -> dict:
   for config in list(configs):
-    config_envar = f"{ENVAR_PREFIX}{config}".upper()
+    config_envar = f"{ENVAR_PREFIX}{config}".lower()
     if os.environ.get(config_envar):
       configs[config]=os.environ.get(config_envar)
       log.info(f"loading {config_envar} from envar. Value: {configs.get(config)}")

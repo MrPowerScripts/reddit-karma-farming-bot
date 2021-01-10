@@ -7,21 +7,17 @@ import sys
 import json
 import os
 
-if os.path.isfile('config.json'):
-  file = open("config.json", "r")
-  AUTH = prefer_envar(json.loads(file.read()))
-else:
-  AUTH = prefer_envar({
-    # app creds
-    "reddit_client_id":"",
-    "reddit_client_secret":"",
-    # reddit account creds
-    "reddit_username":"",
-    "reddit_password":"",
-  })
+AUTH = prefer_envar({
+  # app creds
+  "reddit_client_id":"",
+  "reddit_client_secret":"",
+  # reddit account creds
+  "reddit_username":"",
+  "reddit_password":"",
+})
 
-for envar in AUTH:
-  if AUTH[envar] == "":
+for key in AUTH:
+  if AUTH[key] == "":
     # reddit auth not configured correctly. 
     # instruct user to generate a .env file
     config_gen()
