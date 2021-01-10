@@ -2,7 +2,6 @@ import os
 import collections
 import random
 import time
-import yaml
 import string
 from config.common_config import ENVAR_PREFIX
 from logs.logger import log
@@ -29,10 +28,6 @@ def prefer_envar(configs: dict) -> dict:
       log.debug(f"no environment config for: {config_envar}")
 
   return configs
-
-def load_config(config: str):
-  with open(f"{os.path.join(os.path.dirname(__file__))}/config/{config}.yml") as file:
-    return yaml.load(file, Loader=yaml.FullLoader)
 
 # Checks if the machine has internet and also can connect to reddit
 def check_internet(host="https://reddit.com", timeout=5):

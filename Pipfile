@@ -8,7 +8,6 @@ verify_ssl = true
 [packages]
 psaw = "*"
 praw = "*"
-pyyaml = "*"
 pytest = "*"
 coverage = "*"
 cobe = "*"
