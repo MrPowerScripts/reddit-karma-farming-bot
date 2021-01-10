@@ -17,14 +17,32 @@ You will now be presented with this screen:
 
 In this image, you will find your client id and secret. These are highlighted in red and cyan respectively. Now we are ready to get the bot up and running!
 
-## Configuration
+## Reddit Configuration
 
-### How to configure the bot
+### How to configure the Reddit bot
 
 The bot has many configuration options, and some are enabled/disabled by default. View all of the config options in the [src/config](/src/config) folder.
 
-### Environment Variables
+#### Limit to specific subreddits
 
-Most settings can be cofigured through environment variables. The enviroment variable to configure a setting is the name of the setting prefixed by `BOT_` and fully uppercased. For example, the `reddit_client_id` config can be set with the envar `BOT_REDDIT_CLIENT_ID`.
+Add subreddits to the `REDDIT_APPROVED_SUBS` variable [reddit_sub_lists.py](/src/config/reddit/reddit_sub_lists.py) file. This will limit the bot to only repost/learn/comment to these subreddits.
 
-The easiest way to configure the bot is by adding these enviroment variables to a `.env` file in the root of the repo, and the bot will automatically pick them up when run using `run_linux.sh`. The repo contains a sample `.env.sample` file you can rename to `.env`. Add the configuration envars you want and run the bot. You could also use a command like `env $(cat .env | xargs) && python3 ./src/init.py` to run the bot directly with all envars scoped locally. As well as any other method to apply envars which the bot will pick up and use when running.
+#### Avoid specific subreddits
+
+Add the subreddits the bot should avoid to [reddit_avoid_subs.txt](/src/config/reddit/reddit_avoid_subs.txt) file, and the bot will ignore posting/commenting to these subreddits. Do not include `/r/`, just the clean subreddit name on each line of the file.
+
+#### Avoid specific words
+
+Add words the the bot should avoid to [reddit_avoid_words.txt](/src/config/reddit/reddit_avoid_words.txt) file, and the bot will ignore learning from comments, or reposting posts that include these words. Add a words on separate lines.
+
+#### Configure what actions the Reddit bot performs
+
+The reddit bot actions can be configured in [reddit_config.py](/src/config/reddit_config.py). If you don't want it to perform an action set the chance value to `0`. For instance, to disable commenting set `"reddit_comment_chance": 0.005,` to `"reddit_comment_chance": 0,`. Increasing the chance values will increase the chance the action is performed. The defualt values are fine, but you can experiment.
+
+##### Sleep schedule
+
+The bot has a sleep schedule enabled by default, otherwise it will comment/post 24/7 and likely get banned. You can disable the sleep schedule by removing all schedule values. Like `"reddit_sleep_schedule": [2, 4]` to `"reddit_sleep_schedule": []`.
+
+#### Configure Cobe
+
+Cobe is the library the bot uses to generate comments. You may want to conifgure how big the comment databse needs to be before it starts commeting. You can adjust the values in [cobe_config.py](/src/config/cobe_config.py).
