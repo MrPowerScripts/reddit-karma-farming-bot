@@ -15,7 +15,7 @@ You will now be presented with this screen:
 
 ![app_example](https://user-images.githubusercontent.com/29954899/103455850-f8810880-4cf0-11eb-9002-64c2f1e5a44e.png)
 
-In this image, you will find your client id and secret. These are highlighted in red and cyan respectively. Now we are ready to get the bot up and running!
+In this image, you will find your client id and secret. The red highlight is your client id, and cyan is your secret key. Now we are ready to get the bot up and running!
 
 ## Reddit Configuration
 
