@@ -35,7 +35,7 @@ def check_internet(host="https://reddit.com", timeout=5):
         urllib.request.urlopen(host, None, timeout)
         return True
     except Exception as ex:
-        log.error(ex.message)
+        log.error(ex)
         return False
 
 
