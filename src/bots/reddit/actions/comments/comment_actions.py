@@ -6,6 +6,7 @@ from apis import reddit_api
 from config import reddit_config
 from ..utils import get_subreddit, AVOID_WORDS
 import random
+from praw.exceptions import APIException
 
 Source = namedtuple('Source', ['name', 'api'])
 
@@ -49,17 +50,20 @@ class Comments():
         if len(post.comments.list()) > 0:
           post_with_comments = True
 
-      # choose if we're replying to the post or to a comment
-      if chance(self.config.get('reddit_reply_to_comment')):
-        # reply to the post with a response based on the post title
-        log.info('replying directly to post')
-        post.reply(self.comments.get_reply(post.title))
-      else:
-        # get a random comment from the post
-        comment = random.choice(post.comments.list())
-        # reply to the comment
-        log.info('replying to comment')
-        comment.reply(self.comments.get_reply(comment.body))
+      try:
+        # choose if we're replying to the post or to a comment
+        if chance(self.config.get('reddit_reply_to_comment')):
+          # reply to the post with a response based on the post title
+          log.info('replying directly to post')
+          post.reply(self.comments.get_reply(post.title))
+        else:
+          # get a random comment from the post
+          comment = random.choice(post.comments.list())
+          # reply to the comment
+          log.info('replying to comment')
+          comment.reply(self.comments.get_reply(comment.body))
+      except APIException as e:
+        log.info(f"error commenting: {e}")
 
 
 
