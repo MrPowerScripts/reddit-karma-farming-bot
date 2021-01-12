@@ -49,7 +49,7 @@ def should_we_sleep():
     # check if any of the time between checks returned true.
     # if there's a True in the list, it means we're between one of the scheduled times
     # and so this function returns False so the bot doesn't sleep
-    if True in CHECKS:
+    if True in CHECKS or not CONFIG.get('reddit_sleep_schedule'):
       # no need to sleep - the bot is within one of the time ranges
       return False
     else:
