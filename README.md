@@ -30,7 +30,7 @@ Website: https://bit.ly/mrps-site
 
 ## Features
 
-- Run on Linux, MacOS, or Windows (using Linux in VirtualBox).
+- Run on Linux, MacOS, or Windows.
 - Automatically reposts popular posts from the past to earn post karma.
 - Automatically generates unique (somewhat) contextually relevant comments using [cobe](https://github.com/pteichman/cobe).
 - Automatically deletes poor performing comments and posts.
