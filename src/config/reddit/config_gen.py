@@ -18,6 +18,7 @@ def config_gen():
         if len(CLIENT_ID) == 14 :
             pass
         else:
+            log.info("client id must be 14 characters, try again")
             CI()
     CI()
     def SI():
@@ -25,6 +26,7 @@ def config_gen():
         if len(CLIENT_SECRET) == 30 :
             pass
         else:
+            log.info("client secret must be 30 characters, try again")
             SI()
     SI()
     PASSWORD = input('please input your account password :')
