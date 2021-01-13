@@ -13,11 +13,23 @@ config_file.optionxform = str
 def config_gen():
     if not os.path.isfile(ENV_FILE):
       # ASK FOR CREDENTIALS
-      
-      CLIENT_ID = input('please input your account client id :')
-      CLIENT_SECRET = input('please input your account client secret :')
-      PASSWORD = input('please input your account password :')
-      USERNAME = input('please input your account username :')
+    def CI():
+        CLIENT_ID = input('please input your account client id :')
+        if len(CLIENT_ID) == 14 :
+            pass
+        else:
+            CI()
+    CI()
+    def SI():
+        CLIENT_SECRET = input('please input your account client secret :')
+        if len(CLIENT_SECRET) == 30 :
+            pass
+        else:
+            SI()
+    SI()
+    PASSWORD = input('please input your account password :')
+    USERNAME = input('please input your account username :')
+
 
       reddit = praw.Reddit(
           client_id=CLIENT_ID,
