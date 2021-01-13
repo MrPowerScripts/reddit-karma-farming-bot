@@ -23,10 +23,10 @@ def config_gen():
     CI()
     def SI():
         CLIENT_SECRET = input('please input your account client secret :')
-        if len(CLIENT_SECRET) == 30 :
+        if len(CLIENT_SECRET) > 27 :
             pass
         else:
-            log.info("client secret must be 30 characters, try again")
+            log.info("client secret must be at least 27 characters, try again")
             SI()
     SI()
     PASSWORD = input('please input your account password :')
