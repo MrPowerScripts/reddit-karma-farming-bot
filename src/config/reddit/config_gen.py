@@ -28,7 +28,13 @@ def config_gen():
             SI()
     SI()
     PASSWORD = input('please input your account password :')
-    USERNAME = input('please input your account username :')
+    def UN():
+        USERNAME = input('please input your account username :')
+        if len(USERNAME) in range(21) :
+            pass
+        else:
+            UN()
+    UN()
 
 
       reddit = praw.Reddit(
