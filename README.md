@@ -10,7 +10,7 @@ This bot is probably the reason you saw that post again on Reddit. Need help wit
 ### Video install guides
 [Windows](https://youtu.be/6ICjZUHO2_I)
 
-[Linux](https://youtu.be/ga0OC6lYSRs)
+[Linux/macOS](https://youtu.be/ga0OC6lYSRs)
 
 ### 2020 update videos
 
