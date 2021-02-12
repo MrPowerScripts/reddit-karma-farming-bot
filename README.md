@@ -31,7 +31,7 @@ Website: https://bit.ly/mrps-site
 
 1. Follow the [getting started guide](docs/1-getting-started.md) to create your Reddit app and learn how to configure the bot.
 
-2. Then follow the [macOS/Linux](docs/2-linux-macos.md), or [Windows](docs/3-windows.md) guides to start the bot after everything is set up.
+2. Then follow the [macOS/Linux](docs/2-linux-macos.md), or [Windows](docs/3-windows.md) or [repl.it](docs/4-cloud-hosted-repl.md) guides to start the bot after everything is set up.
 
 ## Features
 
@@ -53,3 +53,4 @@ New Reddit accounts will likely get banned with the bot. Let an account sit for 
 ### Heroku
 
 The bot used to have a Heroku option - till they found out and now using the bot on heroku will get your account banned.
+
