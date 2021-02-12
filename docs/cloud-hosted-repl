@@ -3,7 +3,7 @@
 the first thing to do after creating the reddit app is to fork the repo on repl.it ` https://repl.it/@hata47/reddit-karma-farming-bot-2 `
 
 then just run the the run button 
-![run](https://user-images.githubusercontent.com/65003317/107768101-37fe3400-6d36-11eb-812a-42df195f6be0.png)
+![image](https://user-images.githubusercontent.com/65003317/107768101-37fe3400-6d36-11eb-812a-42df195f6be0.png)
 
 the bot will start downloading the needed deps and then ask for the reddit app credentials and create an .env file 
 
