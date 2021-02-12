@@ -19,7 +19,11 @@ create an account and hit the add new monitor button
 
 ![add](https://user-images.githubusercontent.com/65003317/107768829-5b75ae80-6d37-11eb-9034-30b064dfb0da.png)
 
-then you have to enter the following details 
+then you have to get  the following details from here :
+
+![rep](https://user-images.githubusercontent.com/65003317/107802441-9d1b4f00-6d61-11eb-8822-ae10f901ac0a.png)
+
+then put it in here ;
 
 ![t](https://user-images.githubusercontent.com/65003317/107769236-fcfd0000-6d37-11eb-96a6-bae7bdf0ec35.png)
 
