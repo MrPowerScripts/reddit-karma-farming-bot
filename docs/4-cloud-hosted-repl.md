@@ -1,6 +1,6 @@
 ## Running the bot on repl.it
 
-the first thing to do after creating the reddit app is to fork the repo on repl.it ` https://repl.it/@hata47/reddit-karma-farming-bot-2 `
+the first thing to do after creating the reddit app is to fork the repo on repl.it https://repl.it/@igosad/reddit-karma-farming-bot
 
 then just run the the run button 
 
