@@ -6,7 +6,7 @@ from bots.reddit.actions.comments.comment_actions import Comments
 from bots.reddit.actions.cleanup_actions import Cleanup
 from logs.logger import log
 from logs.log_utils import log_json
-import time, sys
+import time, sys, random
 from collections import namedtuple
 from .utils import should_we_sleep, parse_user
 
@@ -47,10 +47,15 @@ class RedditBot():
 
   def tick(self):
     if not should_we_sleep():
+      report = f""
       for action in self.actions:
-        if chance(self.config[action.name]):
-          log.info(f"running action: {action.name}")
+        roll = random.random()
+        result = roll < self.config[action.name] 
+        print(f"{roll} < {self.config[action.name]} = {result}         ", end="\r")
+        if result:
+          log.info(f"\nrunning action: {action.name}")
           action.call()
+      
 
   def run(self):
     if self.ready:
