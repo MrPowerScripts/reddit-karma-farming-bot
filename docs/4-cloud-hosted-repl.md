@@ -1,6 +1,8 @@
 ## Running the bot on repl.it
 
-1 - fork the repo on repl.it https://repl.it/@igosad/reddit-karma-farming-bot .
+1 - fork the repo on repl.it https://repl.it/@igosad/reddit-karma-farming-bot :
+
+![fork](https://user-images.githubusercontent.com/65003317/107936914-82c0bb80-6f83-11eb-950f-171062d93b5a.png)
 
 2 - run the the run button .
 
