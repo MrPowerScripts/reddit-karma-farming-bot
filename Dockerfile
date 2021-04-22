@@ -7,6 +7,7 @@ RUN pip3 install pipenv
 RUN pipenv install --system --deploy --ignore-pipfile
 RUN pip3 install -r requirements.txt
 RUN chmod +x /app/run_linux.sh
+RUN rm /app/.env ## we don't need this
 ENTRYPOINT /app/run_linux.sh
 
 
