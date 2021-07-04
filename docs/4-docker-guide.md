@@ -10,4 +10,4 @@ From the root of the project, run this docker build command: `docker build -t re
 `docker run -d --name=reddit-bot reddit_karma_bot:latest`
 
 ## View Logs
-docker logs reddit-bot -f 
+`docker logs -f reddit-bot`
