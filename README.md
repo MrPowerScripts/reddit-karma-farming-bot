@@ -31,7 +31,7 @@ Website: https://bit.ly/mrps-site
 
 1. Follow the [getting started guide](docs/1-getting-started.md) to create your Reddit app and learn how to configure the bot.
 
-2. Then follow the [macOS/Linux](docs/2-linux-macos.md), or [Windows](docs/3-windows.md) guides to start the bot after everything is set up.
+2. Then follow the [macOS/Linux](docs/2-linux-macos.md), or [Windows](docs/3-windows.md) or [docker](docs/4-docker-guide.md) guides to start the bot after everything is set up.
 
 ## Features
 
