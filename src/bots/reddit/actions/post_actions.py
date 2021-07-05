@@ -56,30 +56,30 @@ class Posts():
       log.info("running repost")
       # log.info("running _repost")
       post = self.get_post(subreddit=subreddit)
-      p_url = post.url
-      while p_url.endswith(('.jpg', '.png', '.gif', '.jpeg')):
-        if requests.get(p_url).status_code == 404 :
+
+
+      if requests.get(post.url).status_code != 200 :
+        break
+      else : 
+        log.info(f"reposting post: {post.id}")
+
+        if post.is_self:
+          params = {"title": post.title, "selftext": post.selftext}
+        else:
+          params = {"title": post.title, "url": post.url}
+
+        sub = post.subreddit
+
+        # randomly choose a potential subreddit to cross post
+        if CONFIG['reddit_crosspost_enabled']:
+          sub = self.rapi.subreddit(self.crosspost(sub.display_name))
+
+        try:
+          self.rapi.subreddit(sub.display_name).submit(**params)
           break
-        else : 
-          log.info(f"reposting post: {post.id}")
-
-          if post.is_self:
-            params = {"title": post.title, "selftext": post.selftext}
-          else:
-            params = {"title": post.title, "url": post.url}
-
-          sub = post.subreddit
-
-          # randomly choose a potential subreddit to cross post
-          if CONFIG['reddit_crosspost_enabled']:
-            sub = self.rapi.subreddit(self.crosspost(sub.display_name))
-
-          try:
-            self.rapi.subreddit(sub.display_name).submit(**params)
-            break
-          except APIException as e:
-            log.info(f"REPOST ERROR: {e}")
-            break
+        except APIException as e:
+          log.info(f"REPOST ERROR: {e}")
+          break
     else:
       pass
       # log.info("not running repost")
