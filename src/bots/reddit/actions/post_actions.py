@@ -6,6 +6,7 @@ from config.reddit_config import CONFIG
 from config.reddit.reddit_sub_lists import CROSSPOST_SUBS
 from logs.logger import log
 from praw.exceptions import APIException
+import requests
 
 class Posts():
   def __init__(self):
