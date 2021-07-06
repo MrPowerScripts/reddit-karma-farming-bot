@@ -59,7 +59,7 @@ class Posts():
 
 
       if requests.get(post.url).status_code != 200 :
-        break
+        return
       else : 
         log.info(f"reposting post: {post.id}")
 
@@ -76,10 +76,10 @@ class Posts():
 
         try:
           self.rapi.subreddit(sub.display_name).submit(**params)
-          break
+          return
         except APIException as e:
           log.info(f"REPOST ERROR: {e}")
-          break
+          return
     else:
       pass
       # log.info("not running repost")
