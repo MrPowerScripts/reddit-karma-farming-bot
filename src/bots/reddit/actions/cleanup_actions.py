@@ -55,3 +55,14 @@ class Cleanup():
       # GOOD BOT
       if (comment_count + post_count) == 0:
         log.info("no low score content to clean up. I'm a good bot! :^)")
+
+  def karmaLimit(self):
+    response = requests.get(f"https://www.reddit.com/user/{self.username}/about.json",  headers = {'User-agent': f"hiiii its {self.username}"}).json()
+    karma = response["data"]["total_karma"]
+    if karma >= reddit_config.CONFIG["max_karma"]:
+      log.info(f"Karma limit exceeded! Your current karma: {karma}. Shutting down the script.")
+      sys.exit()
+    else:
+      log.info(f"Current karma: {karma}.")
+
+

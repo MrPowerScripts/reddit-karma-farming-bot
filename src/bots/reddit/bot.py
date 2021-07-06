@@ -55,6 +55,9 @@ class RedditBot():
         if result:
           log.info(f"\nrunning action: {action.name}")
           action.call()
+          if action.name == "reddit_post_chance" and self.config["karma_limitation_check"]:
+            #check for karma
+            self.cleanup.karmaLimit()
       
 
   def run(self):

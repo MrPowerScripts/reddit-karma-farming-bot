@@ -52,7 +52,11 @@ CONFIG = prefer_envar({
   # 3 - 2pm-6pm ((14,00),(18,00))
   # 4 - 6pm-10pm ((18,00),(22,00))
   # 5 - 10pm-2am ((22,00),(2,00))
-  "reddit_sleep_schedule": [2, 4]
+  "reddit_sleep_schedule": [],
+  #Toggle karma limitation on/off, enable by default
+  "karma_limitation_check": True,
+  #Max karma, in case karma limitation is enable
+  "max_karma": 5000
 })
 
 log.info(f"REDDIT CONNFIG:\n {log_json(CONFIG)}")
