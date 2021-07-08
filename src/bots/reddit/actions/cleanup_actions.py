@@ -13,7 +13,7 @@ class Cleanup():
     self.username = None
 
   def init(self):
-    self. username = self.rapi.user.me().name
+    self.username = self.rapi.user.me().name
 
   def shadow_check(self, roll=1):
     if chance(roll):
