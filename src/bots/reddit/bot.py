@@ -26,6 +26,7 @@ class RedditBot():
       BotAction('reddit_comment_chance', self.comments.comment),
       BotAction('reddit_shadowban_check', self.cleanup.shadow_check),
       BotAction('reddit_remove_low_scores', self.cleanup.remove_low_scores),
+      BotAction('reddit_karma_limit_check', self.cleanup.karma_limit),
     ]
 
   def _init(self):
@@ -55,10 +56,7 @@ class RedditBot():
         if result:
           log.info(f"\nrunning action: {action.name}")
           action.call()
-          if action.name == "reddit_post_chance" and self.config["karma_limitation_check"]:
-            #check for karma
-            self.cleanup.karmaLimit()
-      
+
 
   def run(self):
     if self.ready:

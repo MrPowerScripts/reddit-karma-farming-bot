@@ -13,7 +13,8 @@ class Cleanup():
     self.username = None
 
   def init(self):
-    self.username = self.rapi.user.me().name
+    self.me = self.rapi.user.me
+    self.username = self.me().name
 
   def shadow_check(self, roll=1):
     if chance(roll):
@@ -56,13 +57,31 @@ class Cleanup():
       if (comment_count + post_count) == 0:
         log.info("no low score content to clean up. I'm a good bot! :^)")
 
-  def karmaLimit(self):
-    response = requests.get(f"https://www.reddit.com/user/{self.username}/about.json",  headers = {'User-agent': f"hiiii its {self.username}"}).json()
-    karma = response["data"]["total_karma"]
-    if karma >= reddit_config.CONFIG["max_karma"]:
-      log.info(f"Karma limit exceeded! Your current karma: {karma}. Shutting down the script.")
-      sys.exit()
-    else:
-      log.info(f"Current karma: {karma}.")
+  def karma_limit(self):
+    # current karma limit
+    ckl = reddit_config.CONFIG["reddit_comment_karma_limit"]
+    # current post karma
+    cck = self.me().comment_karma
+    # post karma limit
+    pkl = reddit_config.CONFIG["reddit_post_karma_limit"]
+    # current post karma
+    cpk = self.me().link_karma
 
+    if ckl:
+      if ckl < cck:
+        log.info(f"Comment karma limit ({ckl}) exceeded! Your current comment karma: {cck}. Shutting down the script.")
+        sys.exit()
+      else:
+        log.info(f"Comment karma limit ({ckl}) not reached. Current comment karma: {cck}")
+        return
+    
+    if pkl:
+      if pkl < cpk:
+        log.info(f"Post karma limit ({pkl}) exceeded! Your current post karma: {cpk}. Shutting down the script.")
+        sys.exit()
+      else:
+        log.info(f"Post karma limit ({pkl}) not reached. Current post karma: {cpk}")
+        return
+
+    log.info(f"No limits - ignoring.")
 
