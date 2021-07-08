@@ -52,7 +52,7 @@ CONFIG = prefer_envar({
   # 3 - 2pm-6pm ((14,00),(18,00))
   # 4 - 6pm-10pm ((18,00),(22,00))
   # 5 - 10pm-2am ((22,00),(2,00))
-  "reddit_sleep_schedule": [],
+  "reddit_sleep_schedule": [2, 4],
   # Frequency to check if the bot hit karma limits
   "reddit_karma_limit_check": 0.002,
   # Set to integer with the max comment karma 
