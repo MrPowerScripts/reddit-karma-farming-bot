@@ -6,7 +6,7 @@ import string
 from config.common_config import ENVAR_PREFIX
 from logs.logger import log
 import urllib.request
-
+import requests 
 ## HELPER VARS
 
 DAY = 86400
@@ -41,7 +41,7 @@ def check_internet(host="https://reddit.com", timeout=5):
 
 def get_public_ip():
     try:
-        external_ip = get("https://api.ipify.org").text
+        external_ip = requests.get("https://api.ipify.org").text
         if external_ip:
             return external_ip
     except Exception as e:
