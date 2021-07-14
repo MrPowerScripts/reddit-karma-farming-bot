@@ -6,8 +6,7 @@ import bot
 if __name__ == "__main__":
     if check_internet() is True:
         try:
-            log.info('Internet connection found')
-            get_public_ip()
+            log.info(f'Internet connection found : {get_public_ip()}')
             bot.run()
         except KeyboardInterrupt:
             # quit
