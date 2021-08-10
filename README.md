@@ -1,3 +1,4 @@
+[![Run on Repl.it](https://repl.it/badge/github/replit/upm)](https://repl.it/github/replit/upm)
 # Reddit Karma Farming Bot
 
 ## Videos and links
