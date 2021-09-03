@@ -35,6 +35,5 @@ class PS():
       response = requests.get(url).json().get("data", [])
       return response
     except Exception as e:
-      print(e)
       # unable to get data from pushshift
       return None
