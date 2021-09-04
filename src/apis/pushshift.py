@@ -24,10 +24,11 @@ class PS():
     before=(cur_time - (YEAR - DAY)) if before is None else None
     score = 5000 if score is None else None
     url = f"https://api.pushshift.io/reddit/search/submission/?subreddit={subreddit}"
-    url = (url + f"&before={before}") if before else ""
-    url = (url + f"&after={after}") if after else ""
-    url = (url + f"&score>={score}") if score else ""
-    url = (url + f"&limit={limit}") if limit else ""
+    url = url + (f"&before={before}" if before else "")
+    url = url + (f"&after={after}" if after else "")
+    url = url + (f"&score>={score}" if score else "")
+    url = url + (f"&limit={limit}" if limit else "")
+    url = url + (f"&author!=[deleted]&selftext:not=[deleted]") # avoids deleted posts
     log.info(f"pushshift-url: {url}")
 
     try:
