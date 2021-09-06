@@ -99,13 +99,13 @@ class Posts():
           print('too many requests to pushshift')
           s(random.uniform(3,8))
         else:
-          print('pushshift error: '+str(api_call))
+          print('pushshift http error: '+str(api_call))
         return
       else:
         log.info(f"reposting post: {post.id}")
         
         if post.is_self:
-          if post.selftext not in ('[removed]','[deleted]') and bool(re.findall(r'20[0-9][0-9]', post.selftext)) == False: # required if posts removed on reddit; but fine on pushshift call
+          if post.selftext not in ('[removed]','[deleted]') and bool(re.findall(r'20[0-9][0-9]|v.redd.it', post.selftext)) == False:
             params = {"title": edit_text(post.title, 'title'), "selftext": edit_text(post.selftext, 'body')}
           else:
             print('Info: skipping post; it was malformed or date indicated')
@@ -120,7 +120,7 @@ class Posts():
         try:
           self.rapi.subreddit(sub.display_name).submit(**params)
           return
-        except UnboundLocalError:pass
+        except (UnboundLocalError, TypeError):pass
         except APIException as e:
           log.info(f"REPOST ERROR: {e}")
           return
