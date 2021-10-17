@@ -87,12 +87,13 @@ class Posts():
       if subs[0] == subreddit:
         return random.choice(subs[idx])
 
-
+  # why do my eyes hurt
   def repost(self, roll=1, subreddit=None):
     if chance(roll):
       log.info("running repost")
       # log.info("running _repost")
       post = self.get_post(subreddit=subreddit)
+      if not post: return
       api_call=requests.get(post.url).status_code
       if api_call != 200:
         if api_call == 429:
