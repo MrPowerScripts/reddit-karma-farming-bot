@@ -17,6 +17,10 @@ You will now be presented with this screen:
 
 In this image, you will find your client id and secret. The red highlight is your client id, and cyan is your secret key. Now we are ready to get the bot up and running!
 
+## Using a proxy
+
+The bot uses the Python `requests` library behind the scenes. Python `requests` library [has some enviroment variables you can set](https://stackoverflow.com/a/8287752) to have it automatically use a proxy server.
+
 ## Reddit Configuration
 
 ### How to configure the Reddit bot
