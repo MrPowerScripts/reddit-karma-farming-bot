@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 from .sources.cobe import Cobe
 from logs.logger import log
 from collections import namedtuple

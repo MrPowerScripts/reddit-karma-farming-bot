@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 from apis import reddit_api
 from config import reddit_config
 from utils import chance

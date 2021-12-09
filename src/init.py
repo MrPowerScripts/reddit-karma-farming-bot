@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 import sys
 from logs.logger import log
 from utils import check_internet , get_public_ip

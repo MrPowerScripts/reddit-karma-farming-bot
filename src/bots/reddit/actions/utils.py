@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 import random
 from apis import reddit_api
 from logs.logger import log

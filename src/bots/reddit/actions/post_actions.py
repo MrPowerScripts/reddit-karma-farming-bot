@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 import random, requests, re
 from time import sleep as s
 from apis import pushshift_api, reddit_api
