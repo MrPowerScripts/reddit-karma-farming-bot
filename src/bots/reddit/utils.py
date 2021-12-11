@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 import datetime
 from logs.logger import log
 from config.reddit_config import CONFIG

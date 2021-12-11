@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 from cobe.brain import Brain
 from config.cobe_config import CONFIG
 from apis import pushshift_api, reddit_api

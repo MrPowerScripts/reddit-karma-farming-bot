@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 import praw
 import requests
 from apis import pushshift_api, reddit_api

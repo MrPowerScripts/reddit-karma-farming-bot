@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 # data sources for comment learning
 from psaw import PushshiftAPI
 from logs.logger import log

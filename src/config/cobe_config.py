@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+# -*- coding: UTF-8 -*-
 from utils import prefer_envar
 from pathlib import Path
 from logs.logger import log
