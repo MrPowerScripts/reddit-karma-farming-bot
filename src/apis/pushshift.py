@@ -28,7 +28,7 @@ class PS():
     url = f"https://api.pushshift.io/reddit/search/submission/?subreddit={subreddit}"
     url = url + (f"&before={before}" if before else "")
     url = url + (f"&after={after}" if after else "")
-    url = url + (f"&score>={score}" if score else "")
+    url = url + (f"&score=>{score}" if score else "")
     url = url + (f"&limit={limit}" if limit else "")
     url = url + (f"&author!=[deleted]&selftext:not=[deleted]") # avoids deleted posts
     log.info(f"pushshift-url: {url}")
