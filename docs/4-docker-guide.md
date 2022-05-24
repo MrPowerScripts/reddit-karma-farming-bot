@@ -20,7 +20,7 @@ From the root of the project, run this docker build command: `docker build -t re
 version: "3"
 services:
   redditkarma:
-    image: docker pull ghcr.io/MrPowerScripts/reddit-karma-farming-bot:main
+    image: docker pull ghcr.io/MrPowerScripts/reddit-karma-farming-bot:master
     environment:
       - TZ=Europe/Berlin
       - bot_reddit_client_id=ZV9O7nswP9Di0Q
