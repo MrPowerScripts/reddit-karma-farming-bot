@@ -13,6 +13,6 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             # quit
             sys.exit()
-        else:
-            log.info('Please check your internet connection')
-            sys.exit()
+    else:
+        log.info('Please check your internet connection')
+        sys.exit()
