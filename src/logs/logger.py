@@ -24,7 +24,7 @@ if "DEBUG" in os.environ:
     print("debug logging")
 else:
     log.setLevel(logging.INFO)
-    print("info loggin")
+    print("info logging")
 
 log.addHandler(stream_handler)
 log.addHandler(file_handler)
