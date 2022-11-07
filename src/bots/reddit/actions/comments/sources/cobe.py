@@ -56,6 +56,7 @@ class Cobe():
           comment = next(comments)
         except StopIteration as e:
           log.info(f"end of comments")
+          break
         
         # bot responses are better when it learns from short comments
         if len(comment.body) < 240:
